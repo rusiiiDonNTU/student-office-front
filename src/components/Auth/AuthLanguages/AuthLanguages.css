@@ -4,8 +4,8 @@
   align-items: center;
   align-self: center;
   position: absolute;
-  /* border: 1px white solid; */
-  border-radius: 10px;
+  border: 1px white solid;
+  border-radius: 20px;
   overflow: hidden;
   right: 0;
   margin-right: 2rem;
@@ -29,7 +29,7 @@
 }
 
 .auth-language:not(.lang-active):hover {
-  background: #18325f;
+  background: #162d55;
 }
 
 @media (min-width: 1024px) {

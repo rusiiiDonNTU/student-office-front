@@ -12,13 +12,15 @@ import DashboardLayout, {
 import ForgotPage from "./pages/auth/Forgot";
 import ProfilePage from "./pages/dashboard/Profile.jsx";
 import SubscribePage from "./pages/dashboard/Subscribe.jsx";
-import AuthErrorPage from "./pages/auth/AuthError.jsx";
+import AuthErrorPage from "./pages/Error.jsx";
 import { getAuthStatus } from "./util/auth.js";
 import LocalizationContextProvider from "./store/Localization/LocalizationContextProvider.jsx";
+import ErrorPage from "./pages/Error.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage />,
     loader: rootRedirectLoader,
   },
   {

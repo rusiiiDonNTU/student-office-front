@@ -6,7 +6,7 @@ import AuthLanguages from "../../components/Auth/AuthLanguages/AuthLanguages";
 import "./Auth.css";
 import { getAuthStatus } from "../../util/auth";
 
-function AuthLayout() {
+function AuthLayout({ children }) {
   // Одноразова зміна кольору фона для компоненту логіна
   useEffect(() => {
     document.body.style.background = "#1B3769";
@@ -19,9 +19,7 @@ function AuthLayout() {
     <div className="auth">
       <AuthLogo />
 
-      <div className="auth-content">
-        <Outlet />
-      </div>
+      <div className="auth-content">{children || <Outlet />}</div>
 
       <AuthLanguages />
     </div>
