@@ -1,0 +1,27 @@
+.auth-info {
+  color: rgb(255, 255, 255);
+  max-width: 40rem;
+}
+
+.auth-info-logo {
+  font-size: 1.563rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.auth-info-list {
+  margin-top: 1rem;
+  list-style-type: circle;
+  margin-left: 1rem;
+}
+
+.auth-info-nested-list {
+  list-style-type: circle;
+  margin-left: 1.1rem;
+}
+
+@media (max-width: 1023px) {
+  .auth-info {
+    display: none;
+  }
+}

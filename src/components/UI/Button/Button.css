@@ -1,0 +1,28 @@
+.button {
+  border-radius: 10px;
+  border: 1px #929292 solid;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.button img {
+  height: 1.5rem;
+}
+
+.button:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.blue-button {
+  background: #1B3769;
+  border: none;
+  color: white;
+}
+
+.blue-button:hover {
+  background: #18325f;
+}

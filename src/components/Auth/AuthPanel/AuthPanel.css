@@ -1,0 +1,59 @@
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+
+  width: 100%;
+  max-width: 40rem;
+  padding: 1.5rem;
+
+  background: white;
+  border-radius: 1rem;
+}
+
+.auth-panel-return {
+  position: absolute;
+  display: flex;
+
+  left: 1.5rem;
+  top: 2.25rem;
+}
+
+.auth-panel-return a {
+  color: #1b3769;
+}
+
+.auth-panel-return a:hover {
+  color: #2a55a0;
+  cursor: pointer;
+}
+
+.auth-panel-return-button {
+  height: 2rem;
+}
+
+.auth-panel-return-button:hover {
+  fill: #2a55a0;
+}
+
+.auth-panel-logo {
+  text-align: center;
+}
+
+.auth-panel-logo h1 {
+  text-transform: uppercase;
+  font-size: 1.25rem;
+}
+
+.auth-panel-logo h2 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  color: #929292;
+}
+
+@media (max-height: 660px) {
+  .auth-panel {
+    margin-top: 9rem;
+  }
+}

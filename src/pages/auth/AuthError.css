@@ -1,0 +1,15 @@
+.auth-error-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto 0;
+  row-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.auth-error-title {
+  font-size: 2rem;
+  font-weight: 500;
+}
