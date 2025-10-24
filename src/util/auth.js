@@ -1,3 +1,5 @@
+import { redirect } from "react-router-dom";
+
 let isLogged = false;
 
 export function login(token, isRemember = true) {
@@ -7,9 +9,15 @@ export function login(token, isRemember = true) {
 }
 
 export function logout() {
-  localStorage.removeItem("token", token);
-  sessionStorage.removeItem("token", token);
-  isLogged = false;
+  const token = getAuthToken();
+
+  if (token !== "UNAUTHETICATED") {
+    localStorage.removeItem("token", token);
+    sessionStorage.removeItem("token", token);
+    isLogged = false;
+  }
+
+  return redirect("/login")
 }
 
 export function getAuthToken() {
@@ -19,9 +27,14 @@ export function getAuthToken() {
   if (locToken) return locToken;
   if (sesToken) return sesToken;
 
-  return 'UNAUTHETICATED';
+  return "UNAUTHETICATED";
 }
 
 export function getAuthStatus() {
+  if (!isLogged) {
+    const token = getAuthToken();
+    if (token !== "UNAUTHETICATED") isLogged = true;
+  }
+
   return isLogged;
 }

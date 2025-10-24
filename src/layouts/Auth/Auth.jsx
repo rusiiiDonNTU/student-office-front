@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, redirect } from "react-router-dom";
 
 import AuthLogo from "../../components/Auth/AuthLogo/AuthLogo";
 import AuthLanguages from "../../components/Auth/AuthLanguages/AuthLanguages";
@@ -29,9 +29,9 @@ function AuthLayout({ children }) {
 export default AuthLayout;
 
 export function permForLoginLoader() {
-  const { isLogged } = getAuthStatus();
+  const isLogged = getAuthStatus();
 
-  if (isLogged) {
+  if (!!isLogged) {
     return redirect("/profile");
   } else {
     return null;

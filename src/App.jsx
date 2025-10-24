@@ -12,8 +12,7 @@ import DashboardLayout, {
 import ForgotPage from "./pages/auth/Forgot";
 import ProfilePage from "./pages/dashboard/Profile.jsx";
 import SubscribePage from "./pages/dashboard/Subscribe.jsx";
-import AuthErrorPage from "./pages/Error.jsx";
-import { getAuthStatus } from "./util/auth.js";
+import { getAuthStatus, logout } from "./util/auth.js";
 import LocalizationContextProvider from "./store/Localization/LocalizationContextProvider.jsx";
 import ErrorPage from "./pages/Error.jsx";
 
@@ -26,7 +25,7 @@ const router = createBrowserRouter([
   {
     element: <AuthLayout />,
     loader: permForLoginLoader,
-    errorElement: <AuthErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       { path: "login", element: <LoginPage />, action: loginAction },
       { path: "register", element: <SignupPage /> },
@@ -36,17 +35,19 @@ const router = createBrowserRouter([
   {
     element: <DashboardLayout />,
     loader: permForDashboardLoader,
+    errorElement: <ErrorPage />,
     children: [
       { path: "profile", element: <ProfilePage /> },
       { path: "subscribe", element: <SubscribePage /> },
     ],
   },
+  { path: "logout", loader: logout },
 ]);
 
 function App() {
   return (
     <LocalizationContextProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </LocalizationContextProvider>
   );
 }
@@ -54,9 +55,9 @@ function App() {
 export default App;
 
 export function rootRedirectLoader() {
-  const { isLogged } = getAuthStatus();
+  const isLogged = getAuthStatus();
 
-  if (isLogged) {
+  if (!!isLogged) {
     return redirect("/profile");
   } else {
     return redirect("/login");

@@ -15,7 +15,7 @@ function LoginForm() {
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
 
   const isSubmitting = navigation.state === "submitting";
-  console.log(loginErrors);
+
   let emailError = null;
   let passwordError = null;
 

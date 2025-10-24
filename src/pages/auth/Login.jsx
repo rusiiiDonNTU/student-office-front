@@ -1,5 +1,7 @@
+import { redirect } from "react-router-dom";
 import AuthPanel from "../../components/Auth/AuthPanel/AuthPanel";
 import LoginForm from "../../components/Login/LoginForm";
+import { login } from "../../util/auth";
 import {
   checkIfNonEmpty,
   validateEmail,
@@ -49,7 +51,7 @@ export async function loginAction({ request, params }) {
   // });
 
   const response = {
-    status: 401,
+    status: 200,
   };
 
   // Перевірка відповіді з сервера
@@ -65,8 +67,8 @@ export async function loginAction({ request, params }) {
   //   );
   // }
   else {
-    const resData = await response.json();
-    login(resData.token, isRemembered);
+    // const resData = await response.json();
+    login("ass", isRemembered);
     return redirect("/profile");
   }
 }

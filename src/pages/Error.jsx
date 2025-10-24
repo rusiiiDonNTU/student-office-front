@@ -8,7 +8,7 @@ function ErrorPage() {
   const isLogged = getAuthStatus();
   const { status } = useRouteError();
 
-  let errorTitle = status;
+  let errorTitle = "\\_(-_-)_/";
   let errorBody = "Спробуйте пізніше або оновіть сторінку";
 
   if (status === 404) {
