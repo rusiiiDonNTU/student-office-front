@@ -50,8 +50,9 @@ export async function loginAction({ request, params }) {
   //   body: JSON.stringify(requestBody),
   // });
 
+  // "Заглушка", щоб запит не відправлявся в будь-якому випадку (доки немає бекенда)
   const response = {
-    status: 200,
+    status: 401,
   };
 
   // Перевірка відповіді з сервера
@@ -67,8 +68,8 @@ export async function loginAction({ request, params }) {
   //   );
   // }
   else {
-    // const resData = await response.json();
-    login("ass", isRemembered);
+    const resData = await response.json();
+    login(resData.token, isRemembered);
     return redirect("/profile");
   }
 }
