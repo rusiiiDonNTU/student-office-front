@@ -21,7 +21,7 @@ function ErrorPage() {
   if (!isLogged) {
     return (
       <AuthLayout>
-        <section className="error-section">
+        <section className="auth-error-section">
           <h1 className="error-title">{errorTitle}</h1>
           <div className="error-body">
             {errorBody}
@@ -37,7 +37,7 @@ function ErrorPage() {
   } else {
     return (
       <DashboardLayout>
-        <section className="error-section">
+        <section className="dashboard-error-section">
           <h1 className="error-title">Виникла помилка!</h1>
           <p>Спробуйте пізніше або оновіть сторінку</p>
         </section>

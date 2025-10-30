@@ -1,4 +1,13 @@
-.error-section {
+.auth-error-section {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.dashboard-error-section {
   display: flex;
   flex-direction: column;
   margin: auto 0;

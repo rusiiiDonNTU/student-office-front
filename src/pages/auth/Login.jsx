@@ -42,18 +42,18 @@ export async function loginAction({ request, params }) {
   }
 
   // Відправка на сервер
-  // const response = await fetch("", {
-  //   method: request.method,
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(requestBody),
-  // });
+  const response = await fetch("http://localhost:7000/login", {
+    method: request.method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  });
 
-  // "Заглушка", щоб запит не відправлявся в будь-якому випадку (доки немає бекенда)
-  const response = {
-    status: 401,
-  };
+  // // "Заглушка", щоб запит не відправлявся в будь-якому випадку (доки немає бекенда)
+  // const response = {
+  //   status: 401,
+  // };
 
   // Перевірка відповіді з сервера
   if (response.status === 401) {
@@ -61,12 +61,13 @@ export async function loginAction({ request, params }) {
       message: "Невірний логін або пароль",
     };
   }
-  // else if (!response.ok) {
-  //   throw new Response(
-  //     { message: "Неочікування помилка під час авторизації" },
-  //     { status: 500 }
-  //   );
-  // }
+  else if (!response.ok) {
+    throw new Response(
+      { message: "Неочікування помилка під час авторизації" },
+      { status: 500 }
+    );
+  }
+  
   else {
     const resData = await response.json();
     login(resData.token, isRemembered);
