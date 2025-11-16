@@ -7,11 +7,14 @@ import {
   validateEmail,
   validatePassword,
 } from "../../util/validation";
+import { useTranslation } from "react-i18next";
 
 function LoginPage() {
+  const { t } = useTranslation("auth");
+
   return (
     <>
-      <AuthPanel header="Логін" style={{ maxWidth: "37.5rem" }}>
+      <AuthPanel header={t("headers.login")} style={{ maxWidth: "37.5rem" }}>
         <LoginForm />
       </AuthPanel>
     </>

@@ -6,12 +6,14 @@ import FormActions from "../UI/Form/FormActions/FormActions";
 import Form from "../UI/Form/Form";
 import { useEffect, useState } from "react";
 import { handleRedirect } from "../../util/redirect";
+import { useTranslation } from "react-i18next";
 
 const initDirtyFields = {};
 
 function LoginForm() {
   const loginErrors = useActionData();
   const navigation = useNavigation();
+  const { t } = useTranslation("auth");
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
 
   const isSubmitting = navigation.state === "submitting";
@@ -20,19 +22,19 @@ function LoginForm() {
   let passwordError = null;
 
   if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
-    emailError = "Пошта невалідна";
+    emailError = t("errors.invalidEmail");
   }
   if (loginErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
-    emailError = "Пошта відсутня";
+    emailError = t("errors.emptyPass");
   }
   if (loginErrors?.message && Object.keys(dirtyFields).length === 0) {
     emailError = loginErrors.message;
   }
   if (loginErrors?.isPasswordValid === false && !dirtyFields.password) {
-    passwordError = "Пароль невалідний";
+    passwordError = t("errors.invalidPass");
   }
   if (loginErrors?.isPasswordNonEmpty === false && !dirtyFields.password) {
-    passwordError = "Пароль відсутній";
+    passwordError = t("errors.emptyPass");
   }
 
   useEffect(() => {
@@ -50,7 +52,7 @@ function LoginForm() {
   return (
     <Form>
       <Input
-        label="Пошта"
+        label={t("fields.emailField")}
         id="email"
         type="email"
         placeholder="name.surname.institute@donntu.edu.ua"
@@ -60,7 +62,7 @@ function LoginForm() {
       />
 
       <Input
-        label="Пароль"
+        label={t("fields.passField")}
         id="password"
         type="password"
         placeholder="••••••••••••••••"
@@ -71,14 +73,14 @@ function LoginForm() {
 
       <div className="form-options">
         <Checkbox
-          label="Запам'ятати мене"
+          label={t("fields.rememberMe")}
           id="remember-me"
           disabled={isSubmitting}
           defaultChecked
         />
 
         <Link className="form-forgot" to="/forgot-password">
-          Забули пароль?
+          {t("links.forgot")}
         </Link>
       </div>
 

@@ -13,7 +13,6 @@ import ForgotPage from "./pages/auth/Forgot";
 import ProfilePage from "./pages/dashboard/Profile.jsx";
 import SubscribePage from "./pages/dashboard/Subscribe.jsx";
 import { getAuthStatus, logout } from "./util/auth.js";
-import LocalizationContextProvider from "./store/Localization/LocalizationContextProvider.jsx";
 import ErrorPage from "./pages/Error.jsx";
 
 const router = createBrowserRouter([
@@ -46,9 +45,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <LocalizationContextProvider>
-      <RouterProvider router={router} />
-    </LocalizationContextProvider>
+    <RouterProvider router={router} />
   );
 }
 

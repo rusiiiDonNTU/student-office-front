@@ -1,23 +1,25 @@
-import { useContext } from "react";
+import { useTranslation } from 'react-i18next';
 import "./AuthLanguages.css";
-import { LocalizationContext } from "../../../store/Localization/LocalizationContext";
+import { LOCALS } from '../../../../public/locales/constants';
 
 function AuthLanguages() {
-  const { lang, changeLang } = useContext(LocalizationContext);
+  const { i18n } = useTranslation();
 
-  function handleSelectLang() {}
+  function handleSelectLang(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   return (
     <section className="auth-languages">
       <div
-        className={`auth-language${lang === "ua" ? " lang-active" : ""}`}
-        onClick={() => changeLang("ua")}
+        className={`auth-language${i18n.language === LOCALS.UK ? " lang-active" : ""}`}
+        onClick={() => handleSelectLang(LOCALS.UK)}
       >
         Українська
       </div>
       <div
-        className={`auth-language${lang === "en" ? " lang-active" : ""}`}
-        onClick={() => changeLang("en")}
+        className={`auth-language${i18n.language === LOCALS.EN ? " lang-active" : ""}`}
+        onClick={() => handleSelectLang(LOCALS.EN)}
       >
         English
       </div>

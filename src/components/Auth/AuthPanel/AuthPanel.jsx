@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import "./AuthPanel.css";
 import arrowImg from "./left-arrow.svg";
+import { useTranslation } from "react-i18next";
 
 function AuthPanel({ header, children, back, ...props }) {
+  const { t } = useTranslation("auth");
+
   return (
     <section className="auth-panel" {...props}>
       {back && (
@@ -14,7 +17,7 @@ function AuthPanel({ header, children, back, ...props }) {
       )}
 
       <div className="auth-panel-logo">
-        <h1>Кабінет студента</h1>
+        <h1>{t("headers.cabinet")}</h1>
         <h2>{header}</h2>
       </div>
 
