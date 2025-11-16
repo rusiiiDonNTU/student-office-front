@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import "./AuthInfo.css";
 
 function AuthInfo({infoType}) {
+  const { t } = useTranslation("auth");
+
   if (infoType === 1) {
     return (
       <section className="auth-info">
@@ -19,20 +22,20 @@ function AuthInfo({infoType}) {
     return (
       <section className="auth-info">
         <h1 className="auth-info-logo">
-          Вимоги до реєстрації акаунту:
+          {t("requirements.start")}
         </h1>
         <ul className="auth-info-list">
-          <li>Пошта може бути як корпоративною, так і особистою</li>
-          <li>Довжина паролю: 8-16 символів</li>
-          <li>Пароль має містити (мінімум): 
+          <li>{t("requirements.email")}</li>
+          <li>{t("requirements.pass.length")}</li>
+          <li>{t("requirements.pass.start")}
             <ul className="auth-info-nested-list">
-              <li>1 маленьку літеру</li>
-              <li>1 велику літеру</li>
-              <li>1 цифру</li>
-              <li>1 спец. символ</li>
+              <li>{t("requirements.pass.lower")}</li>
+              <li>{t("requirements.pass.upper")}</li>
+              <li>{t("requirements.pass.digit")}</li>
+              <li>{t("requirements.pass.symbol")}</li>
             </ul>
           </li>
-          <li>Надати потрібно хоча б один з наведених документів.</li>
+          <li>{t("requirements.docs")}</li>
         </ul>
       </section>
     );

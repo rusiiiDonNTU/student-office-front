@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet, redirect } from "react-router-dom";
+import { Outlet, redirect, useNavigation } from "react-router-dom";
 
 import AuthLogo from "../../components/Auth/AuthLogo/AuthLogo";
 import AuthLanguages from "../../components/Auth/AuthLanguages/AuthLanguages";
@@ -7,11 +7,23 @@ import "./Auth.css";
 import { getAuthStatus } from "../../util/auth";
 
 function AuthLayout({ children }) {
-  // Одноразова зміна кольору фона для компоненту логіна
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
+  
+  // Глобальне вимикання посилань, якщо сабмітиться якась форма
+  useEffect(() => {
+    if (isSubmitting) {
+      document.body.classList.add('is-submitting');
+    } else {
+      document.body.classList.remove('is-submitting');
+    }
+  }, [isSubmitting])
+
+  // Одноразова зміна кольору фона для лейаута авторизації
   useEffect(() => {
     document.body.style.background = "#1B3769";
 
-    // Повернення стандартного фону після закриття логіну
+    // Повернення стандартного фону після авторизації
     return () => (document.body.style.background = "#fff");
   }, []);
 

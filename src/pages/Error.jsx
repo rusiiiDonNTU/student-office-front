@@ -3,19 +3,23 @@ import AuthLayout from "../layouts/Auth/Auth";
 import DashboardLayout from "../layouts/Dashboard/Dashboard";
 import { getAuthStatus } from "../util/auth";
 import "./Error.css";
+import { useTranslation } from "react-i18next";
 
 function ErrorPage() {
   const isLogged = getAuthStatus();
+  const { t } = useTranslation("errors");
   const { status } = useRouteError();
 
   let errorTitle = "\\_(-_-)_/";
-  let errorBody = "Спробуйте пізніше або оновіть сторінку";
+  let errorBody = t("default");
 
   if (status === 404) {
-    errorBody = <p>Сторінку не знайдено</p>;
+    errorTitle = status
+    errorBody = <p>{t("404")}</p>;
   }
   if (status > 500) {
-    errorBody = <p>Сервер не відповідає</p>;
+    errorTitle = status
+    errorBody = <p>{t("500")}</p>;
   }
 
   if (!isLogged) {
@@ -38,8 +42,8 @@ function ErrorPage() {
     return (
       <DashboardLayout>
         <section className="dashboard-error-section">
-          <h1 className="error-title">Виникла помилка!</h1>
-          <p>Спробуйте пізніше або оновіть сторінку</p>
+          <h1 className="error-title">{errorTitle}</h1>
+          <p>{errorBody}</p>
         </section>
       </DashboardLayout>
     );

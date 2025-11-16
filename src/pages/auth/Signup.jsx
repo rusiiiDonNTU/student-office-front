@@ -1,11 +1,14 @@
+import { useTranslation } from "react-i18next";
 import AuthInfo from "../../components/Auth/AuthInfo/AuthInfo.jsx";
 import AuthPanel from "../../components/Auth/AuthPanel/AuthPanel.jsx";
 import SignupForm from "../../components/Signup/SignupForm.jsx";
 
 function SignupPage() {
+  const { t } = useTranslation("auth");
+
   return (
     <>
-      <AuthPanel header="Реєстрація" back>
+      <AuthPanel header={t("headers.register")} back>
         <SignupForm />
       </AuthPanel>
       <AuthInfo infoType={2}/>
@@ -53,7 +56,7 @@ export async function signupAction({ request, params }) {
   // Перевірка відповіді з сервера
   if (response.status === 401) {
     return {
-      message: "Невірний логін або пароль",
+      isWrong: true,
     };
   }
   else if (!response.ok) {

@@ -61,7 +61,7 @@ export async function loginAction({ request, params }) {
   // Перевірка відповіді з сервера
   if (response.status === 401) {
     return {
-      message: "Невірний логін або пароль",
+      isWrong: true,
     };
   }
   else if (!response.ok) {

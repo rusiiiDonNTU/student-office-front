@@ -1,0 +1,5 @@
+{
+    "404": "Page not found",
+    "500": "The server did not respond",
+    "default": "Please try again later or refresh the page"
+}

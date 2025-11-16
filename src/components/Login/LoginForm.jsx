@@ -21,20 +21,22 @@ function LoginForm() {
   let emailError = null;
   let passwordError = null;
 
-  if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
-    emailError = t("errors.invalidEmail");
-  }
-  if (loginErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
-    emailError = t("errors.emptyPass");
-  }
-  if (loginErrors?.message && Object.keys(dirtyFields).length === 0) {
-    emailError = loginErrors.message;
-  }
-  if (loginErrors?.isPasswordValid === false && !dirtyFields.password) {
-    passwordError = t("errors.invalidPass");
-  }
-  if (loginErrors?.isPasswordNonEmpty === false && !dirtyFields.password) {
-    passwordError = t("errors.emptyPass");
+  if (!isSubmitting) {
+    if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
+      emailError = t("errors.invalidEmail");
+    }
+    if (loginErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
+      emailError = t("errors.emptyEmail");
+    }
+    if (loginErrors?.isWrong === true && Object.keys(dirtyFields).length === 0) {
+      emailError = t("errors.wrongCreds");
+    }
+    if (loginErrors?.isPasswordValid === false && !dirtyFields.password) {
+      passwordError = t("errors.invalidPass");
+    }
+    if (loginErrors?.isPasswordNonEmpty === false && !dirtyFields.password) {
+      passwordError = t("errors.emptyPass");
+    }
   }
 
   useEffect(() => {
@@ -86,21 +88,21 @@ function LoginForm() {
 
       <FormActions>
         <Button isBlue disabled={isSubmitting}>
-          Увійти
+          {t("buttons.signIn")}
         </Button>
         <Button disabled={isSubmitting}>
           <img src="/google.svg" />
-          Логін через Google
+          {t("buttons.withGoogle")}
         </Button>
 
         <p className="form-register">
-          Немає аккаунту?{" "}
+          {t("text.noAccount")}{" "}
           <Link
             to="/register"
             className="form-register"
             onClick={() => handleRedirect(isSubmitting)}
           >
-            Зареєструватись
+            {t("links.register")}
           </Link>
         </p>
       </FormActions>
