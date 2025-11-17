@@ -1,6 +1,5 @@
-import i18next from 'i18next';
 import { Link } from "react-router-dom";
-import donntuLogo from "./donntu-logo.png";
+import donntuLogo from "./donntu-white-logo.png";
 import { useTranslation } from 'react-i18next';
 
 function AuthLogo() {

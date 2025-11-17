@@ -14,6 +14,8 @@ import ProfilePage from "./pages/dashboard/Profile.jsx";
 import SubscribePage from "./pages/dashboard/Subscribe.jsx";
 import { getAuthStatus, logout } from "./util/auth.js";
 import ErrorPage from "./pages/Error.jsx";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const { t, i18n } = useTranslation('main');
+  const lang = i18n.language;
+
+  // Переклад назви сторінки в браузері після зміни мови
+  useEffect(() => {
+    document.title = t('title')
+  }, [lang]);
+
   return (
     <RouterProvider router={router} />
   );
