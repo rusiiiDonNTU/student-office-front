@@ -9,32 +9,58 @@ export function validateEmail(email) {
 }
 
 export function validatePassword(password) {
-  // Масив помилок
-  const errors = [];
+  // Об'єкт з помилками
+  const errors = {
+    short: false,
+    long: false,
+    noLower: false,
+    noUpper: false,
+    noDigit: false,
+    noSymbol: false
+  };
 
   // Довжина
   if (password.length < 8) {
-    errors.push("Пароль занадто короткий (мінімум 8 символів)");
+    errors.short = true;
   } else if (password.length > 16) {
-    errors.push("Пароль занадто довгий (максимум 16 символів)");
+    errors.long = true;
   }
 
   // Одна маленька літера
   if (!/[a-z]/.test(password)) {
-    errors.push("Пароль не містить малих літер (мінімум 1)");
+    errors.noLower = true;
   }
   // Одна велика літера
   if (!/[A-Z]/.test(password)) {
-    errors.push("Пароль не містить великих літер (мінімум 1)");
+    errors.noUpper = true;
   }
   // Одна цифра
   if (!/\d/.test(password)) {
-    errors.push("Пароль не містить жодної цифри (мінімум 1)");
+    errors.noDigit = true;
   }
   // Один спец. символ
   if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
-    errors.push("Пароль не містить жодного спец. символу (мінімум 1)");
+    errors.noSymbol = true;
   }
 
   return errors;
+}
+
+export function checkIfEqual(password, confirmPassword) {
+  return password === confirmPassword;
+}
+
+export function validateRNOKPP(rnokpp, isEmpty) {
+  if (!isEmpty) return rnokpp.length === 10
+  return true
+}
+
+export function validateStudIdSeries(sIdSeries, isEmpty) {
+  if (!isEmpty) return sIdSeries.length === 2
+  return true
+}
+
+export function validateStudIdNumber(sIdNumber, isEmpty) {
+  if (!isEmpty) return sIdNumber.length === 8
+  return true
 }

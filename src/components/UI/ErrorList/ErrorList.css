@@ -1,0 +1,15 @@
+.errorlist {
+    color: #742f2f;
+}
+
+.errorlist-ul {
+    padding-left: 1rem;
+    list-style-type: disc;
+}
+
+@media (max-width: 768px) {
+    .errorlist-ul li {
+        font-size: 0.75rem;
+    }
+}
+

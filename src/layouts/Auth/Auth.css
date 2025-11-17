@@ -34,6 +34,8 @@
   align-items: center;
   column-gap: 3rem;
   border-radius: 15px;
+  padding-top: 8rem;
+  padding-bottom: 3.5rem;
 }
 
 @media (max-width: 1600px) {
@@ -45,12 +47,5 @@
 @media (max-width: 1055px) {
   .auth-logo {
     margin-left: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .auth-content {
-    padding-top: 8.5rem;
-    padding-bottom: 3.5rem;
   }
 }

@@ -32,3 +32,9 @@
 .input-group:has(.input-field:disabled) .input-label {
   color: #d1d1d1;
 }
+
+@media (max-width: 768px) {
+    .input-field-message {
+        font-size: 0.75rem;
+    }
+}

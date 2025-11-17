@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import AuthLayout, { permForLoginLoader } from "./layouts/Auth/Auth";
 import LoginPage, { loginAction } from "./pages/auth/Login.jsx";
-import SignupPage from "./pages/auth/Signup";
+import SignupPage, { signupAction } from "./pages/auth/Signup";
 import DashboardLayout, {
   permForDashboardLoader,
 } from "./layouts/Dashboard/Dashboard";
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "login", element: <LoginPage />, action: loginAction },
-      { path: "register", element: <SignupPage /> },
+      { path: "register", element: <SignupPage />, action: signupAction },
       { path: "forgot-password", element: <ForgotPage /> },
     ],
   },

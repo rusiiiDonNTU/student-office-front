@@ -25,12 +25,12 @@ export default LoginPage;
 
 export async function loginAction({ request, params }) {
   const formData = await request.formData();
-  const isRemembered = formData.get("remember-me");
+  const isRemembered = formData.get("remember-me") === "on";
   const requestBody = {
     email: formData.get("email"),
     password: formData.get("password"),
   };
-
+  
   // Валідація (клієнт-сайд)
   const valids = {
     isEmailValid: validateEmail(requestBody.email),

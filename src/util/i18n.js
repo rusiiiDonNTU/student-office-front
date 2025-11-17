@@ -8,7 +8,6 @@ i18n.use(languageDetector)
     .use(backend)
     .use(initReactI18next)
     .init({
-      lng: LOCALS.UK,
       fallbackLng: LOCALS.UK,
       ns: ["main", "auth", "dashboard"],
       defaultNs: "main",
@@ -18,5 +17,5 @@ i18n.use(languageDetector)
       interpolation: {
         escapeValue: false
       },
-      debug: true
+      debug: true, 
     });

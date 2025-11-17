@@ -23,19 +23,19 @@ function LoginForm() {
 
   if (!isSubmitting) {
     if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
-      emailError = t("errors.invalidEmail");
+      emailError = t("errors.email.invalid");
     }
     if (loginErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
-      emailError = t("errors.emptyEmail");
+      emailError = t("errors.email.empty");
     }
     if (loginErrors?.isWrong === true && Object.keys(dirtyFields).length === 0) {
       emailError = t("errors.wrongCreds");
     }
     if (loginErrors?.isPasswordValid === false && !dirtyFields.password) {
-      passwordError = t("errors.invalidPass");
+      passwordError = t("errors.pass.invalid");
     }
     if (loginErrors?.isPasswordNonEmpty === false && !dirtyFields.password) {
-      passwordError = t("errors.emptyPass");
+      passwordError = t("errors.pass.empty");
     }
   }
 
