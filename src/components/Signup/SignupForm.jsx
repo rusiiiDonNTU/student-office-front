@@ -7,7 +7,7 @@ import Form from "../UI/Form/Form";
 import InputRow from "../UI/InputRow/InputRow";
 import FormActions from "../UI/Form/FormActions/FormActions";
 import { useTranslation } from "react-i18next";
-import { useActionData, useNavigation } from "react-router-dom";
+import { useActionData, useNavigate, useNavigation } from "react-router-dom";
 import ErrorList from "../UI/ErrorList/ErrorList";
 
 const initDirtyFields = {};
@@ -15,12 +15,23 @@ const initDirtyFields = {};
 function SignupForm() {
   const signupErrors = useActionData();
   const navigation = useNavigation();
+  const navigate = useNavigate();
   const { t } = useTranslation("auth");
   const [isRnokpp, setIsRnokpp] = useState(true);
   const [isStudentId, setIsStudentId] = useState(true);
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
 
   const isSubmitting = navigation.state === "submitting";
+
+  useEffect(() => {
+    if (signupErrors?.signupSuccess === true) {
+      navigate('/login', {
+        state: {
+          justRegistered: true
+        }
+      });
+    }
+  }, [signupErrors, navigate])
 
   let emailError = null;
   const passwordErrors = [];
@@ -92,7 +103,7 @@ function SignupForm() {
   // Видалення будь-яких символів з поля, крім букв
   function handleLettersInput(e) {
     const { value } = e.target;
-    e.target.value = value.replace(/[^a-zA-Zа-яА-ЯїієІЇЄ]/g, '');
+    e.target.value = value.replace(/[^a-zA-Zа-яА-ЯїієІЇЄ]/g, '').toUpperCase();
   }
 
   // Видалення будь-яких символів з поля, крім цифр
@@ -138,7 +149,7 @@ function SignupForm() {
         <Input
           label={t("fields.confirmPassField")}
           id="confirm-password"
-          type="confirm-password"
+          type="password"
           placeholder="••••••••••••••••"
           maxLength="16"
           disabled={isSubmitting}
@@ -155,7 +166,6 @@ function SignupForm() {
         type="tel"
         onChange={handleDigitsInput}
         disabled={!isRnokpp || isSubmitting}
-
       />
       <Checkbox
         label={t("fields.noTRN")}
@@ -197,7 +207,7 @@ function SignupForm() {
       {studentIdErrors.length > 0 && <ErrorList l={studentIdErrors}/>}
 
       <FormActions>
-        <Button isBlue>{t("buttons.signUp")}</Button>
+        <Button isBlue disabled={isSubmitting}>{t("buttons.signUp")}</Button>
       </FormActions>
     </Form>
   );

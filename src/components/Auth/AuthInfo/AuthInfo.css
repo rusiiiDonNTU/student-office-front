@@ -9,10 +9,18 @@
   font-weight: 500;
 }
 
-.auth-info-list {
+.auth-info ul {
+  margin-left: 1rem;
+}
+
+.auth-info-list-nostart {
   margin-top: 1rem;
   list-style-type: circle;
-  margin-left: 1rem;
+}
+
+.auth-info-list-withstart {
+  margin-top: 0.3rem;
+  list-style-type: disc;
 }
 
 .auth-info-nested-list {

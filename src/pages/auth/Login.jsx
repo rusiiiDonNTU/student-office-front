@@ -1,4 +1,4 @@
-import { redirect } from "react-router-dom";
+import { redirect, useLocation } from "react-router-dom";
 import AuthPanel from "../../components/Auth/AuthPanel/AuthPanel";
 import LoginForm from "../../components/Login/LoginForm";
 import { login } from "../../util/auth";
@@ -8,15 +8,22 @@ import {
   validatePassword,
 } from "../../util/validation";
 import { useTranslation } from "react-i18next";
+import AuthInfo from "../../components/Auth/AuthInfo/AuthInfo";
+import { useState } from "react";
+import LoginMessage from "../../components/Login/LoginMessage/LoginMessage";
 
 function LoginPage() {
   const { t } = useTranslation("auth");
+  const loc = useLocation();
+  const [isJustRegistered, setIsJustRegistered] = useState(loc.state?.justRegistered === true);
 
   return (
     <>
-      <AuthPanel header={t("headers.login")} style={{ maxWidth: "37.5rem" }}>
+      {isJustRegistered && <LoginMessage />} 
+      <AuthPanel header={t("headers.login")} style={{ maxWidth: "37.5rem"}}>
         <LoginForm />
       </AuthPanel>
+      {isJustRegistered && <AuthInfo infoType={1}/>} 
     </>
   );
 }
@@ -36,7 +43,7 @@ export async function loginAction({ request, params }) {
     isEmailValid: validateEmail(requestBody.email),
     isEmailNonEmpty: checkIfNonEmpty(requestBody.email),
     isPasswordValid:
-      validatePassword(requestBody.password).length > 0 ? false : true,
+      Object.keys(validatePassword(requestBody.password)).length > 0 ? false : true,
     isPasswordNonEmpty: checkIfNonEmpty(requestBody.password),
   };
 

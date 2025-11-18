@@ -20,6 +20,10 @@ function SignupPage() {
 export default SignupPage;
 
 export async function signupAction({ request, params }) {
+  // return { 
+  //   signupSuccess: true 
+  // };
+
   const formData = await request.formData();
   const requestBody = {
     email: formData.get("email"),
@@ -54,35 +58,36 @@ export async function signupAction({ request, params }) {
   }
 
   // Відправка на сервер
-  const response = await fetch("https://student-app-web-dzdtfbh6ejcpgcdm.westus-01.azurewebsites.net/api/auth/signUp", {
-    method: request.method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(requestBody),
-  });
+  try {
+    const response = await fetch("https://student-app-web-dzdtfbh6ejcpgcdm.westus-01.azurewebsites.net/api/auth/signUp", {
+      method: request.method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
 
-  // // "Заглушка", щоб запит не відправлявся в будь-якому випадку (доки немає бекенда)
-  // const response = {
-  //   status: 401,
-  // };
+    // // "Заглушка", щоб запит не відправлявся в будь-якому випадку
+    // const response = {
+    //   status: 400,
+    // };
 
-  // Перевірка відповіді з сервера
-  if (response.status >= 400 || response.status < 500) {
-    return {
-      signupFailed: true,
-    };
+    // Перевірка відповіді з сервера
+    if (response.status === 400 || !response.ok) {
+      return {
+        signupFailed: true,
+      };
+    }
+    else {
+      return { 
+        signupSuccess: true 
+      };
+    }
   }
-  else if (!response.ok) {
+  catch (err) {
     throw new Response(
-      { message: "Неочікування помилка під час авторизації" },
+      { message: "Неочікування помилка під час реєстрації." },
       { status: 500 }
     );
-  }
-  
-  else {
-    const resData = await response.json();
-    login(resData.token);
-    return redirect("/profile");
   }
 }

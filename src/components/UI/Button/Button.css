@@ -1,6 +1,8 @@
 .button {
   border-radius: 10px;
   border: 1px #929292 solid;
+  background-color: white;
+  color: black;
   padding: 1rem;
   display: flex;
   justify-content: center;

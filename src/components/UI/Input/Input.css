@@ -28,6 +28,7 @@
 .input-label-row {
   display: flex;
   justify-content: space-between;
+  align-items: end;
 }
 .input-group:has(.input-field:disabled) .input-label {
   color: #d1d1d1;
