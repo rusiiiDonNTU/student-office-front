@@ -103,7 +103,7 @@ function SignupForm() {
   // Видалення будь-яких символів з поля, крім букв
   function handleLettersInput(e) {
     const { value } = e.target;
-    e.target.value = value.replace(/[^a-zA-Zа-яА-ЯїієІЇЄ]/g, '').toUpperCase();
+    e.target.value = value.replace(/[^а-яА-ЯїієІЇЄ]/g, '').toUpperCase();
   }
 
   // Видалення будь-яких символів з поля, крім цифр

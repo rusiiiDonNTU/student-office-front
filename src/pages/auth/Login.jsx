@@ -38,14 +38,18 @@ export async function loginAction({ request, params }) {
     password: formData.get("password"),
   };
   
+  console.log(validatePassword(requestBody.password))
+
   // Валідація (клієнт-сайд)
   const valids = {
     isEmailValid: validateEmail(requestBody.email),
     isEmailNonEmpty: checkIfNonEmpty(requestBody.email),
     isPasswordValid:
-      Object.keys(validatePassword(requestBody.password)).length > 0 ? false : true,
+      Object.values(validatePassword(requestBody.password)).includes(true) ? false : true,
     isPasswordNonEmpty: checkIfNonEmpty(requestBody.password),
   };
+
+  console.log(valids);
 
   if (Object.values(valids).includes(false)) {
     return valids;
