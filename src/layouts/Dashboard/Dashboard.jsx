@@ -1,7 +1,8 @@
 import { Outlet, redirect } from "react-router-dom";
-import DashboardNavigation from "../../components/Dashboard/DashboardNavigation";
+import DashboardHeader from "../../components/Dashboard/DashboardHeader/DashboardHeader";
 import { getAuthStatus } from "../../util/auth";
 import "./Dashboard.css";
+import DashboardFooter from "../../components/Dashboard/DashboardFooter/DashboardFooter";
 
 function DashboardLayout({ children }) {
   // // Одноразова зміна кольору фона для компонентів дешборда
@@ -14,8 +15,9 @@ function DashboardLayout({ children }) {
 
   return (
     <>
-      <DashboardNavigation />
+      <DashboardHeader />
       <div className="dashboard-content">{children || <Outlet />}</div>
+      <DashboardFooter />
     </>
   );
 }

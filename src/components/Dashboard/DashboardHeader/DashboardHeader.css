@@ -1,0 +1,38 @@
+.header-logo {
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.header-logo-icon {
+  width: auto;
+  margin: 1rem 0;
+  margin-left: 2rem;
+  max-height: 3rem;
+  clip-path: inset(0 0 50% 0);
+}
+
+.header-logo-text {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.header-tabs {
+
+}
+
+.dashboard-nav-header-button {
+  display: flex;
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+}
+
+.dashboard-nav-header-button img {
+  max-height: 1.5rem;
+}
+
+.dashboard-nav-header-button:hover,
+.dashboard-nav-header-button:has(a.active) {
+  background: var(--color-dark-blue);
+}

@@ -2,27 +2,27 @@ import { redirect } from "react-router-dom";
 
 let isLogged = false;
 
-export function login(token, isRemember = true) {
-  if (isRemember) localStorage.setItem("token", token);
-  else sessionStorage.setItem("token", token);
+export function login(accessToken, isRemember = true) {
+  if (isRemember) localStorage.setItem("accessToken", accessToken);
+  else sessionStorage.setItem("accessToken", accessToken);
   isLogged = true;
 }
 
 export function logout() {
-  const token = getAuthToken();
+  const accessToken = getAccessToken();
 
-  if (token !== "UNAUTHETICATED") {
-    localStorage.removeItem("token", token);
-    sessionStorage.removeItem("token", token);
+  if (accessToken !== "UNAUTHETICATED") {
+    localStorage.removeItem("accessToken", accessToken);
+    sessionStorage.removeItem("accessToken", accessToken);
     isLogged = false;
   }
 
   return redirect("/login")
 }
 
-export function getAuthToken() {
-  const locToken = localStorage.getItem("token");
-  const sesToken = sessionStorage.getItem("token");
+export function getAccessToken() {
+  const locToken = localStorage.getItem("accessToken");
+  const sesToken = sessionStorage.getItem("accessToken");
 
   if (locToken) return locToken;
   if (sesToken) return sesToken;
@@ -32,8 +32,8 @@ export function getAuthToken() {
 
 export function getAuthStatus() {
   if (!isLogged) {
-    const token = getAuthToken();
-    if (token !== "UNAUTHETICATED") isLogged = true;
+    const accessToken = getAccessToken();
+    if (accessToken !== "UNAUTHETICATED") isLogged = true;
   }
 
   return isLogged;

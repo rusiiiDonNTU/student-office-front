@@ -1,18 +1,23 @@
+import { useLoaderData } from "react-router-dom";
 import "./Profile.css"
 
 function ProfilePage() {
+  const load = useLoaderData();
+
   return (
     <section className="profile">
-      <section>
-        <h3 className="profile-section-header">Студент</h3>
-
-      </section>
-      <div className="profile-sections-row">
-        <section>
-          <h3 className="profile-section-header">Освіта</h3>
+      <div>
+        <section className="profile-person">
+          <img />
+          <div>
+            <span></span>
+            <span></span>
+          </div>
         </section>
-        <section>
-          <h3 className="profile-section-header">Навчання</h3>
+      </div>
+      <div>
+        <section className="profile-education">
+
         </section>
       </div>
     </section>

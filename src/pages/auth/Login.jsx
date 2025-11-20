@@ -37,8 +37,6 @@ export async function loginAction({ request, params }) {
     email: formData.get("email"),
     password: formData.get("password"),
   };
-  
-  console.log(validatePassword(requestBody.password))
 
   // Валідація (клієнт-сайд)
   const valids = {
@@ -48,8 +46,6 @@ export async function loginAction({ request, params }) {
       Object.values(validatePassword(requestBody.password)).includes(true) ? false : true,
     isPasswordNonEmpty: checkIfNonEmpty(requestBody.password),
   };
-
-  console.log(valids);
 
   if (Object.values(valids).includes(false)) {
     return valids;
@@ -81,10 +77,9 @@ export async function loginAction({ request, params }) {
       { status: 500 }
     );
   }
-  
   else {
     const resData = await response.json();
-    login(resData.token, isRemembered);
+    login(resData.accessToken, isRemembered);
     return redirect("/profile");
   }
 }
