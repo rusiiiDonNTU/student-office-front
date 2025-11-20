@@ -17,6 +17,8 @@ function AuthLayout({ children }) {
     } else {
       document.body.classList.remove('is-submitting');
     }
+
+    return () => {document.body.classList.remove('is-submitting');}
   }, [isSubmitting])
 
   // Одноразова зміна кольору фона для лейаута авторизації
