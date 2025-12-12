@@ -35,7 +35,7 @@ export async function loginAction({ request, params }) {
   const buttonType = formData.get("button");
 
   if (buttonType === "google") {
-    window.location.href = "https://student-app-web-dzdtfbh6ejcpgcdm.westus-01.azurewebsites.net/api/auth/google-callback";
+    window.location.href = "https://student-app-web-dzdtfbh6ejcpgcdm.westus-01.azurewebsites.net/api/auth/signin-google";
     return;
   }
 
@@ -65,6 +65,7 @@ export async function loginAction({ request, params }) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(requestBody),
+    credentials: "include"
   });
 
   // // "Заглушка", щоб запит не відправлявся в будь-якому випадку (доки немає бекенда)
@@ -84,9 +85,6 @@ export async function loginAction({ request, params }) {
       { status: 500 }
     );
   }
-  else {
-    const resData = await response.json();
-    login(resData.accessToken, isRemembered);
-    return redirect("/profile");
-  }
+  
+  return redirect("/profile");
 }
