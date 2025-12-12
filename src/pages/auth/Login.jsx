@@ -49,8 +49,8 @@ export async function loginAction({ request, params }) {
   const valids = {
     isEmailValid: validateEmail(requestBody.email),
     isEmailNonEmpty: checkIfNonEmpty(requestBody.email),
-    isPasswordValid:
-      Object.values(validatePassword(requestBody.password)).includes(true) ? false : true,
+    // isPasswordValid:
+    //   Object.values(validatePassword(requestBody.password)).includes(true) ? false : true,
     isPasswordNonEmpty: checkIfNonEmpty(requestBody.password),
   };
 
