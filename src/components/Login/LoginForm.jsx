@@ -22,18 +22,18 @@ function LoginForm() {
   let passwordError = null;
 
   if (!isSubmitting) {
-    if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
-      emailError = t("errors.email.invalid");
-    }
+    // if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
+    //   emailError = t("errors.email.invalid");
+    // }
     if (loginErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
       emailError = t("errors.email.empty");
     }
     if (loginErrors?.isWrong === true && Object.keys(dirtyFields).length === 0) {
       emailError = t("errors.wrongCreds");
     }
-    if (loginErrors?.isPasswordValid === false && !dirtyFields.password) {
-      passwordError = t("errors.pass.invalid");
-    }
+    // if (loginErrors?.isPasswordValid === false && !dirtyFields.password) {
+    //   passwordError = t("errors.pass.invalid");
+    // }
     if (loginErrors?.isPasswordNonEmpty === false && !dirtyFields.password) {
       passwordError = t("errors.pass.empty");
     }
@@ -87,10 +87,10 @@ function LoginForm() {
       </div>
 
       <FormActions>
-        <Button isBlue disabled={isSubmitting}>
+        <Button isBlue disabled={isSubmitting} name="button" value="login">
           {t("buttons.signIn")}
         </Button>
-        <Button disabled={isSubmitting}>
+        <Button disabled={isSubmitting} name="button" value="google">
           <img src="/google.svg" />
           {t("buttons.withGoogle")}
         </Button>

@@ -32,6 +32,13 @@ export default LoginPage;
 
 export async function loginAction({ request, params }) {
   const formData = await request.formData();
+  const buttonType = formData.get("button");
+
+  if (buttonType === "google") {
+    window.location.href = "https://student-app-web-dzdtfbh6ejcpgcdm.westus-01.azurewebsites.net/api/auth/google-callback";
+    return;
+  }
+
   const isRemembered = formData.get("remember-me") === "on";
   const requestBody = {
     email: formData.get("email"),

@@ -39,7 +39,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "profile", element: <ProfilePage /> },
-      { path: "subscribe", element: <SubscribePage /> },
+      { path: "subscribe", element: <SubscribePage /> }
     ],
   },
   { path: "logout", loader: logout },
