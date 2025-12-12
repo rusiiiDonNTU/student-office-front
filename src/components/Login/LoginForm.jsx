@@ -22,9 +22,9 @@ function LoginForm() {
   let passwordError = null;
 
   if (!isSubmitting) {
-    // if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
-    //   emailError = t("errors.email.invalid");
-    // }
+    if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
+      emailError = t("errors.email.invalid");
+    }
     if (loginErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
       emailError = t("errors.email.empty");
     }
