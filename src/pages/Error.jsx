@@ -45,7 +45,7 @@ function ErrorPage() {
       <DashboardLayout>
         <section className="dashboard-error-section">
           <h1 className="error-title">{errorTitle}</h1>
-          <p>{errorBody}</p>
+          {errorBody}
         </section>
       </DashboardLayout>
     );

@@ -1,40 +1,26 @@
 import { redirect } from "react-router-dom";
+import api from "./axios";
 
-let isLogged = false;
-
-export function login(accessToken, isRemember = true) {
-  if (isRemember) localStorage.setItem("accessToken", accessToken);
-  else sessionStorage.setItem("accessToken", accessToken);
-  isLogged = true;
+export async function logout() {
+  try {
+    const respone = await api.post("/auth/logout");
+    return redirect("/login")
+  }
+  catch (err) {
+    throw new Response(
+      { message: "Сервер не надав відповіді" },
+      { status: 500 }
+    );
+  }
 }
 
-export function logout() {
-  const accessToken = getAccessToken();
-
-  if (accessToken !== "UNAUTHETICATED") {
-    localStorage.removeItem("accessToken", accessToken);
-    sessionStorage.removeItem("accessToken", accessToken);
-    isLogged = false;
+export async function getAuthStatus() {
+  try {
+    const response = await api.get("/auth/check");
+  }
+  catch {
+    return false;
   }
 
-  return redirect("/login")
-}
-
-export function getAccessToken() {
-  const locToken = localStorage.getItem("accessToken");
-  const sesToken = sessionStorage.getItem("accessToken");
-
-  if (locToken) return locToken;
-  if (sesToken) return sesToken;
-
-  return "UNAUTHETICATED";
-}
-
-export function getAuthStatus() {
-  if (!isLogged) {
-    const accessToken = getAccessToken();
-    if (accessToken !== "UNAUTHETICATED") isLogged = true;
-  }
-
-  return isLogged;
+  if (response.ok) return true
 }

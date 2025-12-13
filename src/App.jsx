@@ -27,6 +27,9 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     loader: permForLoginLoader,
     errorElement: <ErrorPage />,
+    shouldRevalidate: () => {
+
+    },
     children: [
       { path: "login", element: <LoginPage />, action: loginAction },
       { path: "register", element: <SignupPage />, action: signupAction },
@@ -37,12 +40,15 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     loader: permForDashboardLoader,
     errorElement: <ErrorPage />,
+    shouldRevalidate: () => {
+      
+    },
     children: [
       { path: "profile", element: <ProfilePage /> },
       { path: "subscribe", element: <SubscribePage /> }
     ],
   },
-  { path: "logout", loader: logout },
+  { path: "logout", errorElement: <ErrorPage />, loader: logout },
 ]);
 
 function App() {

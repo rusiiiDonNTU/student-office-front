@@ -1,7 +1,6 @@
 import { redirect, useLocation } from "react-router-dom";
 import AuthPanel from "../../components/Auth/AuthPanel/AuthPanel";
 import LoginForm from "../../components/Login/LoginForm";
-import { login } from "../../util/auth";
 import {
   checkIfNonEmpty,
   validateEmail,
