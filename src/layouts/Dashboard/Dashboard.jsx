@@ -26,7 +26,6 @@ export default DashboardLayout;
 
 export async function permForDashboardLoader() {
   const isLogged = await getAuthStatus();
-  console.log(isLogged);
 
   if (!!isLogged) {
     return null;

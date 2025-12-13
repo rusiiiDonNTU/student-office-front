@@ -17,10 +17,9 @@ export async function logout() {
 export async function getAuthStatus() {
   try {
     const response = await api.get("/auth/check");
+    if (response.ok) return true
   }
   catch {
     return false;
   }
-
-  if (response.ok) return true
 }
