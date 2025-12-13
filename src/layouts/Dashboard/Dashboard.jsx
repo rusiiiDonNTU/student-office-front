@@ -24,8 +24,8 @@ function DashboardLayout({ children }) {
 
 export default DashboardLayout;
 
-export function permForDashboardLoader() {
-  const isLogged = getAuthStatus();
+export async function permForDashboardLoader() {
+  const isLogged = await getAuthStatus();
   console.log(isLogged);
 
   if (!!isLogged) {

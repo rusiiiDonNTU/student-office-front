@@ -42,8 +42,8 @@ function AuthLayout({ children }) {
 
 export default AuthLayout;
 
-export function permForLoginLoader() {
-  const isLogged = getAuthStatus();
+export async function permForLoginLoader() {
+  const isLogged = await getAuthStatus();
 
   if (!!isLogged) {
     return redirect("/profile");
