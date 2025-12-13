@@ -1,4 +1,4 @@
-import { Link, useActionData, useLocation, useNavigation } from "react-router-dom";
+import { Link, useActionData, useLocation, useNavigation, useSearchParams } from "react-router-dom";
 import Button from "../UI/Button/Button";
 import Checkbox from "../UI/Checkbox/Checkbox";
 import Input from "../UI/Input/Input";
@@ -11,17 +11,21 @@ import { useTranslation } from "react-i18next";
 const initDirtyFields = {};
 
 function LoginForm() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [errorFromBack, setErrorFromBack] = useState("");
   const loginErrors = useActionData();
   const navigation = useNavigation();
   const { t } = useTranslation("auth");
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
 
   const isSubmitting = navigation.state === "submitting";
-
   let emailError = null;
   let passwordError = null;
 
   if (!isSubmitting) {
+    if (errorFromBack !== "" && !dirtyFields.email) {
+      emailError = errorFromBack
+    }
     if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
       emailError = t("errors.email.invalid");
     }
@@ -38,13 +42,28 @@ function LoginForm() {
       passwordError = t("errors.pass.empty");
     }
   }
+  if (errorFromBack) emailError = errorFromBack;
+
+  // Зчитування повідомлень з URL
+  useEffect(() => {
+    const msgCode = searchParams.get("message");
+    if (msgCode === "login_failed") {
+      setErrorFromBack(t("errors.notFound"));
+      searchParams.delete("message");
+      setSearchParams(searchParams);
+    }
+  }, [searchParams, setSearchParams])
 
   useEffect(() => {
     setDirtyFields({});
+    if (errorFromBack !== "") setErrorFromBack("");
   }, [loginErrors]);
 
   function handleInputChange(e) {
     const { name } = e.target;
+
+    // Якщо друк йде до поля пошти - помилка зі сторони сервера очищується (якщо вона є)
+    if (name === "email" && errorFromBack !== "") setErrorFromBack("")
 
     setDirtyFields((prev) => {
       return { ...prev, [name]: true };

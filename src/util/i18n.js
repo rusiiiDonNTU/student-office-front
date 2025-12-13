@@ -10,6 +10,7 @@ i18n.use(languageDetector)
     .init({
       fallbackLng: LOCALS.UK,
       ns: ["main", "auth", "dashboard"],
+      preload: ['uk', 'en'],
       defaultNs: "main",
       backend: {
         loadPath: "/locales/{{lng}}/{{ns}}.json"
