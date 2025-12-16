@@ -5,12 +5,21 @@ import { getAuthStatus } from "../util/auth";
 import "./Error.css";
 import { useTranslation } from "react-i18next";
 import Button from "../components/UI/Button/Button";
+import { useEffect, useState } from "react";
 
 function ErrorPage() {
-  const isLogged = getAuthStatus();
+  const [isLogged, setIsLogged] = useState();
   const navigate = useNavigate();
   const { t } = useTranslation("errors");
   const { status, data } = useRouteError();
+
+  useEffect(() => {
+    const getAuth = async () => {
+      const status = await getAuthStatus();
+      setIsLogged(status)
+    }
+    getAuth();
+  }, []);
 
   let errorTitle = "\\_(-_-)_/";
   let errorBody = t("default");
@@ -24,7 +33,7 @@ function ErrorPage() {
     errorBody = <p>{t("500")}</p>;
   }
 
-  if (!isLogged) {
+  if (isLogged === false) {
     return (
       <AuthLayout>
         <section className="auth-error-section">
@@ -40,7 +49,7 @@ function ErrorPage() {
         </section>
       </AuthLayout>
     );
-  } else {
+  } else if (isLogged === true) {
     return (
       <DashboardLayout>
         <section className="dashboard-error-section">
