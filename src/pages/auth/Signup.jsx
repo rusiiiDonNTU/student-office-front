@@ -53,7 +53,7 @@ export async function signupAction({ request, params }) {
     isStudIdNumberNonEmpty: !noStudentId ? checkIfNonEmpty(requestBody.studentIdNumber) : true,
   };
 
-  if (Object.values(valids).includes(false) || valids.isPasswordValid.length > 0) {
+  if (Object.values(valids).includes(false) || Object.values(valids.isPasswordValid).includes(true)) {
     return valids;
   }
 
