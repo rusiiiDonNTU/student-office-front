@@ -4,19 +4,30 @@ import backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import { LOCALS } from "../../public/locales/constants";
 
+const supportedLngs = [LOCALS.UK, LOCALS.EN];
+
 i18n.use(languageDetector)
     .use(backend)
     .use(initReactI18next)
     .init({
+      supportedLngs: supportedLngs,
       fallbackLng: LOCALS.UK,
       ns: ["main", "auth", "dashboard"],
-      preload: ['uk', 'en'],
+      preload: supportedLngs,
       defaultNs: "main",
       backend: {
         loadPath: "/locales/{{lng}}/{{ns}}.json"
+      },
+      detection: {
+        order: ['localStorage']
       },
       interpolation: {
         escapeValue: false
       },
       debug: true, 
+    }).then(() => {
+      // Перевірка мови в localStorage
+      const storedLng = localStorage.getItem('i18nextLng');
+      if (storedLng && !supportedLngs.includes(storedLng))
+        localStorage.setItem('i18nextLng', i18n.resolvedLanguage);
     });
