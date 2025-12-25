@@ -15,14 +15,19 @@ function LoginPage() {
   const { t } = useTranslation("auth");
   const loc = useLocation();
   const [isJustRegistered, setIsJustRegistered] = useState(loc.state?.justRegistered === true);
+  const [isEmailConfirmed, setIsEmailConfirmed] = useState(loc.state?.emailConfirmed === true)
 
   return (
     <>
-      {isJustRegistered && <LoginMessage />} 
+      {/* {isJustRegistered && <LoginMessage h={t("text.signupRequest.header")} b={t("text.signupRequest.info")}/>} 
+      {isEmailConfirmed && <LoginMessage h={t("text.signupSuccess.header")} b={t("text.signupSuccess.login")}/>}  */}
+      {isJustRegistered && <LoginMessage h={t("text.signupSuccess.header")} b={t("text.signupSuccess.login")}/>}
       <AuthPanel header={t("headers.login")} style={{ maxWidth: "37.5rem"}}>
         <LoginForm />
       </AuthPanel>
-      {isJustRegistered && <AuthInfo infoType={1}/>} 
+      {isJustRegistered && <AuthInfo infoType={"success"}/>}
+      {/* {isJustRegistered && <AuthInfo infoType={"request"}/>} 
+      {isEmailConfirmed && <AuthInfo infoType={"success"}/>}  */}
     </>
   );
 }

@@ -24,6 +24,10 @@
   color: black;
 }
 
+.auth-language .loading {
+  opacity: 0.75;
+}
+
 .auth-language:not(.lang-active) {
   cursor: pointer;
 }

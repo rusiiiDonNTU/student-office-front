@@ -50,8 +50,18 @@ export function checkIfEqual(password, confirmPassword) {
   return password === confirmPassword;
 }
 
-export function validateRNOKPP(rnokpp, isEmpty) {
-  if (!isEmpty) return rnokpp.length === 10
+export function validatePassportNumber(passportNumber, isPresent, oldPassport) {
+  if (isPresent && !oldPassport) return (passportNumber.length === 9 && !oldPassport) || (passportNumber.length === 6 && oldPassport)
+  return true
+}
+
+export function validateOldPassportNumber(passportNumber, isPresent, oldPassport) {
+  if (isPresent && oldPassport) return (passportNumber.length === 6 && oldPassport)
+  return true
+}
+
+export function validateOldPassportSeries(passportSeries, isPresent, oldPassport) {
+  if (isPresent && oldPassport) return passportSeries.length === 2
   return true
 }
 

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import AuthInfo from "../../components/Auth/AuthInfo/AuthInfo.jsx";
 import AuthPanel from "../../components/Auth/AuthPanel/AuthPanel.jsx";
 import SignupForm from "../../components/Signup/SignupForm.jsx";
-import { checkIfEqual, checkIfNonEmpty, validateEmail, validatePassword, validateRNOKPP, validateStudIdNumber, validateStudIdSeries } from "../../util/validation.js";
+import { checkIfEqual, checkIfNonEmpty, validateEmail, validatePassword, validateStudIdNumber, validateStudIdSeries, validatePassportNumber, validateOldPassportNumber, validateOldPassportSeries} from "../../util/validation.js";
 
 function SignupPage() {
   const { t } = useTranslation("auth");
@@ -12,7 +12,7 @@ function SignupPage() {
       <AuthPanel header={t("headers.register")} back>
         <SignupForm />
       </AuthPanel>
-      <AuthInfo infoType={2}/>
+      <AuthInfo infoType="requirements"/>
     </>
   );
 }
@@ -28,15 +28,16 @@ export async function signupAction({ request, params }) {
   const requestBody = {
     email: formData.get("email"),
     password: formData.get("password"),
-    itn: formData.get("rnokpp") || "",
+    passportNumber: formData.get("passport-number") || "",
+    passportSeries: formData.get("passport-series") || "",
     studentIdSeries: formData.get("student-id-series") || "",
     studentIdNumber: formData.get("student-id-num") || "",
   };
 
   // Значення полів, що не є частиною запиту, але потребуються для валідації
   const confirmPassword = formData.get("confirm-password");
-  const noRnokpp = formData.get("no-rnokpp") === "on";
   const noStudentId = formData.get("no-student-id") === "on";
+  const oldPassport = formData.get("old-passport") === "on";
   
   // Валідація (клієнт-сайд)
   const valids = {
@@ -45,10 +46,14 @@ export async function signupAction({ request, params }) {
     isPasswordValid: validatePassword(requestBody.password),
     isPasswordNonEmpty: checkIfNonEmpty(requestBody.password),
     arePasswordsEqual: checkIfEqual(requestBody.password, confirmPassword),
-    isRNOKPPValid: validateRNOKPP(requestBody.itn, noRnokpp),
+    isPassportNumberValid: validatePassportNumber(requestBody.passportNumber, noStudentId, oldPassport),
+    isOldPassportNumberValid: validateOldPassportNumber(requestBody.passportNumber, noStudentId, oldPassport),
+    isOldPassportSeriesValid: validateOldPassportSeries(requestBody.passportSeries, noStudentId, oldPassport),
     isStudIdSeriesValid: validateStudIdSeries(requestBody.studentIdSeries, noStudentId),
     isStudIdNumberValid: validateStudIdNumber(requestBody.studentIdNumber, noStudentId),
-    isRNOKPPNonEmpty: !noRnokpp ? checkIfNonEmpty(requestBody.itn) : true,
+    isPassportNumberNonEmpty: (noStudentId && !oldPassport) ? checkIfNonEmpty(requestBody.passportNumber) : true,
+    isOldPassportNumberNonEmpty: (noStudentId && oldPassport) ? checkIfNonEmpty(requestBody.passportNumber) : true,
+    isOldPassportSeriesNonEmpty: (noStudentId && oldPassport) ? checkIfNonEmpty(requestBody.passportSeries) : true,
     isStudIdSeriesNonEmpty: !noStudentId ? checkIfNonEmpty(requestBody.studentIdSeries) : true,
     isStudIdNumberNonEmpty: !noStudentId ? checkIfNonEmpty(requestBody.studentIdNumber) : true,
   };

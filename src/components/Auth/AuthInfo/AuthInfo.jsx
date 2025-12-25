@@ -4,7 +4,18 @@ import "./AuthInfo.css";
 function AuthInfo({infoType}) {
   const { t } = useTranslation("auth");
 
-  if (infoType === 1) {
+  if (infoType === "request") {
+    return (
+      <section className="auth-info">
+        <h1 className="auth-info-logo">
+          {t("text.signupRequest.header")}
+        </h1>
+        <div className="auth-info-body">
+          <p>{t("text.signupRequest.info")}</p>
+        </div>
+      </section>
+    );
+  } else if (infoType === "success") {
     return (
       <section className="auth-info">
         <h1 className="auth-info-logo">
@@ -21,8 +32,8 @@ function AuthInfo({infoType}) {
         </div>
 
       </section>
-    );
-  } else {
+    );   
+  } else if (infoType === "requirements") {
     return (
       <section className="auth-info">
         <h1 className="auth-info-logo">
@@ -40,7 +51,12 @@ function AuthInfo({infoType}) {
                 <li>{t("requirements.pass.symbol")}</li>
               </ul>
             </li>
-            <li>{t("requirements.docs")}</li>
+            <li>{t("requirements.docs.start")}
+              <ul className="auth-info-nested-list">
+                <li>{t("requirements.docs.studentId")}</li>
+                <li>{t("requirements.docs.passport")}</li>
+              </ul>
+            </li>
           </ul>
         </div>
       </section>

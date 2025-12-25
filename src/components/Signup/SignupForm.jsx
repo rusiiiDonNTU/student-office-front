@@ -17,8 +17,8 @@ function SignupForm() {
   const navigation = useNavigation();
   const navigate = useNavigate();
   const { t } = useTranslation("auth");
-  const [isRnokpp, setIsRnokpp] = useState(true);
   const [isStudentId, setIsStudentId] = useState(true);
+  const [isOldPassport, setIsOldPassport] = useState(false);
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
 
   const isSubmitting = navigation.state === "submitting";
@@ -35,18 +35,21 @@ function SignupForm() {
 
   let emailError = null;
   const passwordErrors = [];
-  const rnokppErrors = [];
+  const passportErrors = [];
+  const oldPassportErrors = [];
   const studentIdErrors = []; 
   let signupFailed = false;
 
   // Перевірка результатів валідації
   if (!isSubmitting) {
+    // Пошта
     if (signupErrors?.isEmailValid === false && !dirtyFields.email) {
       emailError = t("errors.email.invalid");
     }
     if (signupErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
       emailError = t("errors.email.empty");
     }
+    // Пароль
     if (signupErrors?.isPasswordValid && Object.keys(signupErrors?.isPasswordValid).length > 0) {
       const errors = signupErrors.isPasswordValid
 
@@ -60,12 +63,7 @@ function SignupForm() {
     if (signupErrors?.arePasswordsEqual === false) {
       passwordErrors.push(t("errors.pass.notEqual"))
     }
-    if (signupErrors?.isRNOKPPNonEmpty === false && !!isRnokpp) {
-      rnokppErrors.push(t("errors.rnokpp.empty"))
-    }    
-    else if (signupErrors?.isRNOKPPValid === false && !!isRnokpp) {
-      rnokppErrors.push(t("errors.rnokpp.short"))
-    }
+    // Студ. квиток
     if (signupErrors?.isStudIdSeriesNonEmpty === false && !!isStudentId) {
       studentIdErrors.push(t("errors.studentid.series.empty"))
     }
@@ -78,11 +76,27 @@ function SignupForm() {
     else if (signupErrors?.isStudIdNumberValid === false && !!isStudentId) {
       studentIdErrors.push(t("errors.studentid.number.short"))
     }
+    // Паспорт
+    if (signupErrors?.isPassportNumberNonEmpty === false && !isStudentId) {
+      passportErrors.push(t("errors.passport.number.empty"))
+    }    
+    else if (signupErrors?.isPassportNumberValid === false && !isStudentId) {
+      passportErrors.push(t("errors.passport.number.short"))
+    }
+   if (signupErrors?.isOldPassportNumberNonEmpty === false && !isStudentId) {
+      oldPassportErrors.push(t("errors.oldPassport.number.empty"))
+    }    
+    else if (signupErrors?.isOldPassportNumberValid === false && !isStudentId) {
+      oldPassportErrors.push(t("errors.oldPassport.number.short"))
+    }
+    if (signupErrors?.isOldPassportSeriesNonEmpty === false && !isStudentId) {
+      oldPassportErrors.push(t("errors.oldPassport.series.empty"))
+    }
+    else if (signupErrors?.isOldPassportSeriesValid === false && !isStudentId) {
+      oldPassportErrors.push(t("errors.oldPassport.series.short"))
+    }
     if (signupErrors?.signupFailed) {
       signupFailed = true
-    }
-    if (!isRnokpp && !isStudentId) {
-      studentIdErrors.push(t("errors.noDocs"))
     }
   }
 
@@ -112,12 +126,12 @@ function SignupForm() {
     e.target.value = value.replace(/\D/g, '');
   }
 
-  function handleRnokppCheckboxChange() {
-    setIsRnokpp((prev) => !prev);
-  }
-
   function handleStudentIdCheckboxChange() {
     setIsStudentId((prev) => !prev);
+  }
+
+  function handlePassportCheckboxChange() {
+    setIsOldPassport((prev) => !prev);
   }
 
   return (
@@ -158,25 +172,6 @@ function SignupForm() {
 
       {passwordErrors.length > 0 && <ErrorList l={passwordErrors}/>}
 
-      <Input
-        label={t("fields.TRN")}
-        id="rnokpp"
-        placeholder="1234567890"
-        maxLength="10"
-        type="tel"
-        onChange={handleDigitsInput}
-        disabled={!isRnokpp || isSubmitting}
-      />
-      <Checkbox
-        label={t("fields.noTRN")}
-        id="no-rnokpp"
-        checked={!isRnokpp}
-        onChange={handleRnokppCheckboxChange}
-        disabled={isSubmitting}
-      />
-
-      {rnokppErrors.length > 0 && <ErrorList l={rnokppErrors}/>}
-
       <InputRow>
         <Input
           label={t("fields.studIdSeries")}
@@ -189,7 +184,7 @@ function SignupForm() {
         <Input
           label={t("fields.studIdNumber")}
           id="student-id-num"
-          placeholder="01234567"
+          placeholder="12345678"
           onChange={handleDigitsInput}
           disabled={!isStudentId || isSubmitting}
           maxLength="8"
@@ -205,6 +200,51 @@ function SignupForm() {
       />
 
       {studentIdErrors.length > 0 && <ErrorList l={studentIdErrors}/>}
+
+      {!isStudentId && <>
+          {isOldPassport &&
+            <InputRow>
+              <Input
+                label={t("fields.passportSeries")}
+                id="passport-series"
+                placeholder="АА"
+                onChange={handleLettersInput}
+                maxLength="2"
+                disabled={isSubmitting}
+              />
+              <Input
+                label={t("fields.passportNumber")}
+                id="passport-number"
+                placeholder="123456"
+                maxLength="6"
+                type="tel"
+                onChange={handleDigitsInput}
+                disabled={isSubmitting}
+              />
+            </InputRow>}
+          {!isOldPassport &&
+            <Input
+              label={t("fields.passportNumber")}
+              id="passport-number"
+              placeholder="123456789"
+              maxLength="9"
+              type="tel"
+              onChange={handleDigitsInput}
+              disabled={isSubmitting}
+            />}
+          <Checkbox
+            label={t("fields.oldPassport")}
+            id="old-passport"
+            checked={isOldPassport}
+            onChange={handlePassportCheckboxChange}
+            disabled={isSubmitting}
+          />
+
+          {(passportErrors.length > 0 && !isOldPassport) && <ErrorList l={passportErrors}/>}
+          {(oldPassportErrors.length > 0 && isOldPassport) && <ErrorList l={oldPassportErrors}/>}
+      </>}
+
+      
 
       <FormActions>
         <Button isBlue disabled={isSubmitting}>{t("buttons.signUp")}</Button>
