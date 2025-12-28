@@ -9,6 +9,8 @@ import { handleRedirect } from "../../util/redirect";
 import { useTranslation } from "react-i18next";
 import ConfirmEmailModal from "./ConfirmEmailModal/ConfirmEmailModal";
 import ErrorModal from "../UI/Modal/ErrorModal/ErrorModal";
+import GoogleErrorModal from "./GoogleErrorModal/GoogleErrorModal";
+import NotActivatedErrorModal from "./NotActivatedErrorModal/NotActivatedErrorModal";
 
 const initDirtyFields = {};
 
@@ -18,9 +20,11 @@ function LoginForm() {
 
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
   const [errorFromBack, setErrorFromBack] = useState("");
+  const [googleFailedEmail, setGoogleFailedEmail] = useState("");
 
-  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showNotActivatedModal, setShowNotActivatedModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showGoogleModal, setShowGoogleModal] = useState(false);
 
   const email = useRef(null);
   const navigation = useNavigation();
@@ -38,9 +42,6 @@ function LoginForm() {
     const credsInavlidError = t("signin:errors.wrongCreds");                          // спроби входу
 
     // Перевірки
-    if (errorFromBack !== "" && !dirtyFields.email) {
-      emailError = errorFromBack
-    }
     if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
       emailError = emailInvalidError;
     }
@@ -58,33 +59,37 @@ function LoginForm() {
     }
   }
 
-  // Зчитування повідомлень з URL
-  useEffect(() => {
-    const msgCode = searchParams.get("message");
-    if (msgCode === "login_failed") {
-      setErrorFromBack(t("signin:errors.notFound"));
-      searchParams.delete("message");
-      setSearchParams(searchParams);
-    }
-  }, [searchParams, setSearchParams])
-
   // Відкат даних та виведення модалок (якщо потрібно)
   useEffect(() => {
     setDirtyFields({});
     if (errorFromBack !== "") setErrorFromBack("");
+    if (googleFailedEmail !== "") setGoogleFailedEmail("");
     if (loginErrors?.notActivated === true) {
-      setShowEmailModal(true);
+      setShowNotActivatedModal(true);
     }
     if (loginErrors?.authError === true) {
       setShowErrorModal(true);
     }
   }, [loginErrors]);
 
+  // Зчитування повідомлень з URL
+  useEffect(() => {
+    const msgCode = searchParams.get("message");
+    if (msgCode === "login_failed") {
+      const msgEmail = searchParams.get("email");
+      if (msgEmail !== null) {
+        setGoogleFailedEmail(msgEmail);
+        searchParams.delete("email");
+      }
+      setErrorFromBack(t("signin:errors.notFound"));
+      searchParams.delete("message");
+      setSearchParams(searchParams);
+      setShowGoogleModal(true);
+    }
+  }, [searchParams, setSearchParams])
+
   function handleInputChange(e) {
     const { name } = e.target;
-
-    // Якщо друк йде до поля пошти - помилка зі сторони сервера очищується (якщо вона є)
-    if (name === "email" && errorFromBack !== "") setErrorFromBack("")
 
     setDirtyFields((prev) => {
       return { ...prev, [name]: true };
@@ -158,8 +163,9 @@ function LoginForm() {
           </p>
         </FormActions>
       </Form>
-      {showEmailModal && <ConfirmEmailModal email={email.current.value} onClose={() => setShowEmailModal(false)} modalType="signin"/>}
+      {showNotActivatedModal && <NotActivatedErrorModal onClose={() => setShowNotActivatedModal(false)} email={email.current.value}/>}
       {showErrorModal && <ErrorModal onClose={() => setShowErrorModal(false)}/>}
+      {showGoogleModal && <GoogleErrorModal onClose={() => setShowGoogleModal(false)} email={googleFailedEmail}/>}
     </>
   );
 }

@@ -29,6 +29,7 @@
 
 .modal img {
     width: 6rem;
+    margin: 1rem 0;
 }
 
 .modal-info {
@@ -38,8 +39,9 @@
     gap: 0.5rem;
 }
 
-.modal-button {
-    align-self: stretch;
+.modal-buttons {
+    display: flex;
+    width: 100%;
     margin-top: 1rem;
 }
 

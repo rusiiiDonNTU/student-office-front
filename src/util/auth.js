@@ -23,3 +23,16 @@ export async function getAuthStatus() {
     return false;
   }
 }
+
+export async function sendActivationList(email) {
+  try {
+    const response = await api.post("/auth/resend-confirmation", {email: email})
+    return 200
+  }
+  catch (err) {
+    if (err.response) {
+      if (err.response.status === 429) return 429
+    }
+    return 500
+  }
+}

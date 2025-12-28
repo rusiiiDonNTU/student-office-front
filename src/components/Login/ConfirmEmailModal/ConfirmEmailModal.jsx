@@ -3,19 +3,9 @@ import emailImg from "/img/email.png";
 import { useModal } from "../../../hooks/useModal";
 import { useTranslation } from "react-i18next";
 
-function ConfirmEmailModal({email, onClose = () => {}, modalType="signup"}) {
+function ConfirmEmailModal({email, onClose = () => {}}) {
     const [isOpen, setIsOpen, handleClose] = useModal();
     const { t } = useTranslation(["signin"]);
-
-    let modalHeader = t("signin:text.signupRequest.header");
-    let modalTextBeforeEmail = t("signin:text.signupRequest.beforeEmail");
-    let modalTextAfterEmail = t("signin:text.signupRequest.beforeEmail");
-    
-    if (modalType === "signin") {
-        modalHeader = t("signin:errors.notActivated.header");
-        modalTextBeforeEmail = t("signin:errors.notActivated.body");
-        modalTextAfterEmail = "";
-    }
 
     function handleConfirmEmailClose() {
         handleClose();
@@ -23,9 +13,9 @@ function ConfirmEmailModal({email, onClose = () => {}, modalType="signup"}) {
     }
 
     return <Modal isOpen={isOpen} onClose={handleConfirmEmailClose}>
-        <h1>{modalHeader}</h1>
+        <h1>{t("signin:text.signupRequest.header")}</h1>
         <img src={emailImg}/>
-        <p>{modalTextBeforeEmail}<span>{email}</span>{modalTextAfterEmail}</p>
+        <p>{t("signin:text.signupRequest.beforeEmail")}<span>{email}</span>{t("signin:text.signupRequest.afterEmail")}</p>
     </Modal>
 }
 

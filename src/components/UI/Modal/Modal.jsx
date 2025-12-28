@@ -2,9 +2,11 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import "./Modal.css";
 import Button from "../Button/Button";
-import closeImg from "/icons/nav/close.png";
+import InputRow from "../InputRow/InputRow";
 
-function Modal({ isOpen, onClose, isButton=true, children }) {
+function Modal({ isOpen, onClose, isWhiteButton=true, 
+    isBlueButton=false, blueButtonText="", blueButtonAction = () => {}, blueButtonDisabled=false,
+    children }) {
     const dialog = useRef();
 
     useEffect(() => {
@@ -15,7 +17,12 @@ function Modal({ isOpen, onClose, isButton=true, children }) {
     return createPortal(<dialog className="modal" ref={dialog} onClose={onClose}>
         <div className="modal-info">
             {children}
-            {isButton && <Button className="modal-button" onClick={onClose}>ОК</Button>}
+            <div className="modal-buttons">
+                <InputRow>
+                    {isWhiteButton && <Button onClick={onClose}>ОК</Button>}
+                    {isBlueButton && <Button isBlue={true} onClick={blueButtonAction} disabled={blueButtonDisabled}>{blueButtonText}</Button>}
+                </InputRow>
+            </div>
         </div>
     </dialog>, document.body);
 }

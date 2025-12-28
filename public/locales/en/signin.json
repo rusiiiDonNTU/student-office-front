@@ -9,7 +9,8 @@
     },
     "buttons": {
         "signIn": "Sign in",
-        "withGoogle": "Continue with Google"
+        "withGoogle": "Continue with Google",
+        "resend": "Resend confirmation"
     },
     "errors": {
         "wrongCreds": "Wrong email or password",
@@ -21,6 +22,14 @@
         "activationFailed": {
             "header": "Activation failed!",
             "body": "Invalid or expired activation attempt - please try to sign up again"
+        },
+        "tooManyTries": {
+            "header": "Sending error!",
+            "body": "Too many attempts to send a letter - try later"
+        },
+        "google": {
+            "header": "Google auth error!",
+            "body": "Student not found"
         }
     },
     "text": {
@@ -38,6 +47,11 @@
             "subscribe": "The opportunity to choose new disciplines",
             "performance": "Academic performance data",
             "calendar": "Calendar with current class schedule, etc."
+        },
+        "activationRequest": {
+            "header": "New email sent!",
+            "beforeEmail": "Please wait for a message to be sent to your email address ",
+            "afterEmail": " with further instructions"
         }
     }
 }

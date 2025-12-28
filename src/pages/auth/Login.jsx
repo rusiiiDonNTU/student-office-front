@@ -23,7 +23,6 @@ function LoginPage() {
   const [isActivationFailed, setIsActivationFailed] = useState(loc.state?.activationFailed === true);
   const [isAuthError, setIsAuthError] = useState(loc.state?.error === true)
 
-
   return (
     <> 
       {isJustRegistered && <ConfirmEmailModal email={loc.state?.email} onClose={() => setIsJustRegistered(false)}/>}
