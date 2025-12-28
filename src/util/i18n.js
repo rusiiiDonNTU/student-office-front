@@ -4,7 +4,7 @@ import backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import { LOCALS } from "../../public/locales/constants";
 
-const supportedLngs = [LOCALS.UK, LOCALS.EN];
+const supportedLngs = Object.values(LOCALS);
 
 i18n.use(languageDetector)
     .use(backend)

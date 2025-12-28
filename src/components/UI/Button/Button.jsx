@@ -1,8 +1,8 @@
 import "./Button.css";
 
-function Button({ children, isBlue, ...props }) {
+function Button({ children, isBlue, className="", ...props }) {
   return (
-    <button className={"button" + (isBlue ? " blue-button" : "")} {...props}>
+    <button className={"button " + (isBlue ? "blue-button" : "") + className} {...props}>
       {children}
     </button>
   );

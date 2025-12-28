@@ -3,6 +3,7 @@ import AuthInfo from "../../components/Auth/AuthInfo/AuthInfo.jsx";
 import AuthPanel from "../../components/Auth/AuthPanel/AuthPanel.jsx";
 import SignupForm from "../../components/Signup/SignupForm.jsx";
 import { checkIfEqual, checkIfNonEmpty, validateEmail, validatePassword, validateStudIdNumber, validateStudIdSeries, validatePassportNumber, validateOldPassportNumber, validateOldPassportSeries} from "../../util/validation.js";
+import api from "../../util/axios.js";
 
 function SignupPage() {
   const { t } = useTranslation("auth");
@@ -64,35 +65,15 @@ export async function signupAction({ request, params }) {
 
   // Відправка на сервер
   try {
-    const response = await fetch("https://student-app-web-dzdtfbh6ejcpgcdm.westus-01.azurewebsites.net/api/auth/signUp", {
-      method: request.method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    });
-
-    // // "Заглушка", щоб запит не відправлявся в будь-якому випадку
-    // const response = {
-    //   status: 400,
-    // };
-
-    // Перевірка відповіді з сервера
-    if (response.status === 400 || !response.ok) {
-      return {
-        signupFailed: true,
-      };
-    }
-    else {
-      return { 
+    const response = await api.post("/auth/signUp", requestBody);
+    return { 
         signupSuccess: true 
-      };
-    }
+    };
   }
   catch (err) {
-    throw new Response(
-      { message: "Неочікування помилка під час реєстрації." },
-      { status: 500 }
-    );
+    console.log("test")
+    return {
+      signupFailed: true
+    }
   }
 }

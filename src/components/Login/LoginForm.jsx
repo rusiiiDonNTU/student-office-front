@@ -4,19 +4,28 @@ import Checkbox from "../UI/Checkbox/Checkbox";
 import Input from "../UI/Input/Input";
 import FormActions from "../UI/Form/FormActions/FormActions";
 import Form from "../UI/Form/Form";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { handleRedirect } from "../../util/redirect";
 import { useTranslation } from "react-i18next";
+import { useModal } from "../../hooks/useModal";
+import ConfirmEmailModal from "./ConfirmEmailModal/ConfirmEmailModal";
+import ErrorModal from "../UI/Modal/ErrorModal/ErrorModal";
 
 const initDirtyFields = {};
 
 function LoginForm() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [errorFromBack, setErrorFromBack] = useState("");
   const loginErrors = useActionData();
+
+  const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
+  const [errorFromBack, setErrorFromBack] = useState("");
+
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const email = useRef(null);
   const navigation = useNavigation();
   const { t } = useTranslation("auth");
-  const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
 
   const isSubmitting = navigation.state === "submitting";
   let emailError = null;
@@ -54,9 +63,16 @@ function LoginForm() {
     }
   }, [searchParams, setSearchParams])
 
+  // Відкат даних та виведення модалки (якщо потрібно)
   useEffect(() => {
     setDirtyFields({});
     if (errorFromBack !== "") setErrorFromBack("");
+    if (loginErrors?.notActivated === true) {
+      setShowEmailModal(true);
+    }
+    if (loginErrors?.authError === true) {
+      setShowErrorModal(true);
+    }
   }, [loginErrors]);
 
   function handleInputChange(e) {
@@ -71,61 +87,66 @@ function LoginForm() {
   }
 
   return (
-    <Form>
-      <Input
-        label={t("fields.emailField")}
-        id="email"
-        type="email"
-        placeholder="name.surname.institute@donntu.edu.ua"
-        errorMsg={emailError}
-        onChange={handleInputChange}
-        disabled={isSubmitting}
-      />
-
-      <Input
-        label={t("fields.passField")}
-        id="password"
-        type="password"
-        placeholder="••••••••••••••••"
-        errorMsg={passwordError}
-        onChange={handleInputChange}
-        disabled={isSubmitting}
-      />
-
-      <div className="form-options">
-        <Checkbox
-          label={t("fields.rememberMe")}
-          id="remember-me"
+    <>
+      <Form>
+        <Input
+          label={t("fields.emailField")}
+          id="email"
+          type="email"
+          placeholder="name.surname.institute@donntu.edu.ua"
+          errorMsg={emailError}
+          onChange={handleInputChange}
           disabled={isSubmitting}
-          defaultChecked
+          ref={email}
         />
 
-        <Link className="form-forgot" to="/forgot-password">
-          {t("links.forgot")}
-        </Link>
-      </div>
+        <Input
+          label={t("fields.passField")}
+          id="password"
+          type="password"
+          placeholder="••••••••••••••••"
+          errorMsg={passwordError}
+          onChange={handleInputChange}
+          disabled={isSubmitting}
+        />
 
-      <FormActions>
-        <Button isBlue disabled={isSubmitting} name="button" value="login">
-          {t("buttons.signIn")}
-        </Button>
-        <Button disabled={isSubmitting} name="button" value="google">
-          <img src="/google.svg" />
-          {t("buttons.withGoogle")}
-        </Button>
+        <div className="form-options">
+          <Checkbox
+            label={t("fields.rememberMe")}
+            id="remember-me"
+            disabled={isSubmitting}
+            defaultChecked
+          />
 
-        <p className="form-register">
-          {t("text.noAccount")}{" "}
-          <Link
-            to="/register"
-            className="form-register"
-            onClick={() => handleRedirect(isSubmitting)}
-          >
-            {t("links.register")}
+          <Link className="form-forgot" to="/forgot-password">
+            {t("links.forgot")}
           </Link>
-        </p>
-      </FormActions>
-    </Form>
+        </div>
+
+        <FormActions>
+          <Button isBlue disabled={isSubmitting} name="button" value="login">
+            {t("buttons.signIn")}
+          </Button>
+          <Button disabled={isSubmitting} name="button" value="google">
+            <img src="/google.svg" />
+            {t("buttons.withGoogle")}
+          </Button>
+
+          <p className="form-register">
+            {t("text.noAccount")}{" "}
+            <Link
+              to="/register"
+              className="form-register"
+              onClick={() => handleRedirect(isSubmitting)}
+            >
+              {t("links.register")}
+            </Link>
+          </p>
+        </FormActions>
+      </Form>
+      {showEmailModal && <ConfirmEmailModal email={email.current.value} onClose={() => setShowEmailModal(false)} modalType="signin"/>}
+      {showErrorModal && <ErrorModal onClose={() => setShowErrorModal(false)}/>}
+    </>
   );
 }
 

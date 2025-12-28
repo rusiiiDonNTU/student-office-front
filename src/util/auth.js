@@ -19,7 +19,7 @@ export async function getAuthStatus() {
     const response = await api.get("/auth/check");
     return true
   }
-  catch {
+  catch (err) {
     return false;
   }
 }

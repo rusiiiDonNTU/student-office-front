@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Button from "../UI/Button/Button";
 import Checkbox from "../UI/Checkbox/Checkbox";
@@ -9,6 +9,7 @@ import FormActions from "../UI/Form/FormActions/FormActions";
 import { useTranslation } from "react-i18next";
 import { useActionData, useNavigate, useNavigation } from "react-router-dom";
 import ErrorList from "../UI/ErrorList/ErrorList";
+import SignupFailedModal from "./SignupFailedModal/SignupFailedModal";
 
 const initDirtyFields = {};
 
@@ -16,18 +17,27 @@ function SignupForm() {
   const signupErrors = useActionData();
   const navigation = useNavigation();
   const navigate = useNavigate();
+
+  const email = useRef(null);
   const { t } = useTranslation("auth");
+
   const [isStudentId, setIsStudentId] = useState(true);
   const [isOldPassport, setIsOldPassport] = useState(false);
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
-
+  const [showSignupFailedModal, setShowSignupFailedModal] = useState(false);
   const isSubmitting = navigation.state === "submitting";
 
   useEffect(() => {
+    setDirtyFields({});
+    if (signupErrors?.signupFailed === true) {
+      setShowSignupFailedModal(true)
+    }
+
     if (signupErrors?.signupSuccess === true) {
       navigate('/login', {
         state: {
-          justRegistered: true
+          justRegistered: true,
+          email: email.current.value
         }
       });
     }
@@ -38,7 +48,6 @@ function SignupForm() {
   const passportErrors = [];
   const oldPassportErrors = [];
   const studentIdErrors = []; 
-  let signupFailed = false;
 
   // Перевірка результатів валідації
   if (!isSubmitting) {
@@ -95,15 +104,7 @@ function SignupForm() {
     else if (signupErrors?.isOldPassportSeriesValid === false && !isStudentId) {
       oldPassportErrors.push(t("errors.oldPassport.series.short"))
     }
-    if (signupErrors?.signupFailed) {
-      signupFailed = true
-    }
   }
-
-  // Чистка "забрудених полів" після того, як прийшла відповідь на відправлену форму
-  useEffect(() => {
-      setDirtyFields({});
-  }, [signupErrors]);
 
   // Занесення поля у список "забруднених", якщо буде введено хоча б один символ
   function handleInputChange(e) {
@@ -135,121 +136,120 @@ function SignupForm() {
   }
 
   return (
-    <Form>
-      <Input
-        label={t("fields.emailField")}
-        id="email"
-        type="email"
-        placeholder="name.surname.institute@donntu.edu.ua"
-        errorMsg={emailError}
-        onChange={handleInputChange}
-        disabled={isSubmitting}
-      />
-      
-      {!!signupFailed && <ErrorList 
-        h={t("errors.failedSignup.start")}
-        l={[t("errors.failedSignup.nonExist"), t("errors.failedSignup.alreadyExist"), t("errors.failedSignup.etc")]}
-      />}
-
-      <InputRow>
+    <>
+      <Form>
         <Input
-          label={t("fields.passField")}
-          id="password"
-          type="password"
-          placeholder="••••••••••••••••"
-          maxLength="16"
+          label={t("fields.emailField")}
+          id="email"
+          type="email"
+          placeholder="name.surname.institute@donntu.edu.ua"
+          errorMsg={emailError}
+          onChange={handleInputChange}
+          disabled={isSubmitting}
+          ref={email}
+        />
+
+        <InputRow>
+          <Input
+            label={t("fields.passField")}
+            id="password"
+            type="password"
+            placeholder="••••••••••••••••"
+            maxLength="16"
+            disabled={isSubmitting}
+          />
+          <Input
+            label={t("fields.confirmPassField")}
+            id="confirm-password"
+            type="password"
+            placeholder="••••••••••••••••"
+            maxLength="16"
+            disabled={isSubmitting}
+          />
+        </InputRow>
+
+        {passwordErrors.length > 0 && <ErrorList l={passwordErrors}/>}
+
+        <InputRow>
+          <Input
+            label={t("fields.studIdSeries")}
+            id="student-id-series"
+            placeholder="АА"
+            onChange={handleLettersInput}
+            maxLength="2"
+            disabled={!isStudentId || isSubmitting}
+          />
+          <Input
+            label={t("fields.studIdNumber")}
+            id="student-id-num"
+            placeholder="12345678"
+            onChange={handleDigitsInput}
+            disabled={!isStudentId || isSubmitting}
+            maxLength="8"
+            type="tel"
+          />
+        </InputRow>
+        <Checkbox
+          label={t("fields.noStudentId")}
+          id="no-student-id"
+          checked={!isStudentId}
+          onChange={handleStudentIdCheckboxChange}
           disabled={isSubmitting}
         />
-        <Input
-          label={t("fields.confirmPassField")}
-          id="confirm-password"
-          type="password"
-          placeholder="••••••••••••••••"
-          maxLength="16"
-          disabled={isSubmitting}
-        />
-      </InputRow>
 
-      {passwordErrors.length > 0 && <ErrorList l={passwordErrors}/>}
+        {studentIdErrors.length > 0 && <ErrorList l={studentIdErrors}/>}
 
-      <InputRow>
-        <Input
-          label={t("fields.studIdSeries")}
-          id="student-id-series"
-          placeholder="АА"
-          onChange={handleLettersInput}
-          maxLength="2"
-          disabled={!isStudentId || isSubmitting}
-        />
-        <Input
-          label={t("fields.studIdNumber")}
-          id="student-id-num"
-          placeholder="12345678"
-          onChange={handleDigitsInput}
-          disabled={!isStudentId || isSubmitting}
-          maxLength="8"
-          type="tel"
-        />
-      </InputRow>
-      <Checkbox
-        label={t("fields.noStudentId")}
-        id="no-student-id"
-        checked={!isStudentId}
-        onChange={handleStudentIdCheckboxChange}
-        disabled={isSubmitting}
-      />
-
-      {studentIdErrors.length > 0 && <ErrorList l={studentIdErrors}/>}
-
-      {!isStudentId && <>
-          {isOldPassport &&
-            <InputRow>
-              <Input
-                label={t("fields.passportSeries")}
-                id="passport-series"
-                placeholder="АА"
-                onChange={handleLettersInput}
-                maxLength="2"
-                disabled={isSubmitting}
-              />
+        {!isStudentId && <>
+            {isOldPassport &&
+              <InputRow>
+                <Input
+                  label={t("fields.passportSeries")}
+                  id="passport-series"
+                  placeholder="АА"
+                  onChange={handleLettersInput}
+                  maxLength="2"
+                  disabled={isSubmitting}
+                />
+                <Input
+                  label={t("fields.passportNumber")}
+                  id="passport-number"
+                  placeholder="123456"
+                  maxLength="6"
+                  type="tel"
+                  onChange={handleDigitsInput}
+                  disabled={isSubmitting}
+                />
+              </InputRow>}
+            {!isOldPassport &&
               <Input
                 label={t("fields.passportNumber")}
                 id="passport-number"
-                placeholder="123456"
-                maxLength="6"
+                placeholder="123456789"
+                maxLength="9"
                 type="tel"
                 onChange={handleDigitsInput}
                 disabled={isSubmitting}
-              />
-            </InputRow>}
-          {!isOldPassport &&
-            <Input
-              label={t("fields.passportNumber")}
-              id="passport-number"
-              placeholder="123456789"
-              maxLength="9"
-              type="tel"
-              onChange={handleDigitsInput}
+              />}
+            <Checkbox
+              label={t("fields.oldPassport")}
+              id="old-passport"
+              checked={isOldPassport}
+              onChange={handlePassportCheckboxChange}
               disabled={isSubmitting}
-            />}
-          <Checkbox
-            label={t("fields.oldPassport")}
-            id="old-passport"
-            checked={isOldPassport}
-            onChange={handlePassportCheckboxChange}
-            disabled={isSubmitting}
-          />
+            />
 
-          {(passportErrors.length > 0 && !isOldPassport) && <ErrorList l={passportErrors}/>}
-          {(oldPassportErrors.length > 0 && isOldPassport) && <ErrorList l={oldPassportErrors}/>}
-      </>}
+            {(passportErrors.length > 0 && !isOldPassport) && <ErrorList l={passportErrors}/>}
+            {(oldPassportErrors.length > 0 && isOldPassport) && <ErrorList l={oldPassportErrors}/>}
+        </>}
 
-      
+        
 
-      <FormActions>
-        <Button isBlue disabled={isSubmitting}>{t("buttons.signUp")}</Button>
-      </FormActions>
-    </Form>
+        <FormActions>
+          <Button isBlue disabled={isSubmitting}>{t("buttons.signUp")}</Button>
+        </FormActions>
+      </Form>
+      {showSignupFailedModal && <SignupFailedModal onClose={() => setShowSignupFailedModal(false)}/>}
+    </>
   );
 }
 

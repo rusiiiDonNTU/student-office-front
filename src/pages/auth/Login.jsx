@@ -10,24 +10,27 @@ import { useTranslation } from "react-i18next";
 import AuthInfo from "../../components/Auth/AuthInfo/AuthInfo";
 import { useState } from "react";
 import LoginMessage from "../../components/Login/LoginMessage/LoginMessage";
+import AuthErrorModal from "../../components/UI/Modal/ErrorModal/ErrorModal";
+import ConfirmEmailModal from "../../components/Login/ConfirmEmailModal/ConfirmEmailModal.jsx";
+import api from "../../util/axios";
 
 function LoginPage() {
   const { t } = useTranslation("auth");
   const loc = useLocation();
   const [isJustRegistered, setIsJustRegistered] = useState(loc.state?.justRegistered === true);
-  const [isEmailConfirmed, setIsEmailConfirmed] = useState(loc.state?.emailConfirmed === true)
+  const [isEmailConfirmed, setIsEmailConfirmed] = useState(loc.state?.emailConfirmed === true);
+  const [isAuthError, setIsAuthError] = useState(loc.state?.error === true)
 
   return (
-    <>
-      {/* {isJustRegistered && <LoginMessage h={t("text.signupRequest.header")} b={t("text.signupRequest.info")}/>} 
-      {isEmailConfirmed && <LoginMessage h={t("text.signupSuccess.header")} b={t("text.signupSuccess.login")}/>}  */}
-      {isJustRegistered && <LoginMessage h={t("text.signupSuccess.header")} b={t("text.signupSuccess.login")}/>}
+    <> 
+      {isJustRegistered && <ConfirmEmailModal email={loc.state?.email}/>}
+      {isAuthError && <AuthErrorModal onClose={() => setIsAuthError(false)}/>}
+
+      {isEmailConfirmed && <LoginMessage h={t("text.signupSuccess.header")} b={t("text.signupSuccess.login")}/>}
       <AuthPanel header={t("headers.login")} style={{ maxWidth: "37.5rem"}}>
         <LoginForm />
       </AuthPanel>
-      {isJustRegistered && <AuthInfo infoType={"success"}/>}
-      {/* {isJustRegistered && <AuthInfo infoType={"request"}/>} 
-      {isEmailConfirmed && <AuthInfo infoType={"success"}/>}  */}
+      {isEmailConfirmed && <AuthInfo infoType={"success"}/>}
     </>
   );
 }
@@ -63,32 +66,27 @@ export async function loginAction({ request, params }) {
   }
 
   // Відправка на сервер
-  const response = await fetch("https://student-app-web-dzdtfbh6ejcpgcdm.westus-01.azurewebsites.net/api/auth/signIn", {
-    method: request.method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(requestBody),
-    credentials: "include"
-  });
+  try {
+    const response = await api.post("/auth/signIn", requestBody);
 
-  // // "Заглушка", щоб запит не відправлявся в будь-якому випадку (доки немає бекенда)
-  // const response = {
-  //   status: 401,
-  // };
-
-  // Перевірка відповіді з сервера
-  if (response.status === 401) {
+    return redirect("/profile");
+  }
+  catch (err) {
+    // Якщо в помилці є відповідь сервера
+    if (err.response) {
+      if (err.response.status === 401) {
+        return {
+          isWrong: true,
+        };
+      }
+      if (err.response.status === 403) {
+        return {
+          notActivated: true,
+        };
+      }
+    }
     return {
-      isWrong: true,
-    };
+        authError: true
+    }
   }
-  else if (!response.ok) {
-    throw new Response(
-      { message: "Неочікування помилка під час авторизації" },
-      { status: 500 }
-    );
-  }
-  
-  return redirect("/profile");
 }

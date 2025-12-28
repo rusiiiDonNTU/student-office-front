@@ -16,6 +16,7 @@ import { getAuthStatus, logout } from "./util/auth.js";
 import ErrorPage from "./pages/Error.jsx";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import ConfirmEmail from "./pages/auth/ConfirmEmail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,8 @@ const router = createBrowserRouter([
       { path: "subscribe", element: <SubscribePage /> }
     ],
   },
-  { path: "logout", errorElement: <ErrorPage />, loader: logout },
+  { path: "/logout", errorElement: <ErrorPage />, loader: logout },
+  { path: "/confirm-email", errorElement: <ErrorPage />, element: <ConfirmEmail />}
 ]);
 
 function App() {
