@@ -46,3 +46,13 @@
 .modal::backdrop {
     background-color: rgba(0,0,0,0.4);
 }
+
+.modal-list {
+    text-align: left;
+    margin: 0 3rem;
+    margin-top: 0.5rem;
+}
+
+.modal-list ul {
+    list-style-type: disc;
+}

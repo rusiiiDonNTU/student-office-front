@@ -34,14 +34,14 @@ function ConfirmEmail() {
                 if (!authStatus) {
                     navigate("/login", {
                         state: {
-                            error: true
+                            activationFailed: true
                         }
                     })
                 }
                 else if (!!authStatus) {
                     navigate("/profile", {
                         state: {
-                            error: true
+                            activationFailed: true
                         }
                     })
                 }

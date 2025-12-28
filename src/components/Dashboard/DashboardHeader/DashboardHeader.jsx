@@ -4,8 +4,11 @@ import bellIcon from "/icons/nav/bell.png";
 import settingsIcon from "/icons/nav/settings.png";
 import logoutIcon from "/icons/nav/logout.png";
 import "./DashboardHeader.css";
+import { useTranslation } from "react-i18next";
 
 function DashboardHeader() {
+  const { t } = useTranslation("dashboard");
+  
   return (
     <header className="header">
       <nav className="dashboard-nav">

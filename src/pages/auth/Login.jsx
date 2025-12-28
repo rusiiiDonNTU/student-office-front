@@ -10,24 +10,28 @@ import { useTranslation } from "react-i18next";
 import AuthInfo from "../../components/Auth/AuthInfo/AuthInfo";
 import { useState } from "react";
 import LoginMessage from "../../components/Login/LoginMessage/LoginMessage";
-import AuthErrorModal from "../../components/UI/Modal/ErrorModal/ErrorModal";
+import ErrorModal from "../../components/UI/Modal/ErrorModal/ErrorModal";
 import ConfirmEmailModal from "../../components/Login/ConfirmEmailModal/ConfirmEmailModal.jsx";
 import api from "../../util/axios";
+import ActivationErrorModal from "../../components/Login/ActivationErrorModal/ActivationErrorModal.jsx";
 
 function LoginPage() {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation("signin");
   const loc = useLocation();
   const [isJustRegistered, setIsJustRegistered] = useState(loc.state?.justRegistered === true);
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(loc.state?.emailConfirmed === true);
+  const [isActivationFailed, setIsActivationFailed] = useState(loc.state?.activationFailed === true);
   const [isAuthError, setIsAuthError] = useState(loc.state?.error === true)
+
 
   return (
     <> 
-      {isJustRegistered && <ConfirmEmailModal email={loc.state?.email}/>}
-      {isAuthError && <AuthErrorModal onClose={() => setIsAuthError(false)}/>}
+      {isJustRegistered && <ConfirmEmailModal email={loc.state?.email} onClose={() => setIsJustRegistered(false)}/>}
+      {isAuthError && <ErrorModal onClose={() => setIsAuthError(false)}/>}
+      {isActivationFailed && <ActivationErrorModal onClose={() => setIsActivationFailed(false)}/>}
 
-      {isEmailConfirmed && <LoginMessage h={t("text.signupSuccess.header")} b={t("text.signupSuccess.login")}/>}
-      <AuthPanel header={t("headers.login")} style={{ maxWidth: "37.5rem"}}>
+      {isEmailConfirmed && <LoginMessage h={t("signing:text.signupSuccess.header")} b={t("signin:text.signupSuccess.login")}/>}
+      <AuthPanel header={t("signin:header")} style={{ maxWidth: "37.5rem"}}>
         <LoginForm />
       </AuthPanel>
       {isEmailConfirmed && <AuthInfo infoType={"success"}/>}

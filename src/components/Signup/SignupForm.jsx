@@ -19,7 +19,7 @@ function SignupForm() {
   const navigate = useNavigate();
 
   const email = useRef(null);
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation(["auth", "signup"]);
 
   const [isStudentId, setIsStudentId] = useState(true);
   const [isOldPassport, setIsOldPassport] = useState(false);
@@ -51,58 +51,79 @@ function SignupForm() {
 
   // Перевірка результатів валідації
   if (!isSubmitting) {
+    // Текст помилок
+    const emailInvalidError = t("auth:errors.email.invalid");                         // пошти
+    const emailEmptyError = t("auth:errors.email.empty");                             //
+    const passShortError = t("signup:errors.pass.short");                             // пароля
+    const passLongError = t("signup:errors.pass.long");                               //
+    const passNoLowerError = t("signup:errors.pass.noLower");                         //
+    const passNoUpperError = t("signup:errors.pass.noUpper");                         //
+    const passNoDigitError = t("signup:errors.pass.noDigit");                         //
+    const passNoSymboLError = t("signup:errors.pass.noSymbol");                       //
+    const passNotEqualError = t("signup:errors.pass.notEqual");                       //
+    const studIdSeriesEmptyError = t("signup:errors.studentid.series.empty");         // студ. квитка
+    const studIdSeriesShortError = t("signup:errors.studentid.series.short");         //
+    const studIdNumberEmptyError = t("signup:errors.studentid.number.empty");         //
+    const studIdNumberShortError = t("signup:errors.studentid.number.short");         //
+    const passportNumberEmptyError = t("signup:errors.passport.number.empty");        // паспорта
+    const passportNumberShortError = t("signup:errors.passport.number.short");        //
+    const oldPassportNumberEmptyError = t("signup:errors.oldPassport.number.empty");  //
+    const oldPassportNumberShortError = t("signup:errors.oldPassport.number.short");  //
+    const oldPassportSeriesEmptyError = t("signup:errors.oldPassport.series.empty");  //
+    const oldPassportSeriesShortError = t("signup:errors.oldPassport.series.short");  //
+
     // Пошта
     if (signupErrors?.isEmailValid === false && !dirtyFields.email) {
-      emailError = t("errors.email.invalid");
+      emailError = emailInvalidError;
     }
     if (signupErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
-      emailError = t("errors.email.empty");
+      emailError = emailEmptyError;
     }
     // Пароль
     if (signupErrors?.isPasswordValid && Object.keys(signupErrors?.isPasswordValid).length > 0) {
       const errors = signupErrors.isPasswordValid
 
-      if (!!errors.short) passwordErrors.push(t("errors.pass.short"))
-      if (!!errors.long) passwordErrors.push(t("errors.pass.long"))
-      if (!!errors.noLower) passwordErrors.push(t("errors.pass.noLower"))
-      if (!!errors.noUpper) passwordErrors.push(t("errors.pass.noUpper"))
-      if (!!errors.noDigit) passwordErrors.push(t("errors.pass.noDigit"))
-      if (!!errors.noSymbol) passwordErrors.push(t("errors.pass.noSymbol"))
+      if (!!errors.short) passwordErrors.push(passShortError)
+      if (!!errors.long) passwordErrors.push(passLongError)
+      if (!!errors.noLower) passwordErrors.push(passNoLowerError)
+      if (!!errors.noUpper) passwordErrors.push(passNoUpperError)
+      if (!!errors.noDigit) passwordErrors.push(passNoDigitError)
+      if (!!errors.noSymbol) passwordErrors.push(passNoSymboLError)
     }
     if (signupErrors?.arePasswordsEqual === false) {
-      passwordErrors.push(t("errors.pass.notEqual"))
+      passwordErrors.push(passNotEqualError)
     }
     // Студ. квиток
     if (signupErrors?.isStudIdSeriesNonEmpty === false && !!isStudentId) {
-      studentIdErrors.push(t("errors.studentid.series.empty"))
+      studentIdErrors.push(studIdSeriesEmptyError)
     }
     else if (signupErrors?.isStudIdSeriesValid === false && !!isStudentId) {
-      studentIdErrors.push(t("errors.studentid.series.short"))
+      studentIdErrors.push(studIdSeriesShortError)
     }
     if (signupErrors?.isStudIdNumberNonEmpty === false && !!isStudentId) {
-      studentIdErrors.push(t("errors.studentid.number.empty"))
+      studentIdErrors.push(studIdNumberEmptyError)
     }
     else if (signupErrors?.isStudIdNumberValid === false && !!isStudentId) {
-      studentIdErrors.push(t("errors.studentid.number.short"))
+      studentIdErrors.push(studIdNumberShortError)
     }
     // Паспорт
     if (signupErrors?.isPassportNumberNonEmpty === false && !isStudentId) {
-      passportErrors.push(t("errors.passport.number.empty"))
+      passportErrors.push(passportNumberEmptyError)
     }    
     else if (signupErrors?.isPassportNumberValid === false && !isStudentId) {
-      passportErrors.push(t("errors.passport.number.short"))
+      passportErrors.push(passportNumberShortError)
     }
    if (signupErrors?.isOldPassportNumberNonEmpty === false && !isStudentId) {
-      oldPassportErrors.push(t("errors.oldPassport.number.empty"))
+      oldPassportErrors.push(oldPassportNumberEmptyError)
     }    
     else if (signupErrors?.isOldPassportNumberValid === false && !isStudentId) {
-      oldPassportErrors.push(t("errors.oldPassport.number.short"))
+      oldPassportErrors.push(oldPassportNumberShortError)
     }
     if (signupErrors?.isOldPassportSeriesNonEmpty === false && !isStudentId) {
-      oldPassportErrors.push(t("errors.oldPassport.series.empty"))
+      oldPassportErrors.push(oldPassportSeriesEmptyError)
     }
     else if (signupErrors?.isOldPassportSeriesValid === false && !isStudentId) {
-      oldPassportErrors.push(t("errors.oldPassport.series.short"))
+      oldPassportErrors.push(oldPassportSeriesShortError)
     }
   }
 
@@ -135,11 +156,25 @@ function SignupForm() {
     setIsOldPassport((prev) => !prev);
   }
 
+  // Текст
+  // -- поля
+  const emailLabel = t("auth:fields.emailField");
+  const passLabel = t("auth:fields.passField");
+  const confirmPassLabel = t("signup:fields.confirmPassField");
+  const studIdSeriesLabel = t("signup:fields.studIdSeries");
+  const studIdNumberLabel = t("signup:fields.studIdNumber");
+  const noStudentIdLabel = t("signup:fields.noStudentId");
+  const passportSeriesLabel = t("signup:fields.passportSeries");
+  const passportNumberLabel = t("signup:fields.passportNumber");
+  const oldPassportLabel = t("signup:fields.oldPassport")
+  // -- кнопка
+  const signUpButtonText = t("signup:buttons.signUp");
+
   return (
     <>
       <Form>
         <Input
-          label={t("fields.emailField")}
+          label={emailLabel}
           id="email"
           type="email"
           placeholder="name.surname.institute@donntu.edu.ua"
@@ -151,7 +186,7 @@ function SignupForm() {
 
         <InputRow>
           <Input
-            label={t("fields.passField")}
+            label={passLabel}
             id="password"
             type="password"
             placeholder="••••••••••••••••"
@@ -159,7 +194,7 @@ function SignupForm() {
             disabled={isSubmitting}
           />
           <Input
-            label={t("fields.confirmPassField")}
+            label={confirmPassLabel}
             id="confirm-password"
             type="password"
             placeholder="••••••••••••••••"
@@ -172,7 +207,7 @@ function SignupForm() {
 
         <InputRow>
           <Input
-            label={t("fields.studIdSeries")}
+            label={studIdSeriesLabel}
             id="student-id-series"
             placeholder="АА"
             onChange={handleLettersInput}
@@ -180,7 +215,7 @@ function SignupForm() {
             disabled={!isStudentId || isSubmitting}
           />
           <Input
-            label={t("fields.studIdNumber")}
+            label={studIdNumberLabel}
             id="student-id-num"
             placeholder="12345678"
             onChange={handleDigitsInput}
@@ -190,7 +225,7 @@ function SignupForm() {
           />
         </InputRow>
         <Checkbox
-          label={t("fields.noStudentId")}
+          label={noStudentIdLabel}
           id="no-student-id"
           checked={!isStudentId}
           onChange={handleStudentIdCheckboxChange}
@@ -203,7 +238,7 @@ function SignupForm() {
             {isOldPassport &&
               <InputRow>
                 <Input
-                  label={t("fields.passportSeries")}
+                  label={passportSeriesLabel}
                   id="passport-series"
                   placeholder="АА"
                   onChange={handleLettersInput}
@@ -211,7 +246,7 @@ function SignupForm() {
                   disabled={isSubmitting}
                 />
                 <Input
-                  label={t("fields.passportNumber")}
+                  label={passportNumberLabel}
                   id="passport-number"
                   placeholder="123456"
                   maxLength="6"
@@ -222,7 +257,7 @@ function SignupForm() {
               </InputRow>}
             {!isOldPassport &&
               <Input
-                label={t("fields.passportNumber")}
+                label={passportNumberLabel}
                 id="passport-number"
                 placeholder="123456789"
                 maxLength="9"
@@ -231,7 +266,7 @@ function SignupForm() {
                 disabled={isSubmitting}
               />}
             <Checkbox
-              label={t("fields.oldPassport")}
+              label={oldPassportLabel}
               id="old-passport"
               checked={isOldPassport}
               onChange={handlePassportCheckboxChange}
@@ -245,7 +280,7 @@ function SignupForm() {
         
 
         <FormActions>
-          <Button isBlue disabled={isSubmitting}>{t("buttons.signUp")}</Button>
+          <Button isBlue disabled={isSubmitting}>{signUpButtonText}</Button>
         </FormActions>
       </Form>
       {showSignupFailedModal && <SignupFailedModal onClose={() => setShowSignupFailedModal(false)}/>}

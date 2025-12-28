@@ -2,32 +2,21 @@ import { useTranslation } from "react-i18next";
 import "./AuthInfo.css";
 
 function AuthInfo({infoType}) {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation(["signin", "signup"]);
 
-  if (infoType === "request") {
+  if (infoType === "success") {
     return (
       <section className="auth-info">
         <h1 className="auth-info-logo">
-          {t("text.signupRequest.header")}
+          {t("signin:text.signupSuccess.header")}
         </h1>
         <div className="auth-info-body">
-          <p>{t("text.signupRequest.info")}</p>
-        </div>
-      </section>
-    );
-  } else if (infoType === "success") {
-    return (
-      <section className="auth-info">
-        <h1 className="auth-info-logo">
-          {t("text.signupSuccess.header")}
-        </h1>
-        <div className="auth-info-body">
-          <p>{t("text.signupSuccess.benefits")}</p>
+          <p>{t("signin:text.signupSuccess.benefits")}</p>
           <ul className="auth-info-list-withstart">
-            <li>{t("text.signupSuccess.profile")}</li>
-            <li>{t("text.signupSuccess.subscribe")}</li>
-            <li>{t("text.signupSuccess.performance")}</li>
-            <li>{t("text.signupSuccess.calendar")}</li>
+            <li>{t("signin:text.signupSuccess.profile")}</li>
+            <li>{t("signin:text.signupSuccess.subscribe")}</li>
+            <li>{t("signin:text.signupSuccess.performance")}</li>
+            <li>{t("signin:text.signupSuccess.calendar")}</li>
           </ul>
         </div>
 
@@ -37,24 +26,29 @@ function AuthInfo({infoType}) {
     return (
       <section className="auth-info">
         <h1 className="auth-info-logo">
-          {t("requirements.start")}
+          {t("signup:requirements.start")}
         </h1>
         <div className="auth-info-body">
           <ul className="auth-info-list-nostart">
-            <li>{t("requirements.email")}</li>
-            <li>{t("requirements.pass.length")}</li>
-            <li>{t("requirements.pass.start")}
+            <li>{t("signup:requirements.email.start")}
               <ul className="auth-info-nested-list">
-                <li>{t("requirements.pass.lower")}</li>
-                <li>{t("requirements.pass.upper")}</li>
-                <li>{t("requirements.pass.digit")}</li>
-                <li>{t("requirements.pass.symbol")}</li>
+                <li>{t("signup:requirements.email.corporate")}</li>
+                <li>{t("signup:requirements.email.personal")}</li>
               </ul>
             </li>
-            <li>{t("requirements.docs.start")}
+            <li>{t("signup:requirements.pass.length")}</li>
+            <li>{t("signup:requirements.pass.start")}
               <ul className="auth-info-nested-list">
-                <li>{t("requirements.docs.studentId")}</li>
-                <li>{t("requirements.docs.passport")}</li>
+                <li>{t("signup:requirements.pass.lower")}</li>
+                <li>{t("signup:requirements.pass.upper")}</li>
+                <li>{t("signup:requirements.pass.digit")}</li>
+                <li>{t("signup:requirements.pass.symbol")}</li>
+              </ul>
+            </li>
+            <li>{t("signup:requirements.docs.start")}
+              <ul className="auth-info-nested-list">
+                <li>{t("signup:requirements.docs.studentId")}</li>
+                <li>{t("signup:requirements.docs.passport")}</li>
               </ul>
             </li>
           </ul>

@@ -1,6 +1,8 @@
 {
     "404": "Page not found",
-    "500": "The server did not respond",
+    "500": "Server did not respond",
     "default": "Please try again later or refresh the page",
-    "back": "Back to Sign In"
+    "back": "Back to Sign in",
+    "errorOccured": "An error occured!",
+    "failed": "Unable to complete the action"
 }

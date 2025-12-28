@@ -6,11 +6,11 @@ import { checkIfEqual, checkIfNonEmpty, validateEmail, validatePassword, validat
 import api from "../../util/axios.js";
 
 function SignupPage() {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation("signup");
 
   return (
     <>
-      <AuthPanel header={t("headers.register")} back>
+      <AuthPanel header={t("signup:header")} back>
         <SignupForm />
       </AuthPanel>
       <AuthInfo infoType="requirements"/>

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 function SignupFailedModal({email, onClose = () => {}}) {
     const [isOpen, setIsOpen, handleClose] = useModal();
-    const { t } = useTranslation();
+    const { t } = useTranslation("signup");
 
     function handleSignupFailedClose() {
         handleClose();
@@ -13,10 +13,17 @@ function SignupFailedModal({email, onClose = () => {}}) {
     }
 
     return <Modal isOpen={isOpen} onClose={handleSignupFailedClose}>
-        <h1>Реєстрація не вдалась!</h1>
+        <h1>{t("signup:errors.signupFailed.header")}</h1>
         <img src={emailImg}/>
         <div>
-            <p>Можливі причини:</p>
+            <p>{t("signup:errors.signupFailed.reasons")}</p>
+            <div className="modal-list">
+                <ul>
+                    <li>{t("signup:errors.signupFailed.alreadyExist")}</li>
+                    <li>{t("signup:errors.signupFailed.nonExist")}</li>
+                    <li>{t("signup:errors.signupFailed.etc")}</li>
+                </ul>
+            </div>
         </div>
     </Modal>
 }

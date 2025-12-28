@@ -1,0 +1,9 @@
+{
+    "header": "Password recovery",
+    "buttons": {
+        "send": "Send request"
+    },
+    "text": {
+        "recoveryInstruction": "A link will be sent to the specified email address, which you can use to change your password."
+    }
+}

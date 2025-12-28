@@ -1,17 +1,20 @@
 import Modal from "../../UI/Modal/Modal";
 import emailImg from "/img/email.png";
 import { useModal } from "../../../hooks/useModal";
+import { useTranslation } from "react-i18next";
 
 function ConfirmEmailModal({email, onClose = () => {}, modalType="signup"}) {
     const [isOpen, setIsOpen, handleClose] = useModal();
+    const { t } = useTranslation(["signin"]);
 
-    console.log(email)
-    let modalHeader = <h1>Запит на реєстрацію відправлено!</h1>;
-    let modalBody = <p>Очікуйте повідомлення на пошту <span>{email}</span> з подальшими інструкціями</p>;
+    let modalHeader = t("signin:text.signupRequest.header");
+    let modalTextBeforeEmail = t("signin:text.signupRequest.beforeEmail");
+    let modalTextAfterEmail = t("signin:text.signupRequest.beforeEmail");
     
     if (modalType === "signin") {
-        modalHeader = <h1>Пошта не підтверджена!</h1>
-        modalBody = <p>Перевірте, чи прийшло посилання з активацією на пошту <span>{email}</span>.</p>
+        modalHeader = t("signin:errors.notActivated.header");
+        modalTextBeforeEmail = t("signin:errors.notActivated.body");
+        modalTextAfterEmail = "";
     }
 
     function handleConfirmEmailClose() {
@@ -20,9 +23,9 @@ function ConfirmEmailModal({email, onClose = () => {}, modalType="signup"}) {
     }
 
     return <Modal isOpen={isOpen} onClose={handleConfirmEmailClose}>
-        {modalHeader}
+        <h1>{modalHeader}</h1>
         <img src={emailImg}/>
-        {modalBody}
+        <p>{modalTextBeforeEmail}<span>{email}</span>{modalTextAfterEmail}</p>
     </Modal>
 }
 
