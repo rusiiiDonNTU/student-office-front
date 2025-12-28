@@ -57,7 +57,6 @@ function LoginForm() {
       passwordError = passEmptyError;
     }
   }
-  if (errorFromBack) emailError = errorFromBack;
 
   // Зчитування повідомлень з URL
   useEffect(() => {

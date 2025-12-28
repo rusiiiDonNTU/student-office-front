@@ -23,8 +23,7 @@ i18n.use(languageDetector)
       },
       interpolation: {
         escapeValue: false
-      },
-      debug: true, 
+      }
     }).then(() => {
       // Перевірка мови в localStorage
       const storedLng = localStorage.getItem('i18nextLng');

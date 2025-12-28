@@ -1,7 +1,9 @@
 .checkbox {
   display: flex;
-  column-gap: 5px;
+  column-gap: 5px; 
+  accent-color: var(--color-light-blue);
 }
+
 input[type="checkbox"]:disabled + .checkbox-label {
   color: #d1d1d1;
 }
