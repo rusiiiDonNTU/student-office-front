@@ -29,7 +29,7 @@
         },
         "google": {
             "header": "Google auth error!",
-            "body": "Student not found"
+            "body": "No student with the specified email address was found"
         }
     },
     "text": {

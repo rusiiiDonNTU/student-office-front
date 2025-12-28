@@ -25,7 +25,7 @@ function GoogleErrorModal({email="", onClose = () => {}}) {
 
     return <Modal isOpen={isOpen} onClose={handleGoogleErrorClose}
         isBlueButton={true}
-        blueButtonText="Зареєструватись"
+        blueButtonText={t("signup:links.signup")}
         blueButtonAction={handleGoToSignup}
     >
         <h1>{t("signin:errors.google.header")}</h1>
