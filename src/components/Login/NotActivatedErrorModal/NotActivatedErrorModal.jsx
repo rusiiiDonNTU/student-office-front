@@ -53,7 +53,7 @@ function NotActivatedErrorModal({email, onClose = () => {}}) {
         isBlueButton={!result.isSent}
         blueButtonText={t("signin:buttons.resend")}
         blueButtonAction={handleSendAgain}
-        blueButtonDisabled={isLoading}>
+        isLoading={isLoading}>
         <h1>{header}</h1>
         <img src={emailImg}/>
         {body}
