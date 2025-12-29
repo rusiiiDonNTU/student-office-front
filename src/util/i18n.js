@@ -12,7 +12,7 @@ i18n.use(languageDetector)
     .init({
       supportedLngs: supportedLngs,
       fallbackLng: LOCALS.UK,
-      ns: ["main", "auth", "signup", "signin"],
+      ns: ["main", "auth", "signup", "signin", "forgot", "dashboard"],
       preload: supportedLngs,
       defaultNs: "main",
       backend: {
