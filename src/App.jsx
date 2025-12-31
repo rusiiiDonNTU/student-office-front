@@ -3,21 +3,25 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
+
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { getAuthStatus, logout } from "./util/auth.js";
 import AuthLayout, { permForLoginLoader } from "./layouts/Auth/Auth";
 import LoginPage, { loginAction } from "./pages/auth/Login.jsx";
 import SignupPage, { signupAction } from "./pages/auth/Signup";
 import DashboardLayout, {
   permForDashboardLoader,
 } from "./layouts/Dashboard/Dashboard";
+import ProfilePage from "./pages/dashboard/Profile/Profile.jsx";
 import ForgotPage from "./pages/auth/Forgot";
-import ProfilePage, { profileLoader } from "./pages/dashboard/Profile/Profile.jsx";
 import SubscribePage from "./pages/dashboard/Subscribe.jsx";
-import { getAuthStatus, logout } from "./util/auth.js";
 import ErrorPage from "./pages/Error.jsx";
-import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
 import ConfirmEmail from "./pages/auth/ConfirmEmail.jsx";
 import SchedulePage from "./pages/dashboard/Schedule/Schedule.jsx";
+import PerformancePage from "./pages/dashboard/Performance/Performance.jsx";
+import DocsPage from "./pages/dashboard/Docs/Docs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,8 +50,10 @@ const router = createBrowserRouter([
       
     },
     children: [
-      { path: "profile", element: <ProfilePage />, loader: profileLoader },
+      { path: "profile", element: <ProfilePage />, },
       { path: "schedule", element: <SchedulePage />, },
+      { path: "performance", element: <PerformancePage />, },
+      { path: "docs", element: <DocsPage />, },
       { path: "subscribe", element: <SubscribePage /> }
     ],
   },
@@ -64,8 +70,12 @@ function App() {
     document.title = t('title')
   }, [lang]);
 
+  const queryClient = new QueryClient();
+
   return (
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient} initialIsOpen={false}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   );
 }
 

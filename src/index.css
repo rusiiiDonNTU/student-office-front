@@ -110,7 +110,6 @@
 body {
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
-  transition: background-color 0.2s ease-in-out;
 }
 
 body.is-submitting a {

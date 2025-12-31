@@ -3,8 +3,17 @@ import DashboardHeader from "../../components/Dashboard/DashboardHeader/Dashboar
 import { getAuthStatus } from "../../util/auth";
 import "./Dashboard.css";
 import DashboardFooter from "../../components/Dashboard/DashboardFooter/DashboardFooter";
+import { useEffect } from "react";
 
 function DashboardLayout({ children }) {
+  // Одноразова зміна кольору фона для лейаута дешборда
+  useEffect(() => {
+    document.body.style.background = "#e4e4e4";
+
+    // Повернення стандартного фону після логауту
+    return () => (document.body.style.background = "#fff");
+  }, []);
+
   return (
     <div className="dashboard">
       <DashboardHeader />

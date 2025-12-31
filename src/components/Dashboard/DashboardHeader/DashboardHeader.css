@@ -84,3 +84,13 @@ a.active {
     min-height: 4rem;
   }
 }
+
+@media (max-width: 965px) {
+  .header-logo {
+    display: none;
+  }
+
+  .header-tabs {
+    margin: 0;
+  }
+}

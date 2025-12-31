@@ -75,7 +75,7 @@ function DashboardHeader() {
               </NavLink>
             </li>
             <li className="dashboard-nav-button">
-              <NavLink to="/perfrormance">
+              <NavLink to="/performance">
                 <div className="header-nav-button">
                   <img src={performanceBlueIcon}/>
                   <span>{t("dashboard:nav.performance")}</span>

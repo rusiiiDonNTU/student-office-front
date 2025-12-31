@@ -8,19 +8,35 @@ import ProfileStatus from "../../../components/Profile/ProfileStatus/ProfileStat
 import ProfileTerms from "../../../components/Profile/ProfileTerms/ProfileTerms";
 import ProfileEntryInfo from "../../../components/Profile/ProfileEntryInfo/ProfileEntryInfo";
 import ProfileEducation from "../../../components/Profile/ProfileEducation/ProfileEducation";
+import { useQuery } from "@tanstack/react-query";
+import { getStudent } from "../../../util/http";
+import ProfileSkeleton from "./ProfileSkeleton";
 
 
 function ProfilePage() {
-  const user = useLoaderData();
+  const { data: user, isPending, isError, error } = useQuery({
+    queryKey: ["profile"],
+    queryFn: getStudent
+  });
+
   const { t } = useTranslation("profile");
+  
+
+  if (isError) {
+    console.log(error)
+  }
+
+  if (isPending || user === undefined ) {
+    return <ProfileSkeleton />
+  }
 
   const words = {
-      one: t("profile:years.one"),
-      few: t("profile:years.few"),
-      many: t("profile:years.many"),
-      other: t("profile:years.other")
+    one: t("profile:years.one"),
+    few: t("profile:years.few"),
+    many: t("profile:years.many"),
+    other: t("profile:years.other")
   }
-  
+
   const pib = user.firstName + " " + user.lastName + " " + user.middleName;
   const age = formatBirthDate(user.birthDate, words);
   const pfp = null;
@@ -76,24 +92,3 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
-
-export async function profileLoader() {
-  try {
-    const response = await api.get("/profile")
-    return response.data;
-  }
-  catch (err) {
-    if (err.response) {
-      if (err.response.status === 401) {
-        return redirect('/logout')
-      }
-      else if (err.response.status === 404) {
-        return redirect('/login')
-      }
-    }
-    throw new Response(
-      { message: "Сервер не надав відповіді" },
-      { status: 500 }
-    );
-  }
-}
