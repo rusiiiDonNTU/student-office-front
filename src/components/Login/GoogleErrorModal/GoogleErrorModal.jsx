@@ -3,6 +3,8 @@ import googleImg from "/img/google.png";
 import { useModal } from "../../../hooks/useModal";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import ModalButtons from "../../UI/Modal/ModalButtons/ModalButtons";
+import Button from "../../UI/Button/Button";
 
 function GoogleErrorModal({email="", onClose = () => {}}) {
     const [isOpen, setIsOpen, handleClose] = useModal();
@@ -15,22 +17,22 @@ function GoogleErrorModal({email="", onClose = () => {}}) {
     }
 
     function handleGoToSignup() {
-        handleGoogleErrorClose();
         navigate("/register", {
             state: {
                 "email": email
             }
-        })
+        });
+        handleGoogleErrorClose();
     }
 
-    return <Modal isOpen={isOpen} onClose={handleGoogleErrorClose}
-        isBlueButton={true}
-        blueButtonText={t("signin:links.signup")}
-        blueButtonAction={handleGoToSignup}
-    >
+    return <Modal isOpen={isOpen} onClose={handleGoogleErrorClose}>
         <h1>{t("signin:errors.google.header")}</h1>
         <img src={googleImg}/>
         <p>{t("signin:errors.google.body")}</p>
+        <ModalButtons>
+            <Button onClick={handleGoogleErrorClose}>ОК</Button>
+            <Button isBlue={true} onClick={handleGoToSignup}>{t("signin:links.signup")}</Button>
+        </ModalButtons>
     </Modal>
 }
 

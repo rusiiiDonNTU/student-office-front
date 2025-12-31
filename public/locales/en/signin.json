@@ -40,7 +40,7 @@
             "afterEmail": " with further instructions"
         },
         "signupSuccess": {
-            "header": "Sign up successful!",
+            "header": "Account activated!",
             "login": "Log in to continue",
             "benefits": "Log in to receive:",
             "profile": "Full access to personal information in the DonNTU system",

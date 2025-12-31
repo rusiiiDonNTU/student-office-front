@@ -1,6 +1,18 @@
 {
     "nav": {
         "profile": "Профіль",
-        "subscribe": "Запис"
+        "schedule": "Розклад",
+        "performance": "Успішність",
+        "subscribe": "Запис",
+        "docs": "Звіти",
+        "notifications": "Інфо",
+        "more": "Більше",
+        "settings": "Опції",
+        "logout": "Вийти"
+    },
+    "settings": {
+        "header": "Налаштування",
+        "language": "Мова",
+        "close": "Закрити"
     }
 }

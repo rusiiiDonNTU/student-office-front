@@ -10,13 +10,14 @@ import DashboardLayout, {
   permForDashboardLoader,
 } from "./layouts/Dashboard/Dashboard";
 import ForgotPage from "./pages/auth/Forgot";
-import ProfilePage from "./pages/dashboard/Profile.jsx";
+import ProfilePage, { profileLoader } from "./pages/dashboard/Profile/Profile.jsx";
 import SubscribePage from "./pages/dashboard/Subscribe.jsx";
 import { getAuthStatus, logout } from "./util/auth.js";
 import ErrorPage from "./pages/Error.jsx";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import ConfirmEmail from "./pages/auth/ConfirmEmail.jsx";
+import SchedulePage from "./pages/dashboard/Schedule/Schedule.jsx";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,8 @@ const router = createBrowserRouter([
       
     },
     children: [
-      { path: "profile", element: <ProfilePage /> },
+      { path: "profile", element: <ProfilePage />, loader: profileLoader },
+      { path: "schedule", element: <SchedulePage />, },
       { path: "subscribe", element: <SubscribePage /> }
     ],
   },

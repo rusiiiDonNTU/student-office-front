@@ -1,12 +1,8 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import "./Modal.css";
-import Button from "../Button/Button";
-import InputRow from "../InputRow/InputRow";
 
-function Modal({ isOpen, onClose, isLoading=false, isWhiteButton=true,
-    isBlueButton=false, blueButtonText="", blueButtonAction = () => {},
-    children }) {
+function Modal({ isOpen, onClose, isLoading=false, children, ...props }) {
     const dialog = useRef();
 
     useEffect(() => {
@@ -20,15 +16,9 @@ function Modal({ isOpen, onClose, isLoading=false, isWhiteButton=true,
             e.preventDefault();
     }
 
-    return createPortal(<dialog className="modal" ref={dialog} onClose={onClose} onCancel={handleCancel}>
+    return createPortal(<dialog className="modal" ref={dialog} onClose={onClose} onCancel={handleCancel} {...props}>
         <div className="modal-info">
             {children}
-            <div className="modal-buttons">
-                <InputRow>
-                    {isWhiteButton && <Button onClick={onClose} disabled={isLoading}>ОК</Button>}
-                    {isBlueButton && <Button isBlue={true} onClick={blueButtonAction} disabled={isLoading}>{blueButtonText}</Button>}
-                </InputRow>
-            </div>
         </div>
     </dialog>, document.body);
 }

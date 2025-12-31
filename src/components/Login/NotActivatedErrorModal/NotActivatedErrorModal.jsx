@@ -4,6 +4,8 @@ import { useModal } from "../../../hooks/useModal";
 import { useTranslation } from "react-i18next";
 import { sendActivationList } from "../../../util/auth";
 import { useState } from "react";
+import ModalButtons from "../../UI/Modal/ModalButtons/ModalButtons";
+import Button from "../../UI/Button/Button";
 
 function NotActivatedErrorModal({email, onClose = () => {}}) {
     const [isOpen, setIsOpen, handleClose] = useModal();
@@ -49,14 +51,14 @@ function NotActivatedErrorModal({email, onClose = () => {}}) {
         body = <p>{t("errors:failed")}</p>
     }
 
-    return <Modal isOpen={isOpen} onClose={handleConfirmErrorClose}
-        isBlueButton={!result.isSent}
-        blueButtonText={t("signin:buttons.resend")}
-        blueButtonAction={handleSendAgain}
-        isLoading={isLoading}>
+    return <Modal isOpen={isOpen} onClose={handleConfirmErrorClose} isLoading={isLoading}>
         <h1>{header}</h1>
         <img src={emailImg}/>
         {body}
+        <ModalButtons>
+            <Button onClick={handleConfirmErrorClose} disabled={isLoading}>ОК</Button>
+            <Button isBlue={true} onClick={handleSendAgain} disabled={isLoading}>{t("signin:buttons.resend")}</Button>
+        </ModalButtons>
     </Modal>
 }
 

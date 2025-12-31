@@ -1,0 +1,20 @@
+{
+    "header": "Профіль",
+    "years": {
+        "one": "рік",
+        "few": "роки",
+        "many": "років",
+        "other": "років"
+    },
+    "group": "Група",
+    "specialtyCode": "Спеціальність",
+    "course": "Курс",
+    "specialtyName": "Назва спеціальності",
+    "educationProgram": "Освітня програма",
+    "faculty": "Факультет / Інститут",
+    "educationLevel": "Освітній рівень",
+    "studyForm": "Форма навчання",
+    "entryDate": "Дата вступу",
+    "entryBasis": "Вступ на основі",
+    "fundingSource": "Джерело фінансування"
+}

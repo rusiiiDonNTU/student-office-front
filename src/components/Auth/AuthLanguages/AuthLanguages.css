@@ -19,7 +19,7 @@
   padding: 0.5rem 0.25rem;
 }
 
-.lang-active {
+.auth-lang-active {
   background: white;
   color: black;
 }
@@ -28,11 +28,11 @@
   opacity: 0.75;
 }
 
-.auth-language:not(.lang-active) {
+.auth-language:not(.auth-lang-active) {
   cursor: pointer;
 }
 
-.auth-language:not(.lang-active):hover {
+.auth-language:not(.auth-lang-active):hover {
   background: #162d55;
 }
 

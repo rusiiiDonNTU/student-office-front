@@ -5,20 +5,12 @@ import "./Dashboard.css";
 import DashboardFooter from "../../components/Dashboard/DashboardFooter/DashboardFooter";
 
 function DashboardLayout({ children }) {
-  // // Одноразова зміна кольору фона для компонентів дешборда
-  // useEffect(() => {
-  //   document.body.style.background = "#ddd";
-
-  //   // Повернення стандартного фону після виходу
-  //   return () => (document.body.style.background = "#fff");
-  // }, []);
-
   return (
-    <>
+    <div className="dashboard">
       <DashboardHeader />
       <div className="dashboard-content">{children || <Outlet />}</div>
       <DashboardFooter />
-    </>
+    </div>
   );
 }
 

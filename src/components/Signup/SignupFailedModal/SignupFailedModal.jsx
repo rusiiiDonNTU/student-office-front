@@ -2,6 +2,8 @@ import Modal from "../../UI/Modal/Modal";
 import emailImg from "/img/email.png";
 import { useModal } from "../../../hooks/useModal";
 import { useTranslation } from "react-i18next";
+import ModalButtons from "../../UI/Modal/ModalButtons/ModalButtons";
+import Button from "../../UI/Button/Button";
 
 function SignupFailedModal({email, onClose = () => {}}) {
     const [isOpen, setIsOpen, handleClose] = useModal();
@@ -25,6 +27,9 @@ function SignupFailedModal({email, onClose = () => {}}) {
                 </ul>
             </div>
         </div>
+        <ModalButtons>
+            <Button onClick={onClose}>ОК</Button>
+        </ModalButtons>
     </Modal>
 }
 

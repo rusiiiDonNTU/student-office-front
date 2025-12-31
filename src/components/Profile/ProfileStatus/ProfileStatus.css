@@ -1,0 +1,12 @@
+.profile-status {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+    .profile-status {
+        padding: 0;
+    }
+}

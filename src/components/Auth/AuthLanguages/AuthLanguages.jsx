@@ -18,15 +18,15 @@ function AuthLanguages() {
   }
 
   return (
-    <section className={`auth-languages ${isLoading ? " loading" : undefined}`}>
+    <section className={`auth-languages${isLoading ? " loading" : ""}`}>
       <div
-        className={`auth-language${i18n.language === LOCALS.UK ? " lang-active" : ""}`}
+        className={`auth-language${i18n.language === LOCALS.UK ? " auth-lang-active" : ""}`}
         onClick={() => handleSelectLang(LOCALS.UK)}
       >
         Українська
       </div>
       <div
-        className={`auth-language${i18n.language === LOCALS.EN ? " lang-active" : ""}`}
+        className={`auth-language${i18n.language === LOCALS.EN ? " auth-lang-active" : ""}`}
         onClick={() => handleSelectLang(LOCALS.EN)}
       >
         English

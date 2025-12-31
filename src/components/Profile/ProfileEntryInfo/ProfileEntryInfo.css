@@ -1,0 +1,29 @@
+.profile-entry-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+}
+
+.profile-person-picture {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 6rem;
+    aspect-ratio: 1/1;
+}
+
+.profile-person-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-person-name {
+    /* font-weight: 500; */
+}
+
+.profile-person-age {
+    color: #5e5e5e;
+}

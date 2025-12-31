@@ -1,6 +1,18 @@
 {
     "nav": {
-        "profile": "Профіль",
-        "subscribe": "Запис"
+        "profile": "Profile",
+        "schedule": "Schedule",
+        "performance": "Performance",
+        "subscribe": "Subscribe",
+        "docs": "Docs",
+        "notifications": "Info",
+        "more": "More",
+        "settings": "Options",
+        "logout": "Logout"
+    },
+    "settings": {
+        "header": "Settings",
+        "language": "Language",
+        "close": "Close"
     }
 }

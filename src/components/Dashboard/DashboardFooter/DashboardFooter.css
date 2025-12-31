@@ -1,0 +1,91 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    background: var(--color-blue);
+    border-top: 3px var(--color-gray) solid;
+    color: white;
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 1.5rem;
+}
+
+.footer-more {
+    position: fixed;
+    right: 1rem;
+    bottom: 5.1rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    animation: popup 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    z-index: 2;
+    background: var(--color-light-blue);
+    color: white;
+}
+
+#footer-more-background {
+    z-index: 1;
+    position: fixed;
+    bottom: 4.4rem;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-buttons-vertical {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0.7rem;
+}
+
+.footer-nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 3.5rem;
+    padding: 0.4rem 0.4rem 0.3rem 0.4rem;
+    row-gap: 0.3rem;
+    border-radius: 10px;
+}
+
+.footer-nav-button span {
+    font-size: 0.8rem;
+}
+
+.footer-nav-button-image {
+    height: auto;
+    max-height: 2rem;
+    object-fit: contain; 
+    flex-shrink: 1;      
+    min-height: 0;
+}
+
+.footer-nav-button:hover {
+    background: var(--color-dark-blue);
+}
+
+.footer-nav-sub-button:hover {
+  background: var(--color-blue);
+}
+
+a.active {
+    .footer-nav-button {
+        background: var(--color-dark-blue);
+    }
+
+    .footer-nav-sub-button {
+        background: var(--color-blue);
+    }
+}
+
+@media (min-width: 769px) {
+  .footer, .footer-more, .footer-more-background  {
+    display: none;
+  }
+}
