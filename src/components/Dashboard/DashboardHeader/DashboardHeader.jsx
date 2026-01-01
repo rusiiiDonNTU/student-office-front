@@ -33,6 +33,8 @@ import calendarBlackIcon from "/icons/nav/black/calendar.png";
 import moreBlackIcon from "/icons/nav/black/more.png";
 import docsBlackIcon from "/icons/nav/black/docs.png";
 
+import logoutRedIcon from "/icons/nav/red/logout.png";
+
 import "./DashboardHeader.css";
 
 

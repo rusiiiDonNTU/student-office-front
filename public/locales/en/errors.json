@@ -4,5 +4,10 @@
     "default": "Please try again later or refresh the page",
     "back": "Back to Sign in",
     "errorOccured": "An error occured!",
-    "failed": "Unable to complete the action"
+    "failed": "Unable to complete the action",
+    "fetching": {
+        "header": "Fetching data failed!",
+        "body": "Please try again or refresh the page",
+        "again": "Try again"
+    }
 }

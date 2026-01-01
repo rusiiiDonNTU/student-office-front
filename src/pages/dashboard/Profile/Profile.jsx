@@ -11,23 +11,26 @@ import ProfileEducation from "../../../components/Profile/ProfileEducation/Profi
 import { useQuery } from "@tanstack/react-query";
 import { getStudent } from "../../../util/http";
 import ProfileSkeleton from "./ProfileSkeleton";
+import { useEffect, useState } from "react";
+import RefreshModal from "../../../components/UI/Modal/RefreshModal/RefreshModal";
 
 
 function ProfilePage() {
-  const { data: user, isPending, isError, error } = useQuery({
+  const { data: user, isPending, isFetching, isError, error, isFetched, refetch } = useQuery({
     queryKey: ["profile"],
     queryFn: getStudent
   });
 
   const { t } = useTranslation("profile");
   
+  const corruptedData = isFetched && !isFetching && typeof user !== "object";
+  const showModal = (isError || corruptedData) && !isFetching;
 
-  if (isError) {
-    console.log(error)
-  }
-
-  if (isPending || user === undefined ) {
-    return <ProfileSkeleton />
+  if (isFetching || typeof user !== "object" ) {
+    return <>
+      {showModal && <RefreshModal refetch={refetch}/>}
+      <ProfileSkeleton />
+    </>
   }
 
   const words = {
