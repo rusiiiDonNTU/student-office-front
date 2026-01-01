@@ -50,6 +50,8 @@
 
 .header-nav-button img {
   max-height: 1.5rem;
+  transition: filter 0.2s ease-in-out;
+  will-change: filter;
 }
 
 .header-nav-button:hover {

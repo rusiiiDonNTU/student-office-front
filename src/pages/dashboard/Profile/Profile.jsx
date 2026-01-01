@@ -26,7 +26,7 @@ function ProfilePage() {
   const corruptedData = isFetched && !isFetching && typeof user !== "object";
   const showModal = (isError || corruptedData) && !isFetching;
 
-  if (isFetching || typeof user !== "object" ) {
+  if (isPending || corruptedData) {
     return <>
       {showModal && <RefreshModal refetch={refetch}/>}
       <ProfileSkeleton />
