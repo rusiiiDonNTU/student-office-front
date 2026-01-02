@@ -16,7 +16,7 @@ function ConfirmEmailModal({email, onClose = () => {}}) {
 
     return <Modal isOpen={isOpen} onClose={handleConfirmEmailClose}>
         <h1>{t("signin:text.signupRequest.header")}</h1>
-        <img src={emailImg}/>
+        <img src={emailImg} className="modal-img"/>
         <p>{t("signin:text.signupRequest.beforeEmail")}<span>{email}</span>{t("signin:text.signupRequest.afterEmail")}</p>
         <ModalButtons>
            <Button onClick={handleConfirmEmailClose}>ОК</Button>

@@ -27,7 +27,7 @@ function GoogleErrorModal({email="", onClose = () => {}}) {
 
     return <Modal isOpen={isOpen} onClose={handleGoogleErrorClose}>
         <h1>{t("signin:errors.google.header")}</h1>
-        <img src={googleImg}/>
+        <img src={googleImg} className="modal-img"/>
         <p>{t("signin:errors.google.body")}</p>
         <ModalButtons>
             <Button onClick={handleGoogleErrorClose}>ОК</Button>

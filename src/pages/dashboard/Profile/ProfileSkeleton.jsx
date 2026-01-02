@@ -5,16 +5,13 @@ import ProfileEducation from "../../../components/Profile/ProfileEducation/Profi
 import ProfileTerms from "../../../components/Profile/ProfileTerms/ProfileTerms";
 import ProfileEntryInfo from "../../../components/Profile/ProfileEntryInfo/ProfileEntryInfo";
 import { useTranslation } from "react-i18next";
+import PageCard from "../../../components/UI/PageCard/PageCard";
 
 function ProfileSkeleton() {
   const { t } = useTranslation("profile");
 
   return (
-    <section className="profile">
-      <div className="profile-header">
-        <h1>{t("profile:header")}</h1>
-      </div>
-
+    <PageCard className="profile" header={t("profile:header")}>
       <div className="profile-content">
         <ProfilePerson skeleton={true}/>
 
@@ -30,7 +27,7 @@ function ProfileSkeleton() {
 
         <ProfileEntryInfo skeleton={true}/>
       </div>
-    </section>
+    </PageCard>
   );
 }
 

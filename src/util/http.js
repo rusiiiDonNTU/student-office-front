@@ -10,11 +10,12 @@ export async function getStudent() {
   catch (err) {
     if (err.response) {
       if (err.response.status === 401) {
-        return redirect('/logout')
+        throw {
+            status: 401
+        };
       }
     }
     throw {
-        message: "Сервер не надав відповіді",
         status: 500
     };
   }

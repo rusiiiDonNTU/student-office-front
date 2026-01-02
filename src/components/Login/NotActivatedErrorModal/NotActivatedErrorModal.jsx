@@ -42,7 +42,7 @@ function NotActivatedErrorModal({email, onClose = () => {}}) {
 
     return <Modal isOpen={isOpen} onClose={handleConfirmErrorClose} isLoading={isLoading}>
         <h1>{header}</h1>
-        <img src={emailImg}/>
+        <img src={emailImg} className="modal-img"/>
         {body}
         <ModalButtons>
             <Button onClick={handleConfirmErrorClose} disabled={isPending}>ОК</Button>

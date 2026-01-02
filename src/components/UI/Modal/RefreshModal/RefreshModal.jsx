@@ -21,7 +21,7 @@ function RefreshModal({ onClose = () => {}, refetch }) {
 
     return <Modal isOpen={isOpen} onClose={handleRefreshClose}>
         <h1>{t("errors:fetching.header")}</h1>
-        <img src={errorImg}/>
+        <img src={errorImg} className="modal-img"/>
         <p>{t("errors:fetching.body")}</p>
         <ModalButtons>
             <Button isBlue={true} onClick={handleRefresh}>{t("errors:fetching.again")}</Button>

@@ -25,7 +25,7 @@ function FPMailForm() {
   const buttonText = t("forgot:buttons.send");
 
   return (
-    <Form className="form">
+    <Form>
       <Input
         label={emailLabel}
         id="email"

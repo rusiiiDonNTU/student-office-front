@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import "./AuthInfo.css";
 
 function AuthInfo({infoType}) {
-  const { t } = useTranslation(["signin", "signup"]);
+  const { t } = useTranslation(["signin", "signup", "forgot"]);
 
   if (infoType === "success") {
     return (
@@ -49,6 +49,27 @@ function AuthInfo({infoType}) {
               <ul className="auth-info-nested-list">
                 <li>{t("signup:requirements.docs.studentId")}</li>
                 <li>{t("signup:requirements.docs.passport")}</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+    );
+  } else if (infoType === "newPass") {
+    return (
+      <section className="auth-info">
+        <h1 className="auth-info-logo">
+          {t("forgot:text.requirements")}
+        </h1>
+        <div className="auth-info-body">
+          <ul className="auth-info-list-nostart">
+            <li>{t("signup:requirements.pass.length")}</li>
+            <li>{t("signup:requirements.pass.start")}
+              <ul className="auth-info-nested-list">
+                <li>{t("signup:requirements.pass.lower")}</li>
+                <li>{t("signup:requirements.pass.upper")}</li>
+                <li>{t("signup:requirements.pass.digit")}</li>
+                <li>{t("signup:requirements.pass.symbol")}</li>
               </ul>
             </li>
           </ul>

@@ -22,6 +22,8 @@ import ConfirmEmail from "./pages/auth/ConfirmEmail.jsx";
 import SchedulePage from "./pages/dashboard/Schedule/Schedule.jsx";
 import PerformancePage from "./pages/dashboard/Performance/Performance.jsx";
 import DocsPage from "./pages/dashboard/Docs/Docs.jsx";
+import ChangePasswordDispatcher from "./dispatchers/ChangePasswordDispatcher.jsx";
+import SettingsPage from "./pages/dashboard/Settings/Settings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,19 +48,29 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     loader: permForDashboardLoader,
     errorElement: <ErrorPage />,
-    shouldRevalidate: () => {
-      
+    shouldRevalidate: ({ currentUrl, nextUrl, formMethod, defaultShouldRevalidate }) => {
+      if (formMethod && formMethod !== "GET") {
+        return true
+      }
+
+      if (currentUrl.pathname !== nextUrl.pathname) {
+        return false;
+      }
+
+      return true
     },
     children: [
       { path: "profile", element: <ProfilePage />, },
       { path: "schedule", element: <SchedulePage />, },
       { path: "performance", element: <PerformancePage />, },
       { path: "docs", element: <DocsPage />, },
-      { path: "subscribe", element: <SubscribePage /> }
+      { path: "subscribe", element: <SubscribePage /> },
+      { path: "settings", element: <SettingsPage />}
     ],
   },
   { path: "/logout", errorElement: <ErrorPage />, loader: logout },
-  { path: "/confirm-email", errorElement: <ErrorPage />, element: <ConfirmEmail />}
+  { path: "/confirm-email", errorElement: <ErrorPage />, element: <ConfirmEmail />},
+  { path: "/change-password", errorElement: <ErrorPage />, element: <ChangePasswordDispatcher />, loader: getAuthStatus}
 ]);
 
 function App() {

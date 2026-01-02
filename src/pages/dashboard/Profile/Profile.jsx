@@ -1,4 +1,4 @@
-import { redirect, useLoaderData } from "react-router-dom";
+import { redirect, useLoaderData, useNavigate } from "react-router-dom";
 import "./Profile.css"
 import { useTranslation } from "react-i18next";
 import api from "../../../util/axios";
@@ -13,6 +13,7 @@ import { getStudent } from "../../../util/http";
 import ProfileSkeleton from "./ProfileSkeleton";
 import { useEffect, useState } from "react";
 import RefreshModal from "../../../components/UI/Modal/RefreshModal/RefreshModal";
+import PageCard from "../../../components/UI/PageCard/PageCard";
 
 
 function ProfilePage() {
@@ -20,15 +21,19 @@ function ProfilePage() {
     queryKey: ["profile"],
     queryFn: getStudent
   });
-
+  const navigate = useNavigate();
   const { t } = useTranslation("profile");
   
-  const corruptedData = isFetched && !isFetching && typeof user !== "object";
-  const showModal = (isError || corruptedData) && !isFetching;
-
-  if (isPending || corruptedData) {
+  if (isError) {
+    if (error.status === 401) {
+      navigate("/login")
+    }
+  }
+  const isNoData = !user || typeof user !== "object";
+  
+  if (isNoData) {
     return <>
-      {showModal && <RefreshModal refetch={refetch}/>}
+      {!isFetching && <RefreshModal refetch={refetch}/>}
       <ProfileSkeleton />
     </>
   }
@@ -60,11 +65,7 @@ function ProfilePage() {
   const entryDate = formatDate(user.entryDate);
 
   return (
-    <section className="profile">
-      <div className="profile-header">
-        <h1>{t("profile:header")}</h1>
-      </div>
-
+    <PageCard className="profile" header={t("profile:header")}>
       <div className="profile-content">
         <ProfilePerson pib={pib}
           age={age}
@@ -90,7 +91,7 @@ function ProfilePage() {
           entryDate={entryDate}
           fundingSource={fundingSource}/>
       </div>
-    </section>
+    </PageCard>
   );
 }
 

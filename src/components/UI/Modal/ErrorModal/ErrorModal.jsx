@@ -17,7 +17,7 @@ function ErrorModal({ onClose = () => {} }) {
         
     return <Modal isOpen={isOpen} onClose={handleErrorClose}>
         <h1>{t("errors:errorOccured")}</h1>
-        <img src={errorImg}/>
+        <img src={errorImg} className="modal-img"/>
         <p>{t("errors:failed")}</p>
         <ModalButtons>
             <Button onClick={handleErrorClose}>ОК</Button>

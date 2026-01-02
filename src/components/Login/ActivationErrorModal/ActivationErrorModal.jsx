@@ -16,7 +16,7 @@ function ActivationErrorModal({onClose = () => {}}) {
     
     return <Modal isOpen={isOpen} onClose={handleActivationErrorClose}>
         <h1>{t("signin:errors.activationFailed.header")}</h1>
-        <img src={emailImg}/>
+        <img src={emailImg} className="modal-img"/>
         <p>{t("signin:errors.activationFailed.body")}</p>
         <ModalButtons>
             <Button onClick={handleActivationErrorClose}>ОК</Button>

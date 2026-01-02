@@ -16,7 +16,7 @@ function SignupFailedModal({email, onClose = () => {}}) {
 
     return <Modal isOpen={isOpen} onClose={handleSignupFailedClose}>
         <h1>{t("signup:errors.signupFailed.header")}</h1>
-        <img src={emailImg}/>
+        <img src={emailImg} className="modal-img"/>
         <div>
             <p>{t("signup:errors.signupFailed.reasons")}</p>
             <div className="modal-list">

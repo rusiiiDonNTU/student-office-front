@@ -13,6 +13,8 @@
     "settings": {
         "header": "Налаштування",
         "language": "Мова",
+        "password": "Пароль",
+        "phone": "Телефон",
         "close": "Закрити"
     }
 }

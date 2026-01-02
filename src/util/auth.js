@@ -3,7 +3,7 @@ import api from "./axios";
 
 export async function logout() {
   try {
-    const respone = await api.post("/auth/logout");
+    const response = await api.post("/auth/logout");
     return redirect("/login")
   }
   catch (err) {

@@ -3,6 +3,11 @@
   max-width: 40rem;
 }
 
+.auth-info-body {
+  display: flex;
+  flex-direction: column;
+}
+
 .auth-info-logo {
   font-size: 1.563rem;
   text-transform: uppercase;
