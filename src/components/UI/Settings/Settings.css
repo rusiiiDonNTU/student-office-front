@@ -10,6 +10,8 @@
     column-gap: 3rem;
     align-items: center;
     text-align: left;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .settings-element {

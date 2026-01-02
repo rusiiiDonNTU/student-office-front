@@ -6,6 +6,7 @@
     background: var(--color-blue);
     border-top: 3px var(--color-gray) solid;
     color: white;
+    user-select: none;
 }
 
 .footer-buttons {
