@@ -1,0 +1,44 @@
+.settings {
+    max-width: 45rem;
+    row-gap: 4rem;
+}
+
+.settings-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    width: 100%;
+    column-gap: 3rem;
+    align-items: center;
+    text-align: left;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.settings-modal-list {
+  min-width: 28rem;
+  margin: 1rem 0;
+}
+
+.settings-element {
+    display: contents;
+}
+
+.settings-element::after {
+    content: '';
+    background: var(--color-gray);
+    height: 1px;
+    grid-column: 1 / -1;
+    margin: 1rem 0;
+}
+
+.settings-element:last-child::after {
+    display: none;
+}
+
+.change-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    width: 100%;
+    min-width: 28rem;
+}

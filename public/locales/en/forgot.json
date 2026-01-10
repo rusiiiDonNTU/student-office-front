@@ -10,7 +10,8 @@
         "requirements": "Password requirements"
     },
     "fields": {
+        "currentPass": "Current password",
         "newPass": "New password",
-        "confirmNewPass": "Confirm new password"
+        "confirmNewPass": "New password (again)"
     }
 }

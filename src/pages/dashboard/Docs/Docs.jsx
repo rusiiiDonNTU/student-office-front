@@ -1,11 +1,9 @@
 import "./Docs.css"
 
-function DocsPage() {
+export function DocsPage() {
   return (
     <section className="docs">
       
     </section>
   );
 }
-
-export default DocsPage;

@@ -1,11 +1,9 @@
 import "./Schedule.css"
 
-function SchedulePage() {
+export function SchedulePage() {
   return (
     <section className="schedule">
       
     </section>
   );
 }
-
-export default SchedulePage;
