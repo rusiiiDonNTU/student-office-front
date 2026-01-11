@@ -49,18 +49,15 @@ export function LoginPage() {
 
     const msgCode = searchParams.get("message");
     if (msgCode === "login_failed") {
-      const msgEmail = searchParams.get("email");
-      if (msgEmail !== null) {
         setGoogleAuthStatus(() => {return {
           failed: true,
-          email: msgEmail
+          email: ''
         }});
 
-        searchParams.delete("email");
+        // searchParams.delete("email");
         searchParams.delete("message");
 
         setSearchParams(searchParams);
-      }
     }
   }, [searchParams, setSearchParams])
   
