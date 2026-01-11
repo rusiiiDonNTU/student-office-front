@@ -21,7 +21,7 @@ export function LoginPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [isJustRegistered, setIsJustRegistered] = useState(loc.state?.justRegistered === true);
-  const [isEmailConfirmed, setIsEmailConfirmed] = useState(loc.state?.emailConfirmed === true);
+  const [isEmailConfirmed, setIsEmailConfirmed] = useState(loc.state?.activationSuccess === true);
   const [isActivationFailed, setIsActivationFailed] = useState(loc.state?.activationSuccess === false);
   const [isAuthError, setIsAuthError] = useState(loc.state?.error === true || loginResults?.authError === true);
   const [isNotActivated, setIsNotActivated] = useState(loginResults?.notActivated === true);

@@ -11,10 +11,10 @@ export function ConfirmEmailPage() {
     const token = searchParams.get('token');
 
     useEffect(() => {
-        const sendToken = async () => {
+        const sendToken = async (token) => {
             // Спроба відправити запит на активацію пошти
-            const result = await postActivateEmail();
-
+            const result = await postActivateEmail(token);
+            
             if (!authStatus) {
                 navigate("/login", {
                     state: result
@@ -32,7 +32,7 @@ export function ConfirmEmailPage() {
             navigate("/", {replace: true})
         }
         else {
-            sendToken();
+            sendToken(token);
         }
     }, [token])
 
