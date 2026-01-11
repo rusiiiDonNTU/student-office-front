@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "react-router-dom";
 
-import { Button, Checkbox, InputForm, FormBlock, InputRow, FormActions, ErrorList} from "../../../../shared/ui";
+import { Button, Checkbox, FormBlock, Input, InputRow, FormActions, ErrorList} from "@/shared/ui";
 
 const initDirtyFields = {};
 
-export function SignupForm() {
+export function SignupForm(signupErrors = null) {
   const navigation = useNavigation();
 
   const email = useRef(null);
@@ -15,6 +15,7 @@ export function SignupForm() {
   const [isStudentId, setIsStudentId] = useState(true);
   const [isOldPassport, setIsOldPassport] = useState(false);
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
+  
   const isSubmitting = navigation.state === "submitting";
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export function SignupForm() {
   const studentIdErrors = []; 
 
   // Перевірка результатів валідації
-  if (!isSubmitting) {
+  if (signupErrors !== null || !isSubmitting) {
     // Пошта
     if (signupErrors?.isEmailValid === false && !dirtyFields.email) {
       emailError = t("auth:errors.email.invalid");
@@ -218,8 +219,6 @@ export function SignupForm() {
           {(passportErrors.length > 0 && !isOldPassport) && <ErrorList l={passportErrors}/>}
           {(oldPassportErrors.length > 0 && isOldPassport) && <ErrorList l={oldPassportErrors}/>}
       </>}
-
-      
 
       <FormActions>
         <Button isBlue disabled={isSubmitting}>{t("signup:buttons.signUp")}</Button>

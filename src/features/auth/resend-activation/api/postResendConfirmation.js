@@ -1,3 +1,5 @@
+import { api } from "@/shared/api"
+
 export async function postResendConfirmation(email) {
   try {
     const response = await api.post("/auth/resend-confirmation", {email: email})

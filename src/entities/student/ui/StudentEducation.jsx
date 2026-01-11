@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import Skeleton from "../../../shared/ui/Skeleton/Skeleton";
+import { Skeleton } from "@/shared/ui";
+import "./StudentEducation.css";
 
 export function StudentEducation({ specialtyName, educationProgram, faculty, skeleton=false }) {
     const { t } = useTranslation("profile");

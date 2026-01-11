@@ -1,6 +1,4 @@
-function SubscribePage() {
+export function SubscribePage() {
     return <>
     </>
 }
-
-export default SubscribePage;

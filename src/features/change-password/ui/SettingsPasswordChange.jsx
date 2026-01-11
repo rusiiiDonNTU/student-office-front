@@ -1,9 +1,7 @@
 import { useTranslation } from "react-i18next";
-import Input from "../../shared/ui/Input/Input";
-import ModalButtons from "../UI/Modal/ModalButtons/ModalButtons";
-import Button from "../../shared/ui/Button/Button";
+import { Button, Input, ModalButtons } from "@/shared/ui";
 
-function SettingsPasswordChange({ className='', onClose }) {
+export function SettingsPasswordChange({ className='', onClose }) {
     const { t } = useTranslation("forgot");
 
     let isSubmitting = false;
@@ -43,5 +41,3 @@ function SettingsPasswordChange({ className='', onClose }) {
         </ModalButtons>
     </div>
 }
-
-export default SettingsPasswordChange;

@@ -1,9 +1,7 @@
-import Modal from "../../../../shared/ui/Modal/Modal";
-import emailImg from "/img/email.png";
-import { useModal } from "../../../../shared/hooks/useModal";
 import { useTranslation } from "react-i18next";
-import ModalButtons from "../../UI/Modal/ModalButtons/ModalButtons";
-import Button from "../../../../shared/ui/Button/Button";
+import emailImg from "/img/email.png";
+import { useModal } from "@/shared/hooks";
+import { Button, ModalButtons, Modal} from "@/shared/ui";
 
 export function ActivationErrorModal({onClose = () => {}}) {
     const [isOpen, setIsOpen, handleClose] = useModal();

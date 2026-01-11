@@ -1,16 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { StudentPerson, StudentStatus, StudentEducation, StudentEntryInfo, StudentTerms, getStudent } from "../../entities/student";
-import { RefreshModal } from "../../shared/ui";
+import { StudentPerson, StudentStatus, StudentEducation, StudentEntryInfo, StudentTerms, useStudent } from "@/entities/student";
+import { RefreshModal } from "@/shared/ui";
+import { StudentProfileCardSkeleton } from "./StudentProfileCardSkeleton";
+import { useTranslation } from "react-i18next";
+import { formatBirthDate, formatDate } from "@/shared/lib";
 
 export function StudentProfileCard() {
-    const { data: user, isPending, isFetching, isError, error, isFetched, refetch } = getStudent();
-
+    const { data: user, isPending, isFetching, isError, error, isFetched, refetch } = useStudent();
+    const { t } = useTranslation();
     const navigate = useNavigate();
+
     if (isError) {
-        if (error.status === 401) {
-          navigate("/login")
-        }
-        if (error.status === 404) {
+        if (error.status < 500) {
           navigate("/logout")
         }
     }
@@ -68,11 +69,11 @@ export function StudentProfileCard() {
 
         <hr className="profile-hr"/>
 
-        <StudentEntryInfo educationLevel={educationLevel}
-          studyForm={studyForm} />
-
-        <StudentTerms entryBasis={entryBasis}
+        <StudentEntryInfo entryBasis={entryBasis}
           entryDate={entryDate}
-          fundingSource={fundingSource}/>
+          fundingSource={fundingSource}  />
+
+        <StudentTerms educationLevel={educationLevel}
+          studyForm={studyForm}/>
     </div>
 }

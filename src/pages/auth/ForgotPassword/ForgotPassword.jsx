@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import AuthPanel from "../../../shared/ui";
-import { FPMailForm } from "../../../features/auth";
+import { AuthPanel } from "@/shared/ui";
+import { FPMailForm } from "@/features/auth";
 
 export function ForgotPasswordPage() {
   const { t } = useTranslation("forgot");

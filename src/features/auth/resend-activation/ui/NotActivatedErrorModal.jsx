@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
 import emailImg from "/img/email.png";
-import { Button, ModalButtons, Modal } from "../../../../shared/ui/";
-import { useModal } from "../../../../shared/hooks";
+import { Button, ModalButtons, Modal } from "@/shared/ui/";
+import { useModal } from "@/shared/hooks";
 import { useResendConfirmation } from "../model/useResendConfirmation";
 
 export function NotActivatedErrorModal({email, onClose = () => {}}) {

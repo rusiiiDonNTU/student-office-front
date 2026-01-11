@@ -2,7 +2,7 @@ import "./SettingsField.css"
 import pencilImg from "/icons/settings/pencil.png";
 import pencilHoverImg from "/icons/settings/pencil-hover.png";
 
-function SettingsField({text, onClick}) {
+export function SettingsField({text, onClick}) {
     return <div className="change-pass-option">
         <div name="pass" className="change-pass-field">
             <span>{text}</span>
@@ -13,5 +13,3 @@ function SettingsField({text, onClick}) {
         </div>
     </div>
 }
-
-export default SettingsField

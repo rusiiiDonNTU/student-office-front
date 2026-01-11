@@ -1,6 +1,6 @@
 import defaultPfp from "/img/default-pfp-white.png";
 import "./StudentPerson.css";
-import Skeleton from "../../../shared/ui/Skeleton/Skeleton";
+import { Skeleton } from "@/shared/ui";
 
 export function StudentPerson({ pib=null, age=null, pfp=null, skeleton=false }) {
     if (skeleton) {

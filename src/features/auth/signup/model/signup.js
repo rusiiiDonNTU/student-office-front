@@ -36,7 +36,9 @@ export async function signup(formData) {
     };
 
     if (Object.values(valids).includes(false) || Object.values(valids.isPasswordValid).includes(true)) {
-        return valids;
+        return {
+            errors: valids
+        };
     }
 
     // Відправка запиту на реєстрацію

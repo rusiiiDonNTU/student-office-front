@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Outlet, redirect, useNavigation } from "react-router-dom";
 
-import UniLogo from "../../../shared/ui";
-import AuthLanguages from "../../../features/change-language";
+import { UniLogo } from "@/shared/ui";
+import { AuthLanguageChanger } from "@/features/change-language";
 import "./Auth.css";
 
 export function AuthLayout({ children }) {
@@ -30,11 +30,11 @@ export function AuthLayout({ children }) {
 
   return (
     <div className="auth">
-      <AuthLogo />
+      <UniLogo />
 
       <div className="auth-content">{children || <Outlet />}</div>
 
-      <AuthLanguages />
+      <AuthLanguageChanger />
     </div>
   );
 }

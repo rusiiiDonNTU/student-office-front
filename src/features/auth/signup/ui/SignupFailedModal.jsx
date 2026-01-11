@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useModal } from "../../../../shared/hooks";
-import  { Modal, ModalButtons, Button } from "../../../../shared/ui";
+import { useModal } from "@/shared/hooks";
+import { Modal, ModalButtons, Button } from "@/shared/ui";
 import emailImg from "/img/email.png";
 
-export function SignupFailedModal({email, onClose = () => {}}) {
+export function SignupFailedModal({onClose = () => {}}) {
     const [isOpen, setIsOpen, handleClose] = useModal();
     const { t } = useTranslation("signup");
 

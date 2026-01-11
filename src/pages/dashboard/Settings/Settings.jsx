@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import PageCard from "../../../shared/ui/PageCard/PageCard";
-import SettingsList from "../../../components/Settings/SettingsList";
+import { PageCard } from "@/shared/ui";
+import { SettingsList } from "@/widgets";
 
-function SettingsPage() {
+export function SettingsPage() {
   const { t } = useTranslation("dashboard");
 
   function handlePasswordClick() {
@@ -15,5 +15,3 @@ function SettingsPage() {
     </PageCard>
   );
 }
-
-export default SettingsPage;

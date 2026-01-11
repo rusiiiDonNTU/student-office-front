@@ -1,3 +1,5 @@
+import { api } from "@/shared/api";
+
 export async function getAuthStatus() {
   try {
     const response = await api.get("/auth/check");

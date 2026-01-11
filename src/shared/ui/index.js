@@ -12,3 +12,5 @@ export { ErrorList } from "./ErrorList/ErrorList";
 export { ErrorModal } from "./ErrorModal/ErrorModal";
 export { FormActions } from "./Form/FormActions/FormActions";
 export { ModalButtons } from "./ModalButtons/ModalButtons";
+export { RefreshModal } from "./RefreshModal/RefreshModal";
+export { SettingsField } from "./SettingsField/SettingsField";

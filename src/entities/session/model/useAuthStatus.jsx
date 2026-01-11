@@ -1,11 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAuthStatus } from "../api/getAuthStatus";
+import { authStatusQueryOptions } from "../api/queries";
 
 export function useAuthStatus() {
-    return useQuery({
-        queryKey: ["session"],
-        queryFn: getAuthStatus,
-        staleTime: 30 * 60 * 1000,
-        retry: false
-    })
+    return useQuery(authStatusQueryOptions());
 }

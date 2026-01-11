@@ -1,4 +1,4 @@
-import { StudentPerson, StudentStatus, StudentEducation, StudentEntryInfo, StudentTerms } from "../../../entities/student";
+import { StudentPerson, StudentStatus, StudentEducation, StudentEntryInfo, StudentTerms } from "@/entities/student";
 
 export function StudentProfileCardSkeleton() {
   return (

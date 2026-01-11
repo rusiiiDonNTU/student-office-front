@@ -1,11 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useModal } from "../../hooks/useModal";
-import Modal from "../Modal/Modal";
-import ModalButtons from "../ModalButtons/ModalButtons";
-import Button from "../Button/Button";
+import { Modal, ModalButtons, Button } from "@/shared/ui";
 import errorImg from "/img/error.png";
 
-function RefreshModal({ onClose = () => {}, refetch }) {
+export function RefreshModal({ onClose = () => {}, refetch }) {
     const [isOpen, setIsOpen, handleClose] = useModal();
     const { t } = useTranslation("errors");
 
@@ -28,5 +26,3 @@ function RefreshModal({ onClose = () => {}, refetch }) {
         </ModalButtons>
     </Modal>
 }
-
-export default RefreshModal;

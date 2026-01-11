@@ -1,4 +1,5 @@
-import { postSignin } from "../api/postSIgnin";
+import { checkIfNonEmpty, validateEmail } from "@/shared/lib";
+import { postSignin } from "../api/postSignIn";
 
 export async function login(formData) {
     const buttonType = formData.get("button");
@@ -13,6 +14,7 @@ export async function login(formData) {
         email: formData.get("email"),
         password: formData.get("password"),
     };
+    
 
     // Валідація (клієнт-сайд)
     const valids = {

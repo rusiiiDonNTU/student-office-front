@@ -2,12 +2,12 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
-import { Modal, ModalButtons, Button } from "../../shared/ui/Modal/Modal";
-import { useModal } from "../../shared/hooks";
+import { Modal, ModalButtons, Button } from "@/shared/ui";
+import { SettingsPasswordChange } from "@/features/change-password";
+import { SettingsList } from "./SettingsList";
+import { useModal } from "@/shared/hooks";
 
 import "./Settings.css";
-import { SettingsList } from "./SettingsList";
-import { SettingsPasswordChange } from "@/features/change-password";
 
 export function SettingsModal({ onClose = () => {} }) {
     const [isOpen, setIsOpen, handleClose] = useModal();

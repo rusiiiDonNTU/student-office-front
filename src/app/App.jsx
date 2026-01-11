@@ -8,33 +8,38 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 // Кастом. хуки
-import { logout } from "../features/auth";
+import { logout } from "@/features/auth";
 // Кастом. API
 import { queryClient } from "../shared/api";
 // Компоненти
 import { AuthLayout, DashboardLayout } from "./layouts";
 import { ErrorRoute, ChangePasswordRoute } from "./routes";
-import { LoginPage, SignupPage, ForgotPasswordPage, ConfirmEmailPage, loginAction, signupAction } from "../pages/auth";
-import { ProfilePage, SchedulePage, PerformancePage, DocsPage, SubscribePage, SettingsPage } from "../pages/dashboard";
+import { LoginPage, SignupPage, ForgotPasswordPage, ConfirmEmailPage, loginAction, signupAction } from "@/pages/auth";
+import { ProfilePage, SchedulePage, PerformancePage, DocsPage, SubscribePage, SettingsPage } from "@/pages/dashboard";
+import { authLoader, dashLoader, rootLoader } from "@/entities/session";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <ErrorRoute />
+    errorElement: <ErrorRoute />,
+    loader: rootLoader
   },
   {
     element: <AuthLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorRoute />,
+    loader: authLoader,
     children: [
       { path: "login", element: <LoginPage />, action: loginAction },
       { path: "register", element: <SignupPage />, action: signupAction },
       { path: "forgot-password", element: <ForgotPasswordPage /> },
-    ],
+    ]
   },
   {
     element: <DashboardLayout />,
     errorElement: <ErrorRoute />,
+    loader: dashLoader,
     children: [
       { path: "profile", element: <ProfilePage />, },
       { path: "schedule", element: <SchedulePage />, },
@@ -61,6 +66,7 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient} initialIsOpen={false}>
       <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>
   );
 }

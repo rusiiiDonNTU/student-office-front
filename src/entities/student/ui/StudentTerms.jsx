@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import "./ProfileTerms.css";
-import Skeleton from "../../../shared/ui/Skeleton/Skeleton";
+import "./StudentTerms.css";
+import { Skeleton } from "@/shared/ui";
 
-export function ProfileTerms({ studyForm, educationLevel, skeleton=false}) {
+export function StudentTerms({ studyForm, educationLevel, skeleton=false}) {
     const { t } = useTranslation("profile");
     
     if (skeleton) {

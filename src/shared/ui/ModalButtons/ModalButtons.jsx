@@ -1,4 +1,4 @@
-import InputRow from "../InputRow/InputRow";
+import { InputRow } from "@/shared/ui";
 import "./ModalButtons.css";
 
 export function ModalButtons({ children }) {

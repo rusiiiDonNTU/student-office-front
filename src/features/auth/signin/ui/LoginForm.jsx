@@ -59,7 +59,6 @@ export function LoginForm(loginErrors = null) {
         errorMsg={emailError}
         onChange={handleInputChange}
         disabled={isSubmitting}
-        ref={email}
       />
 
       <Input

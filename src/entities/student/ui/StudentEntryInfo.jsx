@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import Skeleton from "../../../shared/ui/Skeleton/Skeleton";
+import { Skeleton } from "@/shared/ui";
 
-export function ProfileEntryInfo({ entryBasis, entryDate, fundingSource, skeleton=false }) {
+export function StudentEntryInfo({ entryBasis, entryDate, fundingSource, skeleton=false }) {
     const { t } = useTranslation("profile");
 
     if (skeleton) {
