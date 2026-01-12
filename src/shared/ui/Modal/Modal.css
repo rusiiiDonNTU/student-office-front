@@ -28,6 +28,10 @@
     animation: popup 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* .modal-info {
+    flex: 1;
+} */
+
 .modal-img {
     width: 6rem;
 }

@@ -21,7 +21,7 @@ export function ConfirmLogoutModal({onClose = () => {}}) {
         navigate('/logout');
     }
 
-    return <Modal isOpen={isOpen} onClose={handleConfirmLogoutClose} isLoading={isLoading} style={{width: "25rem"}}>
+    return <Modal isOpen={isOpen} onClose={handleConfirmLogoutClose} isLoading={isLoading}>
         <h1>{t("dashboard:logout.header")}</h1>
         <img src={doorImg} className="modal-img"/>
         <span>{t("dashboard:logout.question")}</span>
