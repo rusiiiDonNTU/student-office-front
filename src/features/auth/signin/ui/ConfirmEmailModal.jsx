@@ -1,6 +1,6 @@
-import { useModal } from "../../../../shared/hooks/useModal";
+import { useModal } from "@/shared/hooks";
 import { useTranslation } from "react-i18next";
-import { Button, ModalButtons, Modal } from "../../../../shared/ui";
+import { Button, ModalButtons, Modal } from "@/shared/ui";
 import emailImg from "/img/email.png";
 
 export function ConfirmEmailModal({email, onClose = () => {}}) {

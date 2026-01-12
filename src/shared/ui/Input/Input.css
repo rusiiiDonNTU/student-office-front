@@ -5,6 +5,10 @@
   flex: 1;
 }
 
+.input-group.hidden {
+  display: none;
+}
+
 .input-field {
   border: 1px #9b9b9b solid;
   padding: 0.75rem 1rem;

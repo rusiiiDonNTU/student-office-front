@@ -1,8 +1,8 @@
 import "./Input.css";
 
-export function Input({ label, id, errorMsg, ...props }) {
+export function Input({ label, id, errorMsg, type="text", ...props }) {
   return (
-    <div className="input-group">
+    <div className={`input-group${type === "hidden" ? " hidden" : ""}`}>
       <div className="input-label-row">
         <label className="input-label" htmlFor={id}>
           {label}

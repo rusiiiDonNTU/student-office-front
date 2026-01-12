@@ -13,9 +13,9 @@ import { logout } from "@/features/auth";
 import { queryClient } from "../shared/api";
 // Компоненти
 import { AuthLayout, DashboardLayout } from "./layouts";
-import { ErrorRoute, ChangePasswordRoute } from "./routes";
-import { LoginPage, SignupPage, ForgotPasswordPage, ConfirmEmailPage, loginAction, signupAction } from "@/pages/auth";
-import { ProfilePage, SchedulePage, PerformancePage, DocsPage, SubscribePage, SettingsPage } from "@/pages/dashboard";
+import { ErrorRoute } from "./routes";
+import { LoginPage, SignupPage, ForgotPasswordPage, ConfirmEmailPage, loginAction, signupAction, forgotPasswordAction, ResetPasswordPage, resetPasswordAction, resetPasswordLoader } from "@/pages/auth";
+import { ProfilePage, SchedulePage, PerformancePage, DocsPage, SubscribePage, SettingsPage, ChangePasswordPage } from "@/pages/dashboard";
 import { authLoader, dashLoader, rootLoader } from "@/entities/session";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -33,7 +33,8 @@ const router = createBrowserRouter([
     children: [
       { path: "login", element: <LoginPage />, action: loginAction },
       { path: "register", element: <SignupPage />, action: signupAction },
-      { path: "forgot-password", element: <ForgotPasswordPage /> },
+      { path: "forgot-password", element: <ForgotPasswordPage />, action: forgotPasswordAction },
+      { path: "reset-password", element: <ResetPasswordPage />, loader: resetPasswordLoader, action: resetPasswordAction },
     ]
   },
   {
@@ -46,12 +47,12 @@ const router = createBrowserRouter([
       { path: "performance", element: <PerformancePage />, },
       { path: "docs", element: <DocsPage />, },
       { path: "subscribe", element: <SubscribePage /> },
-      { path: "settings", element: <SettingsPage />}
+      { path: "settings", element: <SettingsPage />},
+      { path: "change-password", element: <ChangePasswordPage />}
     ],
   },
   { path: "/logout", errorElement: <ErrorRoute />, loader: logout },
   { path: "/confirm-email", errorElement: <ErrorRoute />, element: <ConfirmEmailPage />},
-  { path: "/change-password", errorElement: <ErrorRoute />, element: <ChangePasswordRoute />}
 ]);
 
 export function App() {

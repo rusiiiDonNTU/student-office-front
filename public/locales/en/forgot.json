@@ -13,5 +13,19 @@
         "currentPass": "Current password",
         "newPass": "New password",
         "confirmNewPass": "New password (again)"
+    },
+    "modal": {
+        "sent": {
+            "header": "Request sent!",
+            "body": "If the specified email address is registered, you will receive a link to the password change page."
+        },
+        "invalid": {
+            "header": "An error occured!",
+            "body": "The link is invalid or expired — try sending a new password reset request.",
+            "button": "New request"      
+        },
+        "changed": {
+            "header": "Password changed!"
+        }
     }
 }

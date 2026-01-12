@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { AuthInfo } from "../../../widgets";
 import { ErrorModal, AuthPanel } from "../../../shared/ui";
-import { LoginForm, ConfirmEmailModal, GoogleErrorModal, LoginMessage, NotActivatedErrorModal } from "@/features/auth/";
+import { LoginForm, ConfirmEmailModal, GoogleErrorModal, LoginMessage, NotActivatedErrorModal, FPChangedModal, FPInvalidTokenModal } from "@/features/auth/";
 import { queryClient } from "@/shared/api";
 import { ActivationErrorModal } from "@/features/confirm-email";
 
@@ -22,10 +22,12 @@ export function LoginPage() {
 
   const [isJustRegistered, setIsJustRegistered] = useState(loc.state?.justRegistered === true);
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(loc.state?.activationSuccess === true);
+  const [isPasswordChanged, setIsPasswordChanged] = useState(loc.state?.passwordChanged === true);
   const [isActivationFailed, setIsActivationFailed] = useState(loc.state?.activationSuccess === false);
+  const [isResetTokenInvalid, setIsResetTokenInvalid] = useState(loc.state?.resetTokenInvalid === true);
   const [isAuthError, setIsAuthError] = useState(loc.state?.error === true || loginResults?.authError === true);
-  const [isNotActivated, setIsNotActivated] = useState(loginResults?.notActivated === true);
   const [googleAuthStatus, setGoogleAuthStatus] = useState(googleAuthStatusTemplate);
+  const [isNotActivated, setIsNotActivated] = useState(false);
 
   // Якщо логін пройдено успішно
   useEffect(() => {
@@ -68,11 +70,13 @@ export function LoginPage() {
   return (
     <> 
       {/* Модалки */}
-      {isJustRegistered && <ConfirmEmailModal email={loc.state?.email} onClose={() => setIsJustRegistered(false)}/>}
       {isAuthError && <ErrorModal onClose={() => setIsAuthError(false)}/>}
-      {isActivationFailed && <ActivationErrorModal onClose={() => setIsActivationFailed(false)}/>}
-      {isNotActivated && <NotActivatedErrorModal onClose={() => setIsNotActivated(false)} email={loginResults.email}/>}
       {googleAuthStatus.failed && <GoogleErrorModal onClose={handleGoogleErrorClose} />}
+      {isPasswordChanged && <FPChangedModal onClose={() => setIsPasswordChanged(false)}/>}
+      {isActivationFailed && <ActivationErrorModal onClose={() => setIsActivationFailed(false)}/>}
+      {isResetTokenInvalid && <FPInvalidTokenModal onClose={() => setIsResetTokenInvalid(false)} />}
+      {isJustRegistered && <ConfirmEmailModal email={loc.state?.email} onClose={() => setIsJustRegistered(false)}/>}
+      {isNotActivated && <NotActivatedErrorModal onClose={() => setIsNotActivated(false)} email={loginResults.email}/>}
 
       {/* Повідомлення про активовану пошту (для мобільних пристроів) */}
       {isEmailConfirmed && <LoginMessage h={t("signing:text.signupSuccess.header")} b={t("signin:text.signupSuccess.login")}/>}
