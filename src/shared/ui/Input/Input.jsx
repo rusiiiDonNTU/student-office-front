@@ -10,7 +10,7 @@ export function Input({ label, id, errorMsg, type="text", ...props }) {
         {errorMsg && <p className="input-field-message">{errorMsg}</p>}
       </div>
 
-      <input className="input-field" name={id} id={id} {...props} />
+      <input className="input-field" name={id} id={id} type={type} {...props} />
     </div>
   );
 }

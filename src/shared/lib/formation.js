@@ -1,16 +1,18 @@
 export function formatDate(isoDate) {
     const date = new Date(isoDate);
 
-    const formattedDate = new Intl.DateTimeFormat('uk-UA', {
+    const formation = {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric'
-    }).format(date);
+    }
+
+    const formattedDate = new Intl.DateTimeFormat("uk-UA", formation).format(date);
 
     return formattedDate
 }
 
-export function formatBirthDate(isoDate, words) {
+export function formatBirthDate(isoDate, words, lang="uk") {
     // Розрахунок дат
     const birthDate = new Date(isoDate);
     const today = new Date();
@@ -23,7 +25,7 @@ export function formatBirthDate(isoDate, words) {
         age -= 1;
 
     // Відмінювання слова "рік"
-    const pluralRules = new Intl.PluralRules('uk-UA');
+    const pluralRules = new Intl.PluralRules(lang);
     const word = words[pluralRules.select(age)];
 
     const formattedDate = formatDate(isoDate);

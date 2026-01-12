@@ -1,14 +1,13 @@
 import { Link, useNavigation } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-import { Button, Checkbox, Input, FormActions, FormBlock } from "../../../../shared/ui";
-
-import { handleRedirect } from "../../../../shared/lib";
 import { useTranslation } from "react-i18next";
+
+import { Button, Checkbox, Input, FormActions, FormBlock } from "@/shared/ui";
+import { handleRedirect } from "@/shared/lib";
 
 const initDirtyFields = {};
 
-export function LoginForm(loginErrors = null) {
+export function LoginForm({ loginErrors = null }) {
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
   const navigation = useNavigation();
   const { t } = useTranslation(["auth", "signin"]);
@@ -20,13 +19,13 @@ export function LoginForm(loginErrors = null) {
   if (loginErrors !== null && !isSubmitting) {
     // Перевірки
     if (loginErrors?.isEmailValid === false && !dirtyFields.email) {
-      emailError = t("auth:errors.email.invalid");;
+      emailError = t("auth:errors.email.invalid");
     }
     if (loginErrors?.isEmailNonEmpty === false && !dirtyFields.email) {
       emailError = t("auth:errors.email.empty");
     }
     if (loginErrors?.isWrong === true && Object.keys(dirtyFields).length === 0) {
-      emailError = t("signin:errors.wrongCreds")
+      emailError = t("signin:errors.wrongCreds");
     }
     // if (loginErrors?.isPasswordValid === false && !dirtyFields.password) {
     //   passwordError = passInvalidError;

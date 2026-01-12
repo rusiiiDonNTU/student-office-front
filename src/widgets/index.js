@@ -4,3 +4,4 @@ export { SettingsModal } from "./settings/SettingsModal";
 export { DashboardHeader } from "./dashboard-header/DashboardHeader";
 export { DashboardFooter } from "./dashboard-footer/DashboardFooter";
 export { StudentProfileCard } from "./student-profile/StudentProfileCard";
+export { StudentProfileCardSkeleton } from "./student-profile/StudentProfileCardSkeleton";

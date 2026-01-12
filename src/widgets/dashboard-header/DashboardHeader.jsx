@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
@@ -36,18 +36,29 @@ import docsBlackIcon from "/icons/nav/black/docs.png";
 import logoutRedIcon from "/icons/nav/red/logout.png";
 
 import "./DashboardHeader.css";
+import { ConfirmLogoutModal } from "@/features/auth";
 
 
 export function DashboardHeader() {
   const { t } = useTranslation("dashboard");
   const [showSettingsModal, setShowSettingsModal] = useState(false);
-
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const navigation = useNavigation();
+  
   function handleShowSettingsModal() {
     setShowSettingsModal(true)
   }
 
   function handleCloseSettingsModal() {
     setShowSettingsModal(false)
+  }
+
+  function handleShowLogoutModal() {
+    setShowLogoutModal(true)
+  }
+
+  function handleCloseLogoutModal() {
+    setShowLogoutModal(false)
   }
 
   return (
@@ -116,17 +127,16 @@ export function DashboardHeader() {
               </button>
             </li>
             <li className="dashboard-nav-button">
-              <NavLink to="/logout">
-                <div className="header-nav-button">
-                  <img src={logoutBlueIcon}/>
-                </div>
-              </NavLink>
+              <button className="header-nav-button" onClick={handleShowLogoutModal}>
+                <img src={logoutBlueIcon}/>
+              </button>
             </li>
           </ul>
         </section>
       </nav>
 
       {showSettingsModal && <SettingsModal onClose={handleCloseSettingsModal} />}
+      {showLogoutModal && <ConfirmLogoutModal onClose={handleCloseLogoutModal} />}
     </header>
   );
 }

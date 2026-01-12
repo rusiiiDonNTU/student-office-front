@@ -1,5 +1,6 @@
 import { queryClient } from "@/shared/api";
 import { redirect } from "react-router-dom";
+import { i18n } from "@/shared/config";
 import { authStatusQueryOptions } from "../api/queries";
 
 export async function rootLoader() {
@@ -25,7 +26,9 @@ export async function dashLoader() {
 
     if (authStatus) 
         return null
-    else
+    else {
+        await i18n.loadNamespaces(['profile', 'settings', 'schedule', 'performance', 'docs'])
         return redirect("/login")
+    }
 }
 

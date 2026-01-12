@@ -6,7 +6,7 @@ export function UniLogo() {
   const { t } = useTranslation("main");
 
   return (
-    <Link to="/login">
+    <Link to="/login" className="keep-opacity">
       <section className="auth-logo">
         <div className="auth-logo-img">
           <img src={donntuLogo} />

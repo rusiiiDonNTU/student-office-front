@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/shared/ui";
 import "./StudentEducation.css";
 
-export function StudentEducation({ specialtyName, educationProgram, faculty, skeleton=false }) {
+export function StudentEducation({ user=null, skeleton=false }) {
     const { t } = useTranslation("profile");
 
     if (skeleton) {
@@ -25,24 +25,27 @@ export function StudentEducation({ specialtyName, educationProgram, faculty, ske
             </div>
         </div>
     }
-    else {
-        return <div className="profile-section">
-            <div className="profile-row">
-                <div className="profile-element">
-                    <span className="profile-element-header">{t("profile:specialtyName")}</span>
-                    <span className="profile-element-value">{specialtyName}</span>
-                </div>
-                <div className="profile-element">
-                    <span className="profile-element-header">{t("profile:educationProgram")}</span>
-                    <span className="profile-element-value">{educationProgram}</span>
-                </div>
+
+    const specialtyName = user.specialtyName;
+    const educationProgram = user.educationProgram;
+    const faculty = user.faculty;
+
+    return <div className="profile-section">
+        <div className="profile-row">
+            <div className="profile-element">
+                <span className="profile-element-header">{t("profile:specialtyName")}</span>
+                <span className="profile-element-value">{specialtyName}</span>
             </div>
-            <div className="profile-row">
-                <div className="profile-element">
-                    <span className="profile-element-header">{t("profile:faculty")}</span>
-                    <span className="profile-element-value">{faculty}</span>
-                </div>
+            <div className="profile-element">
+                <span className="profile-element-header">{t("profile:educationProgram")}</span>
+                <span className="profile-element-value">{educationProgram}</span>
             </div>
         </div>
-    }
+        <div className="profile-row">
+            <div className="profile-element">
+                <span className="profile-element-header">{t("profile:faculty")}</span>
+                <span className="profile-element-value">{faculty}</span>
+            </div>
+        </div>
+    </div>
 }

@@ -102,8 +102,20 @@ body {
 }
 
 body.is-submitting a {
-  opacity: 0.8;
   pointer-events: none;
+}
+
+body.is-submitting a:not(.keep-opacity) {
+  opacity: 0.8;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--color-light-blue)
+}
+
+button:focus {
+  outline: none;
 }
 
 html,

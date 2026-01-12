@@ -6,7 +6,7 @@ import { Button, Checkbox, FormBlock, Input, InputRow, FormActions, ErrorList} f
 
 const initDirtyFields = {};
 
-export function SignupForm(signupErrors = null) {
+export function SignupForm({ signupErrors = null }) {
   const navigation = useNavigation();
 
   const email = useRef(null);

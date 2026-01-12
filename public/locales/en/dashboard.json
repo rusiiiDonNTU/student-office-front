@@ -16,5 +16,11 @@
         "password": "Password",
         "phone": "Phone",
         "close": "Close"
+    },
+    "logout": {
+        "header": "Leaving the office",
+        "question": "Are you sure?",
+        "yes": "Yes",
+        "no": "No"
     }
 }

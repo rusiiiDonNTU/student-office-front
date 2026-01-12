@@ -30,3 +30,5 @@ i18n.use(languageDetector)
       if (storedLng && !supportedLngs.includes(storedLng))
         localStorage.setItem('i18nextLng', i18n.resolvedLanguage);
     });
+
+export default i18n;

@@ -9,13 +9,12 @@ export async function login(formData) {
         return;
     }
 
-    const isRemembered = formData.get("remember-me") === "on";
     const requestBody = {
         email: formData.get("email"),
         password: formData.get("password"),
+        rememberMe: formData.get("remember-me") === "on"
     };
     
-
     // Валідація (клієнт-сайд)
     const valids = {
         isEmailValid: validateEmail(requestBody.email),

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/shared/ui";
 import "./StudentStatus.css";
 
-export function StudentStatus({ group, course, specialtyCode, skeleton=false }) {
+export function StudentStatus({ user=null, skeleton=false }) {
     const { t } = useTranslation("profile");
 
     if (skeleton) {
@@ -29,22 +29,25 @@ export function StudentStatus({ group, course, specialtyCode, skeleton=false }) 
             </div>
         </section>
     }
-    else {
-        return <section className="profile-status">
-            <div className="profile-row">
-                <div className="profile-element-centered">
-                    <span className="profile-element-value">{group}</span>
-                    <span className="profile-element-header">{t("profile:group")}</span>
-                </div>
-                <div className="profile-element-centered">
-                    <span className="profile-element-value">{specialtyCode}</span>
-                    <span className="profile-element-header">{t("profile:specialtyCode")}</span>
-                </div>
-                <div className="profile-element-centered">
-                    <span className="profile-element-value">{course}</span>
-                    <span className="profile-element-header">{t("profile:course")}</span>
-                </div>
+    
+    const specialtyCode = user.specialtyCode;
+    const group = user.groupName;
+    const course = user.course;
+
+    return <section className="profile-status">
+        <div className="profile-row">
+            <div className="profile-element-centered">
+                <span className="profile-element-value">{group}</span>
+                <span className="profile-element-header">{t("profile:group")}</span>
             </div>
-        </section>
-    }
+            <div className="profile-element-centered">
+                <span className="profile-element-value">{specialtyCode}</span>
+                <span className="profile-element-header">{t("profile:specialtyCode")}</span>
+            </div>
+            <div className="profile-element-centered">
+                <span className="profile-element-value">{course}</span>
+                <span className="profile-element-header">{t("profile:course")}</span>
+            </div>
+        </div>
+    </section>
 }
