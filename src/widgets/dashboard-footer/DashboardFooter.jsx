@@ -117,7 +117,7 @@ export function DashboardFooter() {
               </li>
               <li className="dashboard-nav-button">
                 <button>
-                  <div className="footer-nav-button">
+                  <div className="footer-nav-button disabled">
                     <img src={bellWhiteIcon} className="footer-nav-button-image"/>
                     <span>{t("dashboard:nav.notifications")}</span>
                   </div>

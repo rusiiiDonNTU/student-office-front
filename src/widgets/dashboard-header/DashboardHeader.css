@@ -61,6 +61,11 @@
   cursor: pointer;
 }
 
+.header-nav-button.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 a.active {
   .header-nav-button {
     background: var(--color-blue);

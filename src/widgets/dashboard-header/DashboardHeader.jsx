@@ -35,8 +35,9 @@ import docsBlackIcon from "/icons/nav/black/docs.png";
 
 import logoutRedIcon from "/icons/nav/red/logout.png";
 
-import "./DashboardHeader.css";
 import { ConfirmLogoutModal } from "@/features/auth";
+
+import "./DashboardHeader.css";
 
 
 export function DashboardHeader() {
@@ -117,7 +118,7 @@ export function DashboardHeader() {
         <section className="header-options">
           <ul className="dashboard-nav-options-list">
             <li className="dashboard-nav-button">
-              <button className="header-nav-button">
+              <button className="header-nav-button disabled">
                 <img src={bellBlueIcon}/>
               </button>
             </li>
