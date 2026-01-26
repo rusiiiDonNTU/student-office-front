@@ -30,7 +30,7 @@ export function ForgotPasswordPage() {
 
       {/* Панель відправки запиту */}
       <AuthPanel header={t("forgot:header")} style={{maxWidth: "37.5rem"}} back>
-        <FPMailForm />
+        <FPMailForm sent={showMailSentModal}/>
       </AuthPanel>
     </>
   );

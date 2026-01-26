@@ -1,8 +1,12 @@
 import { api } from "@/shared/api";
 
-export async function getStudent() {
+export async function getStudent(lang = 'uk') {
   try {
-    const response = await api.get("/profile")
+    const response = await api.get("/profile", {
+      headers: {
+        "Accept-Language": lang
+      }
+    })
     return response.data;
   }
   catch (err) {

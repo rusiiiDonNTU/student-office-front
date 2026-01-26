@@ -10,5 +10,3 @@ export { forgotPasswordAction } from "./ForgotPassword/ForgotPassword.action";
 export { ResetPasswordPage } from "./ResetPassword/ResetPassword";
 export { resetPasswordLoader } from "./ResetPassword/ResetPassword.loader";
 export { resetPasswordAction } from "./ResetPassword/ResetPassword.action";
-
-export { ConfirmEmailPage } from "./ConfirmEmail/ConfirmEmail";

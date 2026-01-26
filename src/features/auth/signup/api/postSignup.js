@@ -4,7 +4,8 @@ export async function postSignup(requestBody) {
     try {
         const response = await api.post("/auth/signUp", requestBody);
         return { 
-            signupSuccess: true 
+            signupSent: true,
+            email: requestBody.email
         };
     }
     catch (err) {

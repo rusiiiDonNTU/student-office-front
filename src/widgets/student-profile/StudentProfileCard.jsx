@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 
 export function StudentProfileCard() {
-    const { data: user, isPending, isFetching, isError, error, isFetched, refetch } = useStudent();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const { data: user, isPending, isFetching, isError, error, isFetched, refetch } = useStudent(i18n.language);
     const navigate = useNavigate();
 
     useEffect(() => {

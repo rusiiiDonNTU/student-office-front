@@ -1,3 +1,9 @@
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
 .input-group {
   display: flex;
   flex-direction: column;
@@ -16,13 +22,14 @@
   width: 100%;
 }
 
+.input-field.error {
+  border: 1px solid #742f2f !important;
+  animation: shake 0.4s ease-in-out;
+}
+
 .input-field:disabled {
   border-color: #d1d1d1;
   color: #d1d1d1;
-}
-
-.input-field-message {
-  color: #742f2f;
 }
 
 .input-label {

@@ -1,9 +1,9 @@
 import { useLoaderData, useNavigate, useSearchParams } from "react-router-dom";
 import InternalChangePasswordPage from "../../dashboard/ChangePassword/InternalChangePassword";
 import ExternalChangePasswordPage from "../../auth/ExternalChangePassword";
-import DashboardLayout from "../../../app/layouts/Dashboard/Dashboard";
+import DashboardLayout from "@/app/layouts/Dashboard/Dashboard";
 
-function ChangePasswordPage() {
+export function ChangePasswordPage() {
     const [searchParams] = useSearchParams();
     const authStatus = useLoaderData();
     const navigate = useNavigate();
@@ -21,5 +21,3 @@ function ChangePasswordPage() {
 
     return navigate("login");
 }
-
-export default ChangePasswordPage;

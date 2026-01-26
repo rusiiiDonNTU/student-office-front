@@ -2,11 +2,10 @@ import { useActionData, useLocation, useNavigate, useSearchParams } from "react-
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 
-import { AuthInfo } from "../../../widgets";
-import { ErrorModal, AuthPanel } from "../../../shared/ui";
-import { LoginForm, ConfirmEmailModal, GoogleErrorModal, LoginMessage, NotActivatedErrorModal, FPChangedModal, FPInvalidTokenModal } from "@/features/auth/";
+import { AuthInfo } from "@/widgets";
+import { ErrorModal, AuthPanel } from "@/shared/ui";
+import { LoginForm, GoogleErrorModal, LoginMessage, NotActivatedErrorModal, FPChangedModal, FPInvalidTokenModal } from "@/features/auth/";
 import { queryClient } from "@/shared/api";
-import { ActivationErrorModal } from "@/features/confirm-email";
 
 const googleAuthStatusTemplate = {
     failed: false,
@@ -20,10 +19,8 @@ export function LoginPage() {
   const loginResults = useActionData();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [isJustRegistered, setIsJustRegistered] = useState(loc.state?.justRegistered === true);
-  const [isEmailConfirmed, setIsEmailConfirmed] = useState(loc.state?.activationSuccess === true);
+  const [isSignupSuccess, setIsSignupSuccess] = useState(loc.state?.signupSuccess === true);
   const [isPasswordChanged, setIsPasswordChanged] = useState(loc.state?.passwordChanged === true);
-  const [isActivationFailed, setIsActivationFailed] = useState(loc.state?.activationSuccess === false);
   const [isResetTokenInvalid, setIsResetTokenInvalid] = useState(loc.state?.resetTokenInvalid === true);
   const [isAuthError, setIsAuthError] = useState(loc.state?.error === true || loginResults?.authError === true);
   const [googleAuthStatus, setGoogleAuthStatus] = useState(googleAuthStatusTemplate);
@@ -73,13 +70,11 @@ export function LoginPage() {
       {isAuthError && <ErrorModal onClose={() => setIsAuthError(false)}/>}
       {googleAuthStatus.failed && <GoogleErrorModal onClose={handleGoogleErrorClose} />}
       {isPasswordChanged && <FPChangedModal onClose={() => setIsPasswordChanged(false)}/>}
-      {isActivationFailed && <ActivationErrorModal onClose={() => setIsActivationFailed(false)}/>}
       {isResetTokenInvalid && <FPInvalidTokenModal onClose={() => setIsResetTokenInvalid(false)} />}
-      {isJustRegistered && <ConfirmEmailModal email={loc.state?.email} onClose={() => setIsJustRegistered(false)}/>}
       {isNotActivated && <NotActivatedErrorModal onClose={() => setIsNotActivated(false)} email={loginResults.email}/>}
 
       {/* Повідомлення про активовану пошту (для мобільних пристроів) */}
-      {isEmailConfirmed && <LoginMessage h={t("signing:text.signupSuccess.header")} b={t("signin:text.signupSuccess.login")}/>}
+      {isSignupSuccess && <LoginMessage h={t("signing:text.signupSuccess.header")} b={t("signin:text.signupSuccess.login")}/>}
 
       {/* Панель логіну */}
       <AuthPanel header={t("signin:header")} style={{ maxWidth: "37.5rem"}}>
@@ -87,7 +82,7 @@ export function LoginPage() {
       </AuthPanel>
 
       {/* Повідомлення про активовану пошту */}
-      {isEmailConfirmed && <AuthInfo infoType={"success"}/>}
+      {isSignupSuccess && <AuthInfo infoType={"success"}/>}
     </>
   );
 }

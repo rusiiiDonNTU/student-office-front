@@ -7,7 +7,8 @@
         "oldPassport": "Old-style passport",
         "studIdSeries": "Student ID series",
         "studIdNumber": "Student ID number",
-        "noStudentId": "No student ID"
+        "noStudentId": "No student ID",
+        "otp": "Account activation code"
     },
     "buttons": {
         "signUp": "Sign up"
@@ -36,7 +37,9 @@
             "series": {
                 "empty": "Empty passport series",
                 "short": "Passport series must contain exactly 2 letters"
-            }
+            },
+            "resend": "Failed to sent code",
+            "confirm": "Incorrect code"
         },
         "studentid": {
             "series": {
@@ -75,6 +78,13 @@
             "start": "Identity confirmation requires either:",
             "studentId": "a student ID card",
             "passport": "or a passport."
+        },
+        "confirm": {
+            "header": "Confirm sign up",
+            "code": "Code",
+            "body": "A code has been sent to the specified email address. Please enter it in the field below.",
+            "resend": "Send a new code",
+            "activate": "Confirm"
         }
     }
 }
