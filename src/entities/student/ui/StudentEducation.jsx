@@ -28,7 +28,7 @@ export function StudentEducation({ user=null, skeleton=false }) {
 
     const specialtyName = user.specialtyName;
     const educationProgram = user.educationProgram;
-    const faculty = user.faculty;
+    const faculty = user.facultyName;
 
     return <div className="profile-section">
         <div className="profile-row">

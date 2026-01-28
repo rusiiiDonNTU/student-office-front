@@ -10,6 +10,8 @@ export function StudentProfileCard() {
     const { data: user, isPending, isFetching, isError, error, isFetched, refetch } = useStudent(i18n.language);
     const navigate = useNavigate();
 
+    console.log(user);
+    
     useEffect(() => {
       if (isError) {
           if (error?.status < 500) {
