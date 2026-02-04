@@ -10,19 +10,11 @@ export async function postSignin(requestBody) {
     }
     catch (err) {
         // Якщо в помилці є відповідь сервера
-        if (err.response) {
-            if (err.response.status === 401) {
-                return {
-                    errors: {
-                        isWrong: true
-                    },
-                };
-            }
-            if (err.response.status === 403) {
-                return {
-                    notActivated: true,
-                    email: requestBody.email
-                };
+        if (err.response) {         
+            return {
+                errors: {
+                    isWrong: true
+                }
             }
         }
         return {

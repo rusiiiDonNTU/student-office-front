@@ -24,7 +24,6 @@ export function LoginPage() {
   const [isResetTokenInvalid, setIsResetTokenInvalid] = useState(loc.state?.resetTokenInvalid === true);
   const [isAuthError, setIsAuthError] = useState(loc.state?.error === true || loginResults?.authError === true);
   const [googleAuthStatus, setGoogleAuthStatus] = useState(googleAuthStatusTemplate);
-  const [isNotActivated, setIsNotActivated] = useState(false);
 
   // Якщо логін пройдено успішно
   useEffect(() => {
@@ -71,7 +70,6 @@ export function LoginPage() {
       {googleAuthStatus.failed && <GoogleErrorModal onClose={handleGoogleErrorClose} />}
       {isPasswordChanged && <FPChangedModal onClose={() => setIsPasswordChanged(false)}/>}
       {isResetTokenInvalid && <FPInvalidTokenModal onClose={() => setIsResetTokenInvalid(false)} />}
-      {isNotActivated && <NotActivatedErrorModal onClose={() => setIsNotActivated(false)} email={loginResults.email}/>}
 
       {/* Повідомлення про активовану пошту (для мобільних пристроів) */}
       {isSignupSuccess && <LoginMessage h={t("signing:text.signupSuccess.header")} b={t("signin:text.signupSuccess.login")}/>}
