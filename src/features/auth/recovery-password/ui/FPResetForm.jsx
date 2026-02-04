@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Button, Input, FormBlock, FormActions, RequirementsList } from "@/shared/ui";
+import { Button, Input, FormBlock, FormActions, RequirementsList, InputPassword } from "@/shared/ui";
 import { useState } from 'react';
 import { validatePassword } from '@/shared/lib';
 import { PASSWORD_RULES } from '@/entities/user';
@@ -14,13 +14,14 @@ export function FPResetForm({ token }) {
 
   const isSubmitting = navigation.state === "submitting";
 
-  const validationErrors = validatePassword(password)
-  const areEqual = (password === confirmPassword) && (password !== "");
+  const validationErrors = validatePassword(password);
+  const isEmpty = password === "";
+  const areEqual = (password === confirmPassword) && !isEmpty;
   const invalid = Object.values(validationErrors).includes(true) || !areEqual;
 
   const requirementsInfo = PASSWORD_RULES.map(rule => {return {
     item: t(rule.locale),
-    done: rule.test(validationErrors, areEqual)
+    done: rule.test(validationErrors, areEqual, isEmpty)
   }})
 
   function handlePasswordChange(event) {
@@ -35,10 +36,9 @@ export function FPResetForm({ token }) {
 
   return (
     <FormBlock>
-      <Input
+      <InputPassword
         label={t("forgot:fields.newPass")}
         id="new-password"
-        type="password"
         placeholder="••••••••••••••••"
         maxLength={32}
         value={password}
@@ -46,10 +46,9 @@ export function FPResetForm({ token }) {
         disabled={isSubmitting}
         required
       />
-      <Input
+      <InputPassword
         label={t("forgot:fields.confirmNewPass")}
         id="confirm-new-password"
-        type="password"
         placeholder="••••••••••••••••"
         maxLength={32}
         value={confirmPassword}

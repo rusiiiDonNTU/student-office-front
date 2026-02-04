@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useModal } from "@/shared/hooks";
 import { Modal, ModalButtons, Button } from "@/shared/ui";
-import emailImg from "/img/email.png";
+import errorImg from "/img/error.png";
 
 export function SignupFailedModal({onClose = () => {}}) {
     const [isOpen, setIsOpen, handleClose] = useModal();
@@ -14,7 +14,7 @@ export function SignupFailedModal({onClose = () => {}}) {
 
     return <Modal isOpen={isOpen} onClose={handleSignupFailedClose}>
         <h1>{t("signup:errors.signupFailed.header")}</h1>
-        <img src={emailImg} className="modal-img"/>
+        <img src={errorImg} className="modal-img"/>
         <div>
             <p>{t("signup:errors.signupFailed.reasons")}</p>
             <div className="modal-list">

@@ -38,7 +38,6 @@ export function ResetPasswordPage() {
 
   // Якщо токен невалідний - йде переадресація на сторінку логіна
   if (!tokenInfo.valid) {
-    console.log(tokenInfo)
     return <Navigate to="/login" replace state={{resetTokenInvalid: true}} />
   }
 

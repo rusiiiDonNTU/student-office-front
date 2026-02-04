@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "react-router-dom";
 
-import { Button, Checkbox, FormBlock, Input, InputRow, FormActions, ErrorList} from "@/shared/ui";
+import { Button, Checkbox, FormBlock, Input, InputRow, FormActions, ErrorList, InputPassword} from "@/shared/ui";
 
 const initDirtyFields = {};
 
@@ -15,6 +15,7 @@ export function SignupForm({ signupErrors = null }) {
   const [isStudentId, setIsStudentId] = useState(true);
   const [isOldPassport, setIsOldPassport] = useState(false);
   const [dirtyFields, setDirtyFields] = useState(initDirtyFields);
+  const [visible, setVisible] = useState(false);
   
   const isSubmitting = navigation.state === "submitting";
 
@@ -128,20 +129,22 @@ export function SignupForm({ signupErrors = null }) {
       />
 
       <InputRow>
-        <Input
+        <InputPassword
           label={t("auth:fields.passField")}
           id="password"
-          type="password"
           placeholder="••••••••••••••••"
           maxLength="64"
+          visible={visible}
+          setVisible={setVisible}
           disabled={isSubmitting}
         />
-        <Input
+        <InputPassword
           label={t("signup:fields.confirmPassField")}
           id="confirm-password"
-          type="password"
           placeholder="••••••••••••••••"
           maxLength="64"
+          visible={visible}
+          setVisible={setVisible}
           disabled={isSubmitting}
         />
       </InputRow>

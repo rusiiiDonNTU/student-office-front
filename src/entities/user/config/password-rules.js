@@ -4,8 +4,8 @@ export const PASSWORD_RULES= [
         test: (errors) => !errors.short
     },
     {
-        local: "auth:passwordRequirements.max",
-        test: (erros) => !errors.long
+        locale: "auth:passwordRequirements.max",
+        test: (errors, areEqual, isEmpty) => !errors.long && !isEmpty
     },
     {
         locale: "auth:passwordRequirements.lower",

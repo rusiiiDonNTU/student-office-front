@@ -19,4 +19,5 @@ export { ModalButtons } from "./ModalButtons/ModalButtons";
 export { RefreshModal } from "./RefreshModal/RefreshModal";
 export { SettingsField } from "./SettingsField/SettingsField";
 export { InDevelopment } from "./InDevelopment/InDevelopment";
+export { InputPassword } from "./InputPassword/InputPassword";
 export { RequirementsList } from "./RequirementsList/RequirementsList";

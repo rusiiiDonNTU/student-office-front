@@ -11,7 +11,7 @@ export function Input({ label, id, isError=false, errorMsg, type="text", maxLeng
         {errorMsg && <ErrorText>{errorMsg}</ErrorText>}
       </div>
 
-      <input className={`input-field${isError ? " error" : ""}`} maxLength={maxLength} name={id} id={id} type={type} {...props} />
+     <input className={`input-field${isError ? " error" : ""}`} maxLength={maxLength} name={id} id={id} type={type} {...props} />
     </div>
   );
 }
