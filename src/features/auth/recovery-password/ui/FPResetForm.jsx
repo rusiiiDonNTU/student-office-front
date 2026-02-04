@@ -10,6 +10,7 @@ export function FPResetForm({ token }) {
   const { t } = useTranslation(["auth", "forgot"]);
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [visible, setVisible] = useState(false);
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === "submitting";
@@ -44,6 +45,8 @@ export function FPResetForm({ token }) {
         value={password}
         onChange={handlePasswordChange}
         disabled={isSubmitting}
+        visible={visible}
+        setVisible={setVisible}
         required
       />
       <InputPassword
@@ -54,6 +57,8 @@ export function FPResetForm({ token }) {
         value={confirmPassword}
         onChange={handleConfirmPasswordChange}
         disabled={isSubmitting}
+        visible={visible}
+        setVisible={setVisible}
         required
       />
       <Input
