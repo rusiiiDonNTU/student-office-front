@@ -4,7 +4,7 @@ import "./InputPassword.css";
 import visibleImg from "/img/visible.png";
 import hiddenImg from "/img/hidden.png";
 
-export function InputPassword({ label, id, isError=false, errorMsg, maxLength=256, visible=false, setVisible=() => {}, ...props }) {
+export function InputPassword({ label, id, isError=false, errorMsg, maxLength=256, visible=false, setVisible=() => {}, disabled=false, ...props }) {
   function handleShowPassword() {
     setVisible(prev => !prev);
   }
@@ -19,8 +19,12 @@ export function InputPassword({ label, id, isError=false, errorMsg, maxLength=25
       </div>
 
       <div className="input-field-block">
-        <input className={`input-password input-field${isError ? " error" : ""}`} maxLength={maxLength} name={id} id={id} type={visible ? "text" : "password"} {...props} />
-        <button type="button" className="password-toggle" onClick={handleShowPassword}>
+        <input className={`input-password input-field${isError ? " error" : ""}`} 
+          maxLength={maxLength} 
+          name={id} id={id} type={visible ? "text" : "password"} 
+          disabled={disabled} {...props}
+        />
+        <button disabled={disabled} type="button" className="password-toggle" onClick={handleShowPassword}>
           <img src={visible ? visibleImg : hiddenImg}/>
         </button>
       </div>
