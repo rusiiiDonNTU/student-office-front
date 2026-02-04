@@ -40,6 +40,7 @@ export function FPResetForm({ token }) {
         id="new-password"
         type="password"
         placeholder="••••••••••••••••"
+        maxLength={32}
         value={password}
         onChange={handlePasswordChange}
         disabled={isSubmitting}
@@ -50,6 +51,7 @@ export function FPResetForm({ token }) {
         id="confirm-new-password"
         type="password"
         placeholder="••••••••••••••••"
+        maxLength={32}
         value={confirmPassword}
         onChange={handleConfirmPasswordChange}
         disabled={isSubmitting}

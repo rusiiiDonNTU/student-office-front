@@ -65,6 +65,7 @@ export function LoginForm({ loginErrors = null }) {
         id="password"
         type="password"
         placeholder="••••••••••••••••"
+        maxLength="64"
         errorMsg={passwordError}
         onChange={handleInputChange}
         disabled={isSubmitting}

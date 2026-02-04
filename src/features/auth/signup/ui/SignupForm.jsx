@@ -133,7 +133,7 @@ export function SignupForm({ signupErrors = null }) {
           id="password"
           type="password"
           placeholder="••••••••••••••••"
-          maxLength="16"
+          maxLength="64"
           disabled={isSubmitting}
         />
         <Input
@@ -141,7 +141,7 @@ export function SignupForm({ signupErrors = null }) {
           id="confirm-password"
           type="password"
           placeholder="••••••••••••••••"
-          maxLength="16"
+          maxLength="64"
           disabled={isSubmitting}
         />
       </InputRow>
