@@ -1,15 +1,22 @@
-import { useTranslation } from 'react-i18next';
-import { Button, Input, FormBlock, FormActions, RequirementsList, InputPassword } from "@/shared/ui";
-import { useState } from 'react';
-import { validatePassword } from '@/shared/lib';
-import { PASSWORD_RULES } from '@/entities/user';
-import { useNavigation } from 'react-router-dom';
-
+import { useTranslation } from "react-i18next";
+import {
+  Button,
+  Input,
+  FormBlock,
+  FormActions,
+  RequirementsList,
+  InputPassword,
+} from "@/shared/ui";
+import { useState } from "react";
+import { validatePassword } from "@/shared/lib";
+import { PASSWORD_RULES } from "@/entities/user";
+import { useNavigation } from "react-router-dom";
 
 export function FPResetForm({ token }) {
   const { t } = useTranslation(["auth", "forgot"]);
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const navigation = useNavigation();
 
@@ -17,22 +24,24 @@ export function FPResetForm({ token }) {
 
   const validationErrors = validatePassword(password);
   const isEmpty = password === "";
-  const areEqual = (password === confirmPassword) && !isEmpty;
+  const areEqual = password === confirmPassword && !isEmpty;
   const invalid = Object.values(validationErrors).includes(true) || !areEqual;
 
-  const requirementsInfo = PASSWORD_RULES.map(rule => {return {
-    item: t(rule.locale),
-    done: rule.test(validationErrors, areEqual, isEmpty)
-  }})
+  const requirementsInfo = PASSWORD_RULES.map((rule) => {
+    return {
+      item: t(rule.locale),
+      done: rule.test(validationErrors, areEqual, isEmpty),
+    };
+  });
 
   function handlePasswordChange(event) {
     const password = event.target.value;
-    setPassword(password)
+    setPassword(password);
   }
 
   function handleConfirmPasswordChange(event) {
-    const password = event.target.value
-    setConfirmPassword(password)
+    const password = event.target.value;
+    setConfirmPassword(password);
   }
 
   return (
@@ -61,18 +70,16 @@ export function FPResetForm({ token }) {
         setVisible={setVisible}
         required
       />
-      <Input
-        type="hidden"
-        id="token"
-        value={token}
-      />
+      <Input type="hidden" id="token" value={token} />
 
-      <hr/>
+      <hr />
       <RequirementsList requirements={requirementsInfo} />
-      <hr/>
+      <hr />
 
       <FormActions>
-        <Button isBlue disabled={invalid || isSubmitting}>{t("forgot:buttons.change")}</Button>
+        <Button isBlue disabled={invalid || isSubmitting}>
+          {t("forgot:buttons.change")}
+        </Button>
       </FormActions>
     </FormBlock>
   );

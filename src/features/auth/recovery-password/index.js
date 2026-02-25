@@ -6,3 +6,4 @@ export { FPMailSentModal } from "./ui/FPMailSentModal";
 export { sendNewPassword } from "./model/sendNewPassword";
 export { sendRecoveryMail } from "./model/sendRecoveryMail";
 export { FPInvalidTokenModal } from "./ui/FPInvalidTokenModal";
+export { FPLogoutRequestModal } from "./ui/FPLogoutRequestModal";
