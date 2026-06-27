@@ -1,0 +1,6 @@
+.form-actions {
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}

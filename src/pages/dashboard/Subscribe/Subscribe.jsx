@@ -1,0 +1,4 @@
+export function SubscribePage() {
+    return <>
+    </>
+}

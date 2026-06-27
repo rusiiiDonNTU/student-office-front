@@ -1,0 +1,26 @@
+{
+    "nav": {
+        "profile": "Profile",
+        "schedule": "Schedule",
+        "performance": "Performance",
+        "subscribe": "Subscribe",
+        "docs": "Docs",
+        "notifications": "Info",
+        "more": "More",
+        "settings": "Options",
+        "logout": "Logout"
+    },
+    "settings": {
+        "header": "Settings",
+        "language": "Language",
+        "password": "Password",
+        "phone": "Phone",
+        "close": "Close"
+    },
+    "logout": {
+        "header": "Leaving the office",
+        "question": "Are you sure?",
+        "yes": "Yes",
+        "no": "No"
+    }
+}

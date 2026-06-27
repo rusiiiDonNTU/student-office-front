@@ -1,0 +1,52 @@
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  flex: 1;
+}
+
+.input-group.hidden {
+  display: none;
+}
+
+.input-field {
+  border: 1px #9b9b9b solid;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.input-field.error {
+  border: 1px solid #742f2f !important;
+  animation: shake 0.4s ease-in-out;
+}
+
+.input-field:disabled {
+  border-color: #d1d1d1;
+  color: #d1d1d1;
+}
+
+.input-label {
+  white-space: nowrap;
+}
+
+.input-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.input-group:has(.input-field:disabled) .input-label {
+  color: #d1d1d1;
+}
+
+@media (max-width: 768px) {
+    .input-field-message {
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "nav": {
+        "profile": "Профіль",
+        "schedule": "Розклад",
+        "performance": "Успішність",
+        "subscribe": "Запис",
+        "docs": "Звіти",
+        "notifications": "Інфо",
+        "more": "Більше",
+        "settings": "Опції",
+        "logout": "Вийти"
+    },
+    "settings": {
+        "header": "Налаштування",
+        "language": "Мова",
+        "password": "Пароль",
+        "phone": "Телефон",
+        "close": "Закрити"
+    },
+    "logout": {
+        "header": "Вихід з кабінету",
+        "question": "Ви впевнені?",
+        "yes": "Так",
+        "no": "Ні"
+    }
+}

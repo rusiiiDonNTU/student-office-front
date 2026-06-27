@@ -1,0 +1,32 @@
+.dashboard-languages {
+  color: black;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  overflow: hidden;
+}
+
+.dashboard-language {
+  user-select: none;
+  min-width: 8rem;
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+  flex: 1;
+}
+
+.lang-active {
+  background: var(--color-gray);
+}
+
+.dashboard-language .loading {
+  opacity: 0.75;
+}
+
+.dashboard-language:not(.lang-active) {
+  cursor: pointer;
+}
+
+.dashboard-language:not(.lang-active):hover {
+  background: var(--color-light-gray);
+}
+

@@ -1,0 +1,57 @@
+{
+    "header": "Sign in",
+    "fields": {
+        "rememberMe": "Remember me"
+    },
+    "links": {
+        "forgot": "Forgot password?",
+        "signup": "Sign up"
+    },
+    "buttons": {
+        "signIn": "Sign in",
+        "withGoogle": "Continue with Google",
+        "resend": "Resend confirmation"
+    },
+    "errors": {
+        "wrongCreds": "Wrong email or password",
+        "notFound": "Student not found",
+        "notActivated": {
+            "header": "Account not activated!",
+            "body": "Check if you have received an activation link at  "
+        },
+        "activationFailed": {
+            "header": "Activation failed!",
+            "body": "Invalid or expired activation attempt - please try to sign up again"
+        },
+        "tooManyTries": {
+            "header": "Sending error!",
+            "body": "Too many attempts to send a letter - try later"
+        },
+        "google": {
+            "header": "Google auth error!",
+            "body": "No student with the specified email address was found"
+        }
+    },
+    "text": {
+        "noAccount": "Don't have an account?",
+        "signupRequest": {
+            "header": "Sign up request sent!",
+            "beforeEmail": "Please wait for a message to be sent to your email address ",
+            "afterEmail": " with further instructions"
+        },
+        "signupSuccess": {
+            "header": "Account activated!",
+            "login": "Log in to continue",
+            "benefits": "Log in to receive:",
+            "profile": "Full access to personal information in the DonNTU system",
+            "subscribe": "The opportunity to choose new disciplines",
+            "performance": "Academic performance data",
+            "calendar": "Calendar with current class schedule, etc."
+        },
+        "activationRequest": {
+            "header": "New email sent!",
+            "beforeEmail": "Please wait for a message to be sent to your email address ",
+            "afterEmail": " with further instructions"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+export { SettingsPasswordChange } from "./ui/SettingsPasswordChange";

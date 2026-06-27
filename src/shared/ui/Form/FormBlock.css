@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 1rem;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-forgot {
+  color: #1b3769;
+}
+
+.form-forgot:hover {
+  color: #2a55a0;
+}
+
+.form-register {
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.form-register a {
+  color: #1b3769;
+}
+
+.form-register a:hover {
+  color: #2a55a0;
+  cursor: pointer;
+}

@@ -1,0 +1,77 @@
+.profile {
+    max-width: 45rem;
+    animation: cubic-bezier(1, 0, 0, 1);
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-dark-gray);
+}
+
+.profile-header hr {
+    color: var(--color-dark-gray);
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    min-width: 100%;
+}
+
+/* .profile-hr {
+    color: var(--color-gray);
+} */
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.profile-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: 1rem;
+}
+
+.profile-element {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    text-align: left;
+}
+
+.profile-element-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-element-header {
+    color: var(--color-dark-gray);
+}
+
+.profile-element-value {
+    /* font-weight: 500; */
+}
+
+@media (max-width: 768px) {
+    .profile {
+        max-width: 768px;
+        height: 100%;
+        border-radius: 0%;
+    }
+
+    /* .profile-content {
+        margin: auto 2rem;
+    } */
+}
+
+@media (max-height: 800px) and (min-width: 768px) {
+    .profile {
+        margin-top: 6rem;
+    }
+}

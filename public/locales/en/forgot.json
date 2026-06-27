@@ -1,0 +1,37 @@
+{
+  "header": "Password recovery",
+  "change": "Change password",
+  "buttons": {
+    "send": "Send request",
+    "change": "Change password"
+  },
+  "text": {
+    "recoveryInstruction": "A link will be sent to the specified email address, which you can use to change your password.",
+    "requirements": "Password requirements"
+  },
+  "fields": {
+    "currentPass": "Current password",
+    "newPass": "New password",
+    "confirmNewPass": "New password (again)"
+  },
+  "modal": {
+    "sent": {
+      "header": "Request sent!",
+      "body": "If the specified email address is registered, you will receive a link to the password change page."
+    },
+    "invalid": {
+      "header": "An error occured!",
+      "body": "The link is invalid or expired — try sending a new password reset request.",
+      "button": "New request"
+    },
+    "logout": {
+      "header": "Logout requested!",
+      "body": "To reset your password, you must log out of your current session.",
+      "later": "Later",
+      "ok": "Logout"
+    },
+    "changed": {
+      "header": "Password changed!"
+    }
+  }
+}

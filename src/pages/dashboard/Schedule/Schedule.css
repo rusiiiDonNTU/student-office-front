@@ -1,0 +1,19 @@
+.schedule {
+    max-width: 45rem;
+    background: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 2rem 3rem 3rem 3rem;
+    row-gap: 2rem;
+    border-radius: 15px;
+
+    border: 1px var(--color-gray) solid;
+    box-shadow: 
+    0 1px 3px 0 rgba(0, 0, 0, 0.1), 
+    0 1px 2px -1px rgba(0, 0, 0, 0.06);
+
+    animation: cubic-bezier(1, 0, 0, 1);
+}

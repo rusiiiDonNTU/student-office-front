@@ -1,0 +1,97 @@
+{
+    "header": "Sign up",
+    "fields": {
+        "confirmPassField": "Confirm password",
+        "passportNumber": "Passport number",
+        "passportSeries": "Passport series",
+        "oldPassport": "Old-style passport",
+        "studIdSeries": "Student ID series",
+        "studIdNumber": "Student ID number",
+        "noStudentId": "No student ID",
+        "otp": "Account activation code"
+    },
+    "buttons": {
+        "signUp": "Sign up"
+    },
+    "errors": {
+        "pass": {
+            "short": "Password is too short (min. 8 characters)",
+            "long": "Password is too long (max. 16 characters)",
+            "noLower": "Password does not contain lowercase letters (min. 1)",
+            "noUpper": "Password does not contain uppercase letters (min. 1)",
+            "noDigit": "Password does not contain any numbers (min. 1)",
+            "noSymbol": "Password does not contain any special symbol (min. 1)",
+            "notEqual": "Passwords in both fields must be the same"
+        },
+        "passport": {
+            "number": {
+                "empty": "Empty passport number",
+                "short": "Passport number must contain exactly 9 digits"
+            }
+        },
+        "oldPassport": {
+            "number": {
+                "empty": "Empty passport number",
+                "short": "Passport number must contain exactly 6 digits"
+            },
+            "series": {
+                "empty": "Empty passport series",
+                "short": "Passport series must contain exactly 2 letters"
+            },
+            "resend": "Failed to sent code",
+            "confirm": "Incorrect code"
+        },
+        "studentid": {
+            "series": {
+                "empty": "Empty student ID series",
+                "short": "Student ID series must contain exactly 2 letters"
+            },
+            "number": {
+                "empty": "Empty student ID number",
+                "short": "Student ID number must contain exactly 8 digits"
+            }
+        },
+        "signupFailed": {
+            "header": "Sign up failed!", 
+            "reasons": "Possible reasons",
+            "alreadyExist": "you are already registered;",
+            "nonExist":  "your documents were not found in the student database;",
+            "etc": "server issues, etc."
+        }
+    },
+    "requirements": {
+        "start": "Sign up requirements",
+        "email": {
+            "start": "Email:",
+            "corporate": "It is preferable to use a corporate address (@donntu.edu.ua),",
+            "personal": "but a personal is also acceptable."
+        },
+        "pass": {
+            "start": "Password must contain (minimum):",
+            "length": "Password length: 8-16 characters",
+            "lower": "1 lowercase letter",
+            "upper": "1 uppercase letter",
+            "symbol": "1 special symbol",
+            "digit": "1 digit"
+        },
+        "docs": {
+            "start": "Identity confirmation requires either:",
+            "studentId": "a student ID card",
+            "passport": "or a passport."
+        },
+        "confirm": {
+            "header": "Confirm sign up",
+            "code": "Code",
+            "body": "A code has been sent to the specified email address. Please enter it in the field below.",
+            "resend": "Send a new code",
+            "activate": "Confirm"
+        }
+    },
+    "confirm": {
+        "header": "Sign up confirm",
+        "code": "Code",
+        "body": "A code has been sent to the specified email address. Please enter it in the field below.",
+        "resend": "Send new code",
+        "activate": "Confirm"
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "header": "Profile",
+    "years": {
+        "one": "year",
+        "few": "years",
+        "many": "years",
+        "other": "years"
+    },
+    "group": "Group",
+    "specialtyCode": "Specialty code",
+    "course": "Course",
+    "specialtyName": "Specialty name",
+    "educationProgram": "Education program",
+    "faculty": "Faculty / Institute",
+    "educationLevel": "Education level",
+    "studyForm": "Study form",
+    "entryDate": "Entry date",
+    "entryBasis": "Entry basis",
+    "fundingSource": "Funding source"
+}
